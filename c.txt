@@ -1,0 +1,1815 @@
+Configuring MPICH version 5.0.0b1 with  '--prefix=/home/qik/mpich-install'
+Running on system: Linux Kunting-Qi-Desktop 6.17.0-14-generic #14~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jan 15 15:52:10 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking target system type... x86_64-pc-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking how to run the C preprocessor... gcc -E
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for wchar.h... yes
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking whether _XOPEN_SOURCE should be defined... no
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for fgrep... /usr/bin/grep -F
+checking if fgrep support -w option... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports the include directive... yes (GNU style)
+checking whether make supports nested variables... yes
+checking dependency style of gcc... gcc3
+checking whether to enable maintainer-specific portions of Makefiles... yes
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for egrep... /usr/bin/grep -E
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking whether make supports nested variables... (cached) yes
+checking for g++... g++
+checking whether the compiler supports GNU C++... yes
+checking whether g++ accepts -g... yes
+checking for g++ option to enable C++11 features... none needed
+checking dependency style of g++... gcc3
+checking how to run the C++ preprocessor... g++ -E
+checking for ld used by g++... /usr/bin/ld -m elf_x86_64
+checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
+checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking for g++ option to produce PIC... -fPIC -DPIC
+checking if g++ PIC flag -fPIC -DPIC works... yes
+checking if g++ static flag -static works... yes
+checking if g++ supports -c -o file.o... yes
+checking if g++ supports -c -o file.o... (cached) yes
+checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking dynamic linker characteristics... (cached) GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether the C++ compiler g++ can build an executable... yes
+checking for python... /home/qik/anaconda3/bin/python
+configure: Python version 3 is /home/qik/anaconda3/bin/python
+checking for gfortran... gfortran
+checking whether the compiler supports GNU Fortran... yes
+checking whether gfortran accepts -g... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for gfortran option to produce PIC... -fPIC
+checking if gfortran PIC flag -fPIC works... yes
+checking if gfortran static flag -static works... yes
+checking if gfortran supports -c -o file.o... yes
+checking if gfortran supports -c -o file.o... (cached) yes
+checking whether the gfortran linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking dynamic linker characteristics... (cached) GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether the compiler supports GNU Fortran 77... yes
+checking whether gfortran accepts -g... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for gfortran option to produce PIC... -fPIC
+checking if gfortran PIC flag -fPIC works... yes
+checking if gfortran static flag -static works... yes
+checking if gfortran supports -c -o file.o... yes
+checking if gfortran supports -c -o file.o... (cached) yes
+checking whether the gfortran linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking dynamic linker characteristics... (cached) GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking for C compiler vendor... gnu
+checking whether C compiler accepts option --diag_suppress=branch_past_initialization... no
+checking whether C compiler accepts option -fPIE... yes
+checking whether routines compiled with -fPIE can be linked with ones compiled without -fPIE... yes
+configure: RUNNING PREREQ FOR CH4 DEVICE
+checking for rdma/fabric.h... no
+checking for ucp/api/ucp.h... no
+configure: CH4 select netmod: ofi 
+Parsing POSIX eager arguments
+There are 1 POSIX eager modules (iqueue)
+checking for hcoll/api/hcoll_api.h... no
+checking for type of weak symbol alias support... pragma weak
+checking whether __attribute__ ((weak,alias(...))) allowed... yes
+checking for multiple weak symbol support... yes
+checking if gcc supports -fvisibility=hidden... yes
+checking whether to enable symbol visibility... yes (via -fvisibility=hidden)
+configure: ===== configuring src/mpl =====
+configure: running /bin/bash ./configure --disable-option-checking '--prefix=/home/qik/mpich-install' --disable-versioning --enable-embedded --cache-file=/dev/null --srcdir=.
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for wchar.h... yes
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking whether _XOPEN_SOURCE should be defined... no
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for fgrep... /usr/bin/grep -F
+checking if fgrep support -w option... yes
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for egrep... /usr/bin/grep -E
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking whether make supports nested variables... (cached) yes
+checking for an ANSI C-conforming const... yes
+checking for C/C++ restrict keyword... __restrict__
+checking for inline... inline
+checking for variable argument list macro functionality... yes
+checking if C compiler supports __builtin_expect... yes
+checking if C compiler supports __builtin_clz... yes
+checking if C compiler supports __builtin_popcount... yes
+checking for C11 _Static_assert functionality... yes
+checking for gcov... gcov
+checking whether the compiler supports __typeof(variable)... yes
+checking for stdio.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for stdarg.h... yes
+checking for ctype.h... yes
+checking for sys/types.h... (cached) yes
+checking for sys/uio.h... yes
+checking for execinfo.h... yes
+checking for unistd.h... (cached) yes
+checking for errno.h... yes
+checking for windows.h... no
+checking for sys/mman.h... yes
+checking for inttypes.h... (cached) yes
+checking for stdint.h... (cached) yes
+checking for _Bool... yes
+checking for stdbool.h that conforms to C99... yes
+checking whether -mavx2 is supported... yes
+checking whether -mavx512f is supported... yes
+checking whether __builtin_cpu_init and __builtin_cpu_supports are available... yes
+checking whether __builtin_cpu_supports("avx512f") is available... yes
+checking for valgrind.h... no
+checking for memcheck.h... no
+checking for valgrind/valgrind.h... no
+checking for valgrind/memcheck.h... no
+checking for helgrind.h... no
+checking for valgrind/helgrind.h... no
+checking for drd.h... no
+checking for valgrind/drd.h... no
+checking whether the valgrind headers are broken or too old... yes
+checking for clock_gettime... yes
+checking for clock_getres... yes
+checking for gethrtime... no
+checking for mach_absolute_time... no
+checking for gettimeofday... yes
+checking for library containing clock_gettime... none required
+checking for library containing clock_getres... none required
+checking whether struct timespec is defined in time.h... yes
+checking for CLOCK_REALTIME defined in time.h... yes
+configure: Timer type selected is CLOCK_GETTIME
+checking for sched.h... yes
+checking for unistd.h... (cached) yes
+checking for sys/select.h... yes
+checking for x86intrin.h... yes
+checking for sched_yield... yes
+checking for yield... no
+checking for usleep... yes
+checking for sleep... yes
+checking for select... yes
+checking whether usleep needs a declaration... no
+checking for sys/sysinfo.h... yes
+checking for unistd.h... (cached) yes
+checking for get_nprocs... yes
+checking whether _SC_NPROCESSORS_ONLN is declared... yes
+checking for pthread.h... yes
+checking for pthread_key_create in -lpthread... yes
+checking for pthread_yield... no
+checking for pthread_key_create... yes
+checking for thread local storage... _Thread_local
+checking for pthread_mutex_init... yes
+checking for pthread_mutexattr_setpshared... yes
+checking for pthread_setaffinity_np... yes
+checking whether cpu_set_t available... yes
+checking whether the CPU_SET and CPU_ZERO macros are defined... yes
+configure: POSIX will be used for interprocess mutex package.
+checking whether pthread.h defines PTHREAD_MUTEX_ERRORCHECK_NP... yes
+checking whether pthread.h defines PTHREAD_MUTEX_ERRORCHECK... yes
+checking whether pthread_mutexattr_settype needs a declaration... no
+checking size of void *... 8
+checking whether C compiler accepts option -Werror... yes
+checking whether routines compiled with -Werror can be linked with ones compiled without -Werror... yes
+checking for support for gcc __sync intrinsics... yes
+checking for support for gcc __atomic intrinsics... yes
+checking for support for C11 atomic intrinsics... yes
+checking for support for Windows NT atomic intrinsics... no
+checking for mkstemp... yes
+checking whether mkstemp needs a declaration... no
+checking for fdopen... yes
+checking whether fdopen needs a declaration... no
+checking for getpid... yes
+checking for mmap... yes
+checking for munmap... yes
+configure: Using a memory-mapped file for shared memory
+checking for library containing shm_open... none required
+checking for cuda_runtime_api.h... yes
+checking for cudaStreamSynchronize in -lcudart... yes
+checking for cuda.h... yes
+checking for cuMemGetAddressRange in -lcuda... yes
+checking for dlopen in -ldl... yes
+checking for nvcc... /usr/bin/nvcc
+checking whether nvcc works... yes
+checking if gcc can link libstdc++... yes
+checking for strdup... yes
+checking whether strdup needs a declaration... no
+checking for putenv... yes
+checking whether putenv needs a declaration... no
+checking for strerror... yes
+checking whether strerror needs a declaration... no
+checking for usleep... (cached) yes
+checking whether usleep needs a declaration... (cached) no
+checking for posix_memalign... yes
+checking for aligned_alloc... yes
+checking whether aligned_alloc needs a declaration... no
+checking for execinfo.h... (cached) yes
+checking size parameter type for backtrace()... int
+checking for library containing backtrace... none required
+checking for library containing gethostbyname... none required
+checking for library containing socket... none required
+checking for ifaddrs.h... yes
+checking for arpa/inet.h... yes
+checking for inet_ntop... yes
+checking for getifaddrs... yes
+checking whether __attribute__ allowed... yes
+checking whether __attribute__((format)) allowed... yes
+checking for __attribute__((aligned))... yes
+checking for __attribute__((used))... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating localdefs
+config.status: creating include/mpl_timer.h
+config.status: creating include/config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+config.status: executing prefix-config commands
+configure: ===== done with src/mpl configure =====
+configure: sourcing src/mpl/localdefs
+configure: ===== configuring modules/json-c =====
+configure: running /bin/bash ./configure --disable-option-checking '--prefix=/home/qik/mpich-install' --enable-embedded --disable-werror --cache-file=/dev/null --srcdir=.
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make sets $(MAKE)... (cached) yes
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking whether make supports the include directive... yes (GNU style)
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking dependency style of gcc... gcc3
+checking whether C compiler accepts option -fvisibility=hidden... yes
+checking whether routines compiled with -fvisibility=hidden can be linked with ones compiled without -fvisibility=hidden... yes
+Multi-threaded support disabled. Use --enable-threading to enable.
+RDRAND Hardware RNG Hash Seed disabled. Use --enable-rdrand to enable
+checking whether make supports nested variables... (cached) yes
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fcntl.h... yes
+checking for limits.h... yes
+checking for strings.h... (cached) yes
+checking for syslog.h... yes
+checking for unistd.h... (cached) yes
+checking for sys/cdefs.h... yes
+checking for sys/param.h... yes
+checking for stdarg.h... yes
+checking for locale.h... yes
+checking for xlocale.h... no
+checking for endian.h... yes
+checking for inttypes.h... (cached) yes
+checking for an ANSI C-conforming const... yes
+checking for size_t... yes
+checking for __thread support... yes
+checking for vprintf... yes
+checking for working memcmp... yes
+checking for realloc... yes
+checking for strcasecmp... yes
+checking for strdup... yes
+checking for strerror... yes
+checking for snprintf... yes
+checking for vsnprintf... yes
+checking for open... yes
+checking for strncasecmp... yes
+checking for setlocale... yes
+checking for gcc options needed to detect all undeclared functions... none needed
+checking whether INFINITY is declared... yes
+checking whether nan is declared... yes
+checking whether isnan is declared... yes
+checking whether isinf is declared... yes
+checking whether _isnan is declared... no
+checking whether _finite is declared... no
+checking for GCC atomic builtins... yes
+checking for uselocale... yes
+checking if .gnu.warning accepts long strings... yes
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for -Bsymbolic-functions linker flag... yes
+checking whether C compiler accepts option -Wall... yes
+checking whether routines compiled with -Wall can be linked with ones compiled without -Wall... yes
+checking whether C compiler accepts option -Wcast-qual... yes
+checking whether routines compiled with -Wcast-qual can be linked with ones compiled without -Wcast-qual... yes
+checking whether C compiler accepts option -Wno-error=deprecated-declarations... yes
+checking whether routines compiled with -Wno-error=deprecated-declarations can be linked with ones compiled without -Wno-error=deprecated-declarations... yes
+checking whether C compiler accepts option -Wextra... yes
+checking whether routines compiled with -Wextra can be linked with ones compiled without -Wextra... yes
+checking whether C compiler accepts option -Wwrite-strings... yes
+checking whether routines compiled with -Wwrite-strings can be linked with ones compiled without -Wwrite-strings... yes
+checking whether C compiler accepts option -Wno-unused-parameter... yes
+checking whether routines compiled with -Wno-unused-parameter can be linked with ones compiled without -Wno-unused-parameter... yes
+checking whether C compiler accepts option -D_GNU_SOURCE... yes
+checking whether routines compiled with -D_GNU_SOURCE can be linked with ones compiled without -D_GNU_SOURCE... yes
+checking whether C compiler accepts option -diag-disable=all... no
+checking whether __attribute__ allowed... yes
+checking whether __attribute__((format)) allowed... yes
+checking for compatibility with _REENTRANT and toolchain headers... yes
+checking size of int... 4
+checking size of long... 8
+checking size of long long... 8
+checking size of size_t... 8
+checking size of int64_t... 8
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating json-c.pc
+config.status: creating tests/Makefile
+config.status: creating json-c-uninstalled.pc
+config.status: creating config.h
+config.status: creating json_config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+configure: ===== done with modules/json-c configure =====
+checking for hwloc.h... yes
+checking for hwloc_topology_set_pid in -lhwloc... yes
+checking if hwloc meets minimum version requirement... yes
+checking for netloc.h... no
+configure: ===== configuring src/mpi/romio =====
+configure: running /bin/bash ./configure --disable-option-checking '--prefix=/home/qik/mpich-install'  --cache-file=/dev/null --srcdir=.
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether to enable maintainer-specific portions of Makefiles... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking if gcc supports -fvisibility=hidden... yes
+checking whether to enable symbol visibility... yes (via -fvisibility=hidden)
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for wchar.h... yes
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking whether _XOPEN_SOURCE should be defined... no
+checking for fgrep... /usr/bin/grep -F
+checking if fgrep support -w option... yes
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for egrep... /usr/bin/grep -E
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking whether make supports nested variables... (cached) yes
+configure: Configuring with args dummy mt
+configure: sourcing /home/qik/projects/mpich/src/mpl/localdefs
+checking whether clock skew breaks make... no
+checking whether make supports include... yes
+checking whether make allows comments in actions... yes
+checking for virtual path format... VPATH
+checking whether make sets CFLAGS... yes
+checking for architecture... LINUX
+ROMIO home directory is /home/qik/projects/mpich/src/mpi/romio
+checking for long long... yes
+checking size of long long... 8
+./configure: line 15591: PAC_GET_SPECIAL_SYSTEM_INFO: command not found
+checking for memalign... yes
+checking for inline... inline
+checking for size_t... yes
+checking for ssize_t... yes
+checking for off_t... yes
+checking how to run the C preprocessor... gcc -E
+checking for unistd.h... (cached) yes
+checking for fcntl.h... yes
+checking for malloc.h... yes
+checking for stddef.h... yes
+checking for sys/types.h... (cached) yes
+checking for limits.h... yes
+checking for time.h... yes
+checking for dirent.h... yes
+checking for mpix.h... no
+checking for u_char... yes
+checking for u_short... yes
+checking for u_int... yes
+checking for u_long... yes
+checking for sys/attr.h... no
+checking size of int... 4
+checking size of void *... 8
+checking for int large enough for pointers... no
+checking size of long long... (cached) 8
+Overriding Array test for MPICH
+checking for type of weak symbol alias support... pragma weak
+checking whether __attribute__ ((weak,alias(...))) allowed... yes
+checking for multiple weak symbol support... yes
+checking whether struct flock compatible with MPI_Offset... yes
+checking for pvfs2-config... notfound
+checking configured file systems... testfs ufs nfs
+configure: WARNING: File locks may not work with NFS.  See the Installation and
+users manual for instructions on testing and if necessary fixing this
+checking for library containing aio_write... none required
+checking for signal.h... yes
+checking for aio.h... yes
+checking for sys/aio.h... no
+checking whether aio routines can be used... yes
+checking for obsolete two-argument aio_write... no
+checking for obsolete two-argument aio_suspend... no
+checking for struct aiocb.aio_fildes... yes
+checking for struct aiocb.aio_whence... no
+checking for struct aiocb.aio_handle... no
+checking for struct aiocb.aio_reqprio... yes
+checking for struct aiocb.aio_sigevent... yes
+checking for sys/vfs.h... yes
+checking for sys/param.h... yes
+checking for sys/mount.h... yes
+checking for sys/statvfs.h... yes
+checking for sys/stat.h... (cached) yes
+checking for sys/type.h... no
+checking for unistd.h... (cached) yes
+checking for statvfs... yes
+checking for statfs... yes
+checking for stat... yes
+checking for struct statvfs.f_basetype... no
+checking for struct statfs.f_fstypename... no
+checking for struct statfs.f_type... yes
+checking for struct stat.st_fstype... no
+checking for blksize_t... yes
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for gcc options needed to detect all undeclared functions... none needed
+checking whether pwrite is declared... yes
+checking for strerror... yes
+checking for doctext... no
+checking for strdup... yes
+checking whether strdup needs a declaration... no
+checking for lstat... yes
+checking whether lstat needs a declaration... no
+checking for readlink... yes
+checking whether readlink needs a declaration... no
+checking for fsync... yes
+checking whether fsync needs a declaration... no
+checking for ftruncate... yes
+checking whether ftruncate needs a declaration... no
+checking for lseek64... yes
+checking whether lseek64 needs a declaration... no
+checking for usleep... yes
+checking whether usleep needs a declaration... no
+configure: setting SYSDEP_INC to 
+checking for C/C++ restrict keyword... __restrict__
+checking whether __attribute__ allowed... yes
+checking whether __attribute__((format)) allowed... yes
+checking for gcov... gcov
+configure: setting CC to gcc
+configure: setting TEST_CC to $(bindir)/mpicc
+configure: setting CFLAGS to     
+configure: setting USER_CFLAGS to 
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating localdefs
+config.status: creating mpi2-other/info/Makefile
+config.status: creating mpi2-other/array/Makefile
+config.status: creating test/Makefile
+config.status: creating test/misc.c
+config.status: creating test/large_file.c
+config.status: creating test-internal/Makefile
+config.status: creating include/mpio.h
+config.status: creating util/romioinstall
+config.status: creating test/runtests
+config.status: creating test/parallel_run.sh
+config.status: creating adio/include/romioconf.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+configure: ===== done with src/mpi/romio configure =====
+configure: sourcing src/mpi/romio/localdefs
+configure: ===== configuring src/pmi =====
+configure: running /bin/bash ./configure --disable-option-checking '--prefix=/home/qik/mpich-install' --enable-embedded --cache-file=/dev/null --srcdir=.
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for wchar.h... yes
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking whether _XOPEN_SOURCE should be defined... no
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports the include directive... yes (GNU style)
+checking whether make supports nested variables... yes
+checking dependency style of gcc... gcc3
+checking whether make supports nested variables... (cached) yes
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking for gcc... (cached) gcc
+checking whether the compiler supports GNU C... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to enable C11 features... (cached) none needed
+checking whether gcc understands -c and -o together... (cached) yes
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for fgrep... /usr/bin/grep -F
+checking if fgrep support -w option... yes
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for egrep... /usr/bin/grep -E
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking if gcc supports -fvisibility=hidden... yes
+checking whether to enable symbol visibility... yes (via -fvisibility=hidden)
+configure: sourcing /home/qik/projects/mpich/src/mpl/localdefs
+checking for unistd.h... (cached) yes
+checking for string.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for sys/socket.h... yes
+checking for strings.h... (cached) yes
+checking for assert.h... yes
+checking for arpa/inet.h... yes
+checking for strncasecmp... yes
+checking whether __attribute__ allowed... yes
+checking whether __attribute__((format)) allowed... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating include/pmi_config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+configure: ===== done with src/pmi configure =====
+checking whether C compiler accepts option -O2... yes
+checking whether routines compiled with -O2 can be linked with ones compiled without -O2... yes
+checking for shared library (esp. rpath) characteristics of CC... done (results in src/env/cc_shlib.conf)
+checking for extension for Fortran 90 programs... f90
+checking whether Fortran 77 compiler accepts option -O2... yes
+checking whether routines compiled with -O2 can be linked with ones compiled without -O2... yes
+checking how to get verbose linking output from gfortran... -v
+checking for Fortran 77 libraries of gfortran...  -L/usr/lib/gcc/x86_64-linux-gnu/13 -L/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/13/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/13/../../.. -lgfortran -lm -lquadmath
+checking whether gfortran accepts the FLIBS found by autoconf... yes
+checking whether gcc links with FLIBS found by autoconf... yes
+checking whether Fortran 77 and C objects are compatible... yes
+checking for linker for Fortran main program... Use Fortran to link programs
+checking for Fortran 77 name mangling... lower uscore
+checking for libraries to link Fortran main with C stdio routines... none
+checking whether Fortran init will work with C... yes
+checking for shared library (esp. rpath) characteristics of F77... done (results in src/env/f77_shlib.conf)
+checking whether Fortran 77 accepts ! for comments... yes
+checking for include directory flag for Fortran... -I
+checking for Fortran 77 flag for library directories... -L
+checking whether Fortran 77 compiler processes .F files with C preprocessor... yes
+checking whether gfortran allows mismatched arguments... yes, with -fallow-argument-mismatch
+checking for Fortran 2008 support... yes
+checking for shared library (esp. rpath) characteristics of FC... done (results in src/env/fc_shlib.conf)
+checking whether the Fortran 90 compiler (gfortran    ) works... yes
+checking whether the Fortran 90 compiler (gfortran    ) is a cross-compiler... no
+checking for Fortran 90 module extension... mod
+checking for Fortran 90 module include flag... -I
+checking for Fortran 90 module output directory flag... -J
+checking whether Fortran 90 compiler accepts option -O2... yes
+checking whether routines compiled with -O2 can be linked with ones compiled without -O2... yes
+checking whether Fortran 90 compiler processes .F90 files with C preprocessor... yes
+checking what libraries are needed to link Fortran90 programs with C routines that use stdio... none
+checking whether TRUE has been defined... no
+checking whether C++ compiler works with string... yes
+checking whether the compiler supports exceptions... yes
+checking whether the compiler recognizes bool as a built-in type... yes
+checking whether the compiler implements namespaces... yes
+checking whether <iostream> available... yes
+checking whether the compiler implements the namespace std... yes
+checking whether <math> available... no
+checking for GNU g++ version... 13 . 3
+checking for shared library (esp. rpath) characteristics of CXX... done (results in src/env/cxx_shlib.conf)
+checking whether C++ compiler accepts option -O2... yes
+checking whether routines compiled with -O2 can be linked with ones compiled without -O2... yes
+checking for perl... /usr/bin/perl
+checking for killall... killall
+checking whether install works... yes
+checking whether mkdir -p works... yes
+checking for make... make
+checking whether clock skew breaks make... no
+checking whether make supports include... yes
+checking whether make allows comments in actions... yes
+checking for virtual path format... VPATH
+checking whether make sets CFLAGS... yes
+checking for bash... /usr/bin/bash
+checking whether /usr/bin/bash supports arrays... yes
+checking for doctext... false
+checking for an ANSI C-conforming const... yes
+checking for working volatile... yes
+checking for C/C++ restrict keyword... __restrict__
+checking for inline... inline
+checking whether __attribute__ allowed... yes
+checking whether __attribute__((format)) allowed... yes
+checking if C compiler supports __builtin_expect... yes
+checking for C11 _Static_assert functionality... yes
+checking whether byte ordering is bigendian... no
+checking whether C compiler allows unaligned doubles... yes
+checking whether gcc supports __func__... yes
+checking whether long double is supported... yes
+checking whether long long is supported... yes
+checking alignment of max_align_t... 0
+checking alignment of long double... 16
+checking size of char... 1
+checking size of unsigned char... 1
+checking size of short... 2
+checking size of unsigned short... 2
+checking size of int... 4
+checking size of unsigned int... 4
+checking size of long... 8
+checking size of unsigned long... 8
+checking size of long long... 8
+checking size of unsigned long long... 8
+checking size of float... 4
+checking size of double... 8
+checking size of long double... 16
+checking size of void *... 8
+checking for stddef.h... yes
+checking size of wchar_t... 4
+checking size of float_int... 8
+checking size of double_int... 16
+checking size of long_int... 16
+checking size of short_int... 8
+checking size of two_int... 8
+checking size of long_double_int... 32
+checking for sys/bitypes.h... yes
+checking for inttypes.h... (cached) yes
+checking for stdint.h... (cached) yes
+checking size of int8_t... 1
+checking size of int16_t... 2
+checking size of int32_t... 4
+checking size of int64_t... 8
+checking size of uint8_t... 1
+checking size of uint16_t... 2
+checking size of uint32_t... 4
+checking size of uint64_t... 8
+checking for stdbool.h... yes
+checking for complex.h... yes
+checking size of _Bool... 1
+checking size of float _Complex... 8
+checking size of double _Complex... 16
+checking size of long double _Complex... 32
+checking for _Bool... yes
+checking for float _Complex... yes
+checking for double _Complex... yes
+checking for long double _Complex... yes
+checking alignment of int8_t... 1
+checking alignment of int16_t... 2
+checking alignment of int32_t... 4
+checking alignment of int64_t... 8
+checking size of __int128... 16
+checking alignment of __int128... 16
+checking size of _Float16... 2
+checking alignment of _Float16... 2
+checking alignment of float... 4
+checking alignment of double... 8
+checking size of __float128... 16
+checking alignment of __float128... 16
+checking alignment of long double... (cached) 16
+checking for size of Fortran type integer... 4
+checking for size of Fortran type real... 4
+checking for size of Fortran type double precision... 8
+checking for size of Fortran type logical... 4
+checking whether integer*1 is supported... yes
+checking whether integer*2 is supported... yes
+checking whether integer*4 is supported... yes
+checking whether integer*8 is supported... yes
+checking whether integer*16 is supported... yes
+checking whether real*2 is supported... no
+checking whether real*4 is supported... yes
+checking whether real*8 is supported... yes
+checking whether real*16 is supported... yes
+checking for C type matching Fortran integer... int
+checking for values of Fortran logicals... True is 1 and False is 0
+checking for Fortran 90 integer kind for 8-byte integers... 8
+checking for Fortran 90 integer kind for 4-byte integers... 4
+checking if real*8 is supported in Fortran 90... yes
+checking size of bool... 1
+checking for C types matching C++ bool... _Bool
+checking for complex... yes
+checking size of Complex... 8
+checking size of DoubleComplex... 16
+checking size of LongDoubleComplex... 32
+checking the sizeof MPI_Offset... 8
+checking whether the Fortran Offset type works with Fortran 77... yes
+checking whether the Fortran Offset type works with Fortran 90... yes
+checking MPI datatypes... done
+checking whether C compiler accepts option -Werror=type-safety... no
+checking for alignment restrictions on ... yes
+checking for alignment restrictions on int32_t... yes
+checking for gcov... gcov
+checking for stdlib.h... (cached) yes
+checking for stdarg.h... yes
+checking for sys/types.h... (cached) yes
+checking for string.h... (cached) yes
+checking for inttypes.h... (cached) yes
+checking for limits.h... yes
+checking for stddef.h... (cached) yes
+checking for errno.h... yes
+checking for sys/socket.h... yes
+checking for sys/time.h... yes
+checking for unistd.h... (cached) yes
+checking for endian.h... yes
+checking for assert.h... yes
+checking for sys/param.h... yes
+checking for sys/uio.h... yes
+checking for size_t... yes
+checking for setitimer... yes
+checking for alarm... yes
+checking for vsnprintf... yes
+checking for vsprintf... yes
+checking whether vsnprintf needs a declaration... no
+checking for strerror... yes
+checking for strncasecmp... yes
+checking for gcc options needed to detect all undeclared functions... none needed
+checking whether strerror_r is declared... yes
+checking whether strerror_r returns char *... yes
+checking for qsort... yes
+checking for variable argument list macro functionality... yes
+checking for strdup... yes
+checking whether strdup needs a declaration... no
+checking for signal.h... yes
+checking for signal... yes
+checking for putenv... yes
+checking whether putenv needs a declaration... no
+checking size of MPII_Bsend_data_t... 96
+checking for sched_setaffinity... yes
+checking for sched_getaffinity... yes
+checking for bindprocessor... no
+checking for thread_policy_set... no
+checking whether cpu_set_t available... yes
+checking whether the CPU_SET and CPU_ZERO macros are defined... yes
+checking for nvcc... /usr/bin/nvcc
+checking for nccl.h... no
+configure: ===== configuring src/mpi/datatype/typerep/yaksa =====
+configure: running /bin/bash ./configure --disable-option-checking '--prefix=/home/qik/mpich-install' --enable-embedded --cache-file=/dev/null --srcdir=.
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking whether make supports the include directive... yes (GNU style)
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking dependency style of gcc... gcc3
+checking dependency style of gcc... gcc3
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld -m elf_x86_64
+checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld -m elf_x86_64 option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64 -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for gcc... (cached) gcc
+checking whether the compiler supports GNU C... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to enable C11 features... (cached) none needed
+checking whether gcc understands -c and -o together... (cached) yes
+checking dependency style of gcc... (cached) gcc3
+checking whether C compiler accepts option -std=c11... yes
+checking whether C compiler option -std=c11 works with an invalid prototype program... yes
+checking whether routines compiled with -std=c11 can be linked with ones compiled without -std=c11... yes
+checking if gcc supports -fvisibility=hidden... yes
+checking whether to enable symbol visibility... yes (via -fvisibility=hidden)
+checking whether C compiler accepts option --diag_suppress=incompatible_param... no
+checking whether __attribute__ allowed... yes
+checking whether __attribute__((format)) allowed... yes
+checking for stdatomic.h... yes
+checking for pthread.h... yes
+checking for pthread_key_create in -lpthread... yes
+checking alignment of _Bool... 1
+checking alignment of char... 1
+checking alignment of signed char... 1
+checking alignment of unsigned char... 1
+checking alignment of wchar_t... 4
+checking alignment of int8_t... 1
+checking alignment of int16_t... 2
+checking alignment of int32_t... 4
+checking alignment of int64_t... 8
+checking alignment of uint8_t... 1
+checking alignment of uint16_t... 2
+checking alignment of uint32_t... 4
+checking alignment of uint64_t... 8
+checking alignment of int... 4
+checking alignment of unsigned... 4
+checking alignment of short... 2
+checking alignment of unsigned short... 2
+checking alignment of long... 8
+checking alignment of unsigned long... 8
+checking alignment of long long... 8
+checking alignment of unsigned long long... 8
+checking alignment of int_fast8_t... 1
+checking alignment of int_fast16_t... 8
+checking alignment of int_fast32_t... 8
+checking alignment of int_fast64_t... 8
+checking alignment of uint_fast8_t... 1
+checking alignment of uint_fast16_t... 8
+checking alignment of uint_fast32_t... 8
+checking alignment of uint_fast64_t... 8
+checking alignment of int_least8_t... 1
+checking alignment of int_least16_t... 2
+checking alignment of int_least32_t... 4
+checking alignment of int_least64_t... 8
+checking alignment of uint_least8_t... 1
+checking alignment of uint_least16_t... 2
+checking alignment of uint_least32_t... 4
+checking alignment of uint_least64_t... 8
+checking alignment of byte... 0
+checking alignment of intmax_t... 8
+checking alignment of uintmax_t... 8
+checking alignment of size_t... 8
+checking alignment of intptr_t... 8
+checking alignment of uintptr_t... 8
+checking alignment of ptrdiff_t... 8
+checking alignment of float... 4
+checking alignment of double... 8
+checking alignment of long double... 16
+checking for cuda_runtime_api.h... yes
+checking for cudaStreamSynchronize in -lcudart... yes
+checking whether nvcc works... yes
+checking if gcc can link libstdc++... yes
+checking for CUDA compute capability auto detection... 8.9 yes
+checking for level_zero/ze_api.h... no
+checking for zeCommandQueueCreate in -lze_loader... no
+checking whether ocloc is installed... no
+checking for hip/hip_runtime_api.h... no
+checking for hipStreamSynchronize in -lamdhip64... no
+checking for struct hipPointerAttribute_t.memoryType... no
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating Doxyfile
+config.status: creating maint/yaksa.pc
+config.status: creating src/frontend/include/yaksa.h
+config.status: creating src/frontend/include/yaksa_config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+
+##################################################################
+# Final status of compiled yaksa modules
+##################################################################
+
+Backends supported: seq,cuda
+
+CUDA backend specific options:
+      CUDA GENCODE:  (-gencode=arch=compute_89,code=sm_89)
+
+##################################################################
+# End of yaksa configure
+##################################################################
+
+configure: ===== done with src/mpi/datatype/typerep/yaksa configure =====
+configure: RUNNING CONFIGURE FOR CH4 DEVICE
+checking for sys/mman.h... yes
+checking for sys/stat.h... (cached) yes
+checking for fcntl.h... yes
+checking for mmap... yes
+checking for gethostname... yes
+checking whether gethostname needs a declaration... no
+configure: RUNNING CONFIGURE FOR ch4:shm:posix
+checking for random.h... no
+checking for struct random_data... yes
+checking for random_r... yes
+configure: Using a symmetric heap
+configure: RUNNING CONFIGURE FOR ch4:ofi
+configure: Using runtime capability set due to no selected provider or explicitly runtime selection
+configure: CH4 OFI Netmod:  Using an embedded libfabric
+configure: ===== configuring modules/libfabric =====
+configure: running /bin/bash ./configure --disable-option-checking '--prefix=/home/qik/mpich-install' --enable-embedded  --cache-file=/dev/null --srcdir=.
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking how to create a pax tar archive... gnutar
+checking whether make supports nested variables... (cached) yes
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking whether make supports the include directive... yes (GNU style)
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking dependency style of gcc... gcc3
+checking dependency style of gcc... gcc3
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking for gcc... (cached) gcc
+checking whether the compiler supports GNU C... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to enable C11 features... (cached) none needed
+checking whether gcc understands -c and -o together... (cached) yes
+checking dependency style of gcc... (cached) gcc3
+checking for C compiler conformance level... c11
+checking how to run the C preprocessor... gcc -E
+checking for typeof syntax and keyword spelling... typeof
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld -m elf_x86_64
+checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld -m elf_x86_64 option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for elf.h... yes
+checking for sys/auxv.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64 -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+configure: creating ./config.lt
+config.lt: creating libtool
+checking for dlopen in -ldl... yes
+checking for pthread_mutex_init in -lpthread... yes
+checking for pthread_spin_init... yes
+checking for shm_open... yes
+checking for epoll_create... yes
+checking for gcc options needed to detect all undeclared functions... none needed
+checking for linux/perf_event.h... yes
+checking whether __builtin_ia32_rdpmc is declared... yes
+checking compiler support for c11 atomics... yes
+checking compiler support for c11 atomic `least` types... yes
+checking compiler support for built-in atomics... yes
+checking for library containing __atomic_load_8... -latomic
+checking compiler support for built-in memory model aware atomics... yes
+checking for __int128... yes
+checking compiler support for built-in memory model aware 128-bit atomics... no
+checking compiler support for cpuid... yes
+checking whether ld accepts --version-script... yes
+checking for xpmem.h... no
+checking for .symver assembler support... disabled
+checking for __alias__ attribute support... yes
+checking for getifaddrs... yes
+checking ethtool support... yes
+checking whether ethtool_cmd_speed is declared... yes
+checking whether SPEED_UNKNOWN is declared... yes
+checking for linux/userfaultfd.h... yes
+checking whether __NR_userfaultfd is declared... yes
+checking for userfaultfd unmap support... yes
+checking for library containing clock_gettime... none required
+checking for liburing.h... no
+checking for cuda_runtime.h... yes
+configure: looking for library without search path
+checking for cudaMemcpy in -lcudart... yes
+checking whether cuMemGetHandleForAddressRange is declared... yes
+checking whether CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED is declared... yes
+checking whether CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD is declared... yes
+checking for level_zero/ze_api.h... no
+checking for nrt/nrt.h... no
+checking for habanalabs/synapse_api.h... no
+checking for __curbrk... yes
+checking for __clear_cache... yes
+checking for linux/mman.h... yes
+checking for sys/syscall.h... yes
+checking whether __syscall is declared... no
+checking for __syscall... no
+checking for gdrapi.h... no
+checking for hsa/hsa_ext_amd.h... no
+checking size of void *... 8
+configure: *** Configuring psm2 provider
+checking for psm2.h... no
+configure: configure: recheck psm2 without psm2_info_query.
+checking for psm2.h... no
+configure: recheck psm2 without psm2_mq_ipeek_dequeue_multi.
+checking for psm2.h... no
+configure: recheck psm2 without psm2_mq_fp_msg.
+checking for psm2.h... no
+configure: recheck psm2 without psm2_am_register_handlers_2.
+checking for psm2.h... no
+configure: psm2 provider: disabled
+configure: *** Configuring psm3 provider
+checking for sys/mman.h... yes
+configure: looking for library without search path
+checking for shm_open in -lrt... yes
+checking for numa.h... yes
+configure: looking for library without search path
+checking for numa_node_of_cpu in -lnuma... yes
+checking for infiniband/verbs.h... yes
+configure: looking for library without search path
+checking for ibv_get_device_list in -libverbs... yes
+checking for uuid/uuid.h... no
+checking for -msse4.2 support... yes
+checking for -mavx support... yes
+checking for -mavx2 support... yes
+checking for grep that handles long lines and -e... (cached) /usr/bin/grep
+checking for -Wno-address-of-packed-member support... yes
+checking for rdma/rv_user_ioctls.h... no
+checking for linux/idxd.h... yes
+checking for full Intel DSA support... yes
+configure: psm3 provider: disabled
+configure: *** Configuring sockets provider
+checking for sys/socket.h... yes
+checking for shm_open... (cached) yes
+checking for getifaddrs... (cached) yes
+configure: sockets provider: include in libfabric
+configure: *** Configuring verbs provider
+checking for infiniband/verbs.h... yes
+configure: looking for library without search path
+checking for ibv_open_device in -libverbs... yes
+checking if libibverbs is linkable by libtool... yes
+checking for rdma/rdma_cma.h... no
+checking for rdma/rdma_cma.h... no
+checking for asm/types.h... yes
+checking whether ibv_query_device_ex is declared... yes
+checking whether ibv_reg_dmabuf_mr is declared... yes
+configure: verbs provider: disabled
+configure: *** Configuring efa provider
+checking for infiniband/verbs.h... yes
+configure: looking for library without search path
+checking for ibv_open_device in -libverbs... yes
+checking if libibverbs is linkable by libtool... yes
+checking for GCC... yes
+checking for infiniband/efadv.h... yes
+configure: looking for library without search path
+checking for efadv_query_ah in -lefa... yes
+checking for struct efadv_device_attr.max_rdma_size... yes
+checking whether EFADV_DEVICE_ATTR_CAPS_RNR_RETRY is declared... yes
+checking whether EFADV_DEVICE_ATTR_CAPS_RDMA_WRITE is declared... yes
+checking whether ibv_is_fork_initialized is declared... yes
+checking whether IBV_QUERY_QP_DATA_IN_ORDER_ALIGNED_128_BYTES is declared... yes
+checking whether ibv_reg_dmabuf_mr is declared... (cached) yes
+checking whether efadv_create_cq is declared... yes
+checking whether efadv_cq_from_ibv_cq_ex is declared... yes
+checking whether efadv_wc_read_sgid is declared... yes
+configure: efa provider: include in libfabric
+configure: *** Configuring usnic provider
+checking for infiniband/verbs.h... (cached) yes
+checking for infiniband/driver.h... no
+checking if building usnic fake verbs driver... no
+configure: checking for libnl3
+checking for libnl3 prefix... /usr
+checking for /usr/include/libnl3... found
+configure: looking for header without includes
+checking for netlink/version.h... yes
+configure: looking for library without search path
+checking for nl_socket_set_peer_groups in -lnl-3... yes
+checking for library containing nl_rtgen_request... -lnl-route-3
+checking to ensure these really are libnl3 headers... yes
+configure: usnic provider: include in libfabric
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+configure: *** Configuring gni provider
+checking for CRAY_GNI_HEADERS... no
+configure: gni provider: disabled
+configure: *** Configuring udp provider
+checking for sys/socket.h... (cached) yes
+configure: udp provider: include in libfabric
+configure: *** Configuring tcp provider
+configure: tcp provider: include in libfabric
+configure: *** Configuring rxm provider
+configure: rxm provider: include in libfabric
+configure: *** Configuring mrail provider
+configure: mrail provider: include in libfabric
+configure: *** Configuring rxd provider
+configure: rxd provider: include in libfabric
+configure: *** Configuring bgq provider
+checking for direct bgq provider... no
+configure: bgq provider: disabled
+configure: *** Configuring shm provider
+checking for shm_open... (cached) yes
+checking for accel-config/libaccel_config.h... no
+checking whether HAVE_ATOMICS is declared... yes
+configure: shm provider: include in libfabric
+configure: *** Configuring sm2 provider
+checking for shm_open... (cached) yes
+checking whether HAVE_ATOMICS is declared... (cached) yes
+configure: sm2 provider: include in libfabric
+configure: *** Configuring rstream provider
+configure: rstream provider: include in libfabric
+configure: *** Configuring ucx provider
+configure: ucx provider: disabled
+configure: *** Configuring perf provider
+configure: perf provider: include in libfabric
+configure: *** Configuring trace provider
+configure: trace provider: include in libfabric
+configure: *** Configuring profile provider
+configure: profile provider: disabled
+configure: *** Configuring hook_debug provider
+configure: hook_debug provider: include in libfabric
+configure: *** Configuring hook_hmem provider
+configure: hook_hmem provider: include in libfabric
+configure: *** Configuring dmabuf_peer_mem provider
+configure: dmabuf_peer_mem provider: include in libfabric
+configure: *** Configuring opx provider
+checking for opx provider... checking for uuid/uuid.h... no
+checking for numa.h... yes
+configure: looking for library without search path
+checking for numa_node_of_cpu in -lnuma... yes
+checking for rdma/hfi/hfi1_user.h... yes
+checking whether HAVE_ATOMICS is declared... (cached) yes
+configure: opx provider: disabled
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating libfabric.pc
+config.status: creating Makefile
+config.status: creating libfabric.spec
+config.status: creating libfabric.map
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+***
+*** Built-in providers:	dmabuf_peer_mem hook_hmem hook_debug trace perf rstream sm2 shm rxd mrail rxm tcp udp usnic efa sockets 
+*** DSO providers:	
+***
+configure: ===== done with modules/libfabric configure =====
+checking if fi_info struct has nic field... yes
+configure: RUNNING CONFIGURE FOR ch4:shm:xpmem
+checking for xpmem.h... no
+configure: RUNNING CONFIGURE FOR ch4:shm:cma
+checking for sys/uio.h... (cached) yes
+checking for process_vm_readv... yes
+configure: ===== configuring src/pm/hydra =====
+configure: running /bin/bash ./configure --disable-option-checking '--prefix=/home/qik/mpich-install'  --cache-file=/dev/null --srcdir=.
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for wchar.h... yes
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking whether _XOPEN_SOURCE should be defined... no
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for fgrep... /usr/bin/grep -F
+checking if fgrep support -w option... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports the include directive... yes (GNU style)
+checking whether make supports nested variables... yes
+checking dependency style of gcc... gcc3
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking whether make supports nested variables... (cached) yes
+checking for perl... /usr/bin/perl
+checking for doctext... false
+checking for an ANSI C-conforming const... yes
+checking for working volatile... yes
+checking for C/C++ restrict keyword... __restrict__
+checking for inline... inline
+checking size of unsigned long... 8
+checking for size_t... yes
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for egrep... /usr/bin/grep -E
+checking for ld used by gcc... /usr/bin/ld -m elf_x86_64
+checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld -m elf_x86_64 option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64 -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for variable argument list macro functionality... yes
+checking whether __attribute__ allowed... yes
+checking whether __attribute__((format)) allowed... yes
+configure: sourcing /home/qik/projects/mpich/src/mpl/localdefs
+checking for doxygen... no
+checking for gcov... gcov
+checking for unistd.h... (cached) yes
+checking for strings.h... (cached) yes
+checking for sys/types.h... (cached) yes
+checking for sys/socket.h... yes
+checking for sched.h... yes
+checking for sys/stat.h... (cached) yes
+checking for sys/param.h... yes
+checking for netinet/in.h... yes
+checking for netinet/tcp.h... yes
+checking for sys/un.h... yes
+checking for sys/time.h... yes
+checking for time.h... yes
+checking for ifaddrs.h... yes
+checking for arpa/inet.h... yes
+checking for poll.h... yes
+checking for fcntl.h... yes
+checking for netdb.h... yes
+checking for winsock2.h... no
+checking for windows.h... no
+checking for library containing socket... none required
+checking for library containing gethostbyname... none required
+checking for library containing hstrerror... none required
+checking for gettimeofday... yes
+checking for time... yes
+checking for sigaction... yes
+checking for signal... yes
+checking for usleep... yes
+checking for alloca... no
+checking for unsetenv... yes
+checking for strsignal... yes
+checking for stat... yes
+checking for fcntl... yes
+checking for alarm... yes
+checking for isatty... yes
+checking for inet_ntop... yes
+checking for getpgid... yes
+checking for setsid... yes
+checking for killpg... yes
+checking for hstrerror... yes
+checking whether hstrerror needs a declaration... no
+checking whether gettimeofday needs a declaration... no
+checking whether getpgid needs a declaration... no
+checking whether killpg needs a declaration... no
+checking for environ in unistd.h... yes
+checking bootstrap server... user,ssh,rsh,fork,slurm,ll,lsf,sge,pbs,cobalt,manual,persist
+checking for tm.h... no
+checking for tm.h... (cached) no
+checking process manager... pmiserv
+checking desired processor topology libraries... hwloc
+checking for hwloc.h... yes
+checking for hwloc_topology_set_pid in -lhwloc... yes
+checking if hwloc meets minimum version requirement... yes
+checking available processor topology libraries... hwloc
+checking whether POSIX compliant regcomp()/regexec()... yes
+checking demux engine... poll,select,port
+checking for poll... yes
+checking for select... yes
+checking debugging support... none
+checking error checking... yes
+checking warnings... no
+checking profiling... yes
+checking for strsignal... (cached) yes
+checking whether strsignal needs a declaration... no
+checking for sigaction... (cached) yes
+checking for signal... (cached) yes
+checking for sigset... yes
+checking for struct sigaction and sa_handler... yes
+checking for gethostname... yes
+checking whether gethostname needs a declaration... no
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating lib/tools/bootstrap/src/bsci_init.c
+config.status: creating hydra-doxygen.cfg
+config.status: creating hydra_config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+configure: ===== done with src/pm/hydra configure =====
+checking for BSD/POSIX style global symbol lister... BSD style,/usr/bin/nm -g -B
+checking for stdio.h... (cached) yes
+checking for multiple __attribute__((alias)) support... no! link failure
+configure: creating ./config.lt
+config.lt: creating libtool
+checking for the precision and range of reals...  6 , 37
+checking for the precision and range of double precision...  15 , 307
+checking for the range of integer...  9
+checking for available integer kinds...  2 , 1, 4 , 2, 9 , 4, 18 , 8,
+checking for available integer ranges...  {  2 , 1 , 1 }, {  4 , 2 , 2 }, {  9 , 4 , 4 }, {  18 , 8 , 8 },
+checking directives for Fortran compiler to ignore TKR check... gcc
+checking Whether Fortran compiler supports ISO_C_BINDING... yes
+checking for Fortran 90 real128... yes
+checking directives for Fortran compiler to ignore TKR(d) check... dir
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating src/mpid/ch4/shm/posix/posix_eager_array.c
+config.status: creating src/mpid/ch4/shm/posix/eager/include/posix_eager_pre.h
+config.status: creating src/mpid/ch4/src/mpid_ch4_net_array.c
+config.status: creating src/mpid/ch4/include/netmodpre.h
+config.status: creating Makefile
+config.status: creating examples/Makefile
+config.status: creating test/Makefile
+config.status: creating test/commands/Makefile
+config.status: creating src/include/mpichinfo.h
+config.status: creating mpich-doxygen
+config.status: creating src/include/mpir_ext.h
+config.status: creating src/binding/cxx/mpicxx.h
+config.status: creating src/packaging/pkgconfig/mpich.pc
+config.status: creating src/packaging/envmods/mpich.module
+config.status: WARNING:  'src/packaging/envmods/mpich.module.in' seems to ignore the --datarootdir setting
+config.status: creating src/env/mpixxx_opts.conf
+config.status: creating src/env/mpicc.sh
+config.status: creating src/env/mpicc.bash
+config.status: creating src/env/mpicxx.sh
+config.status: creating src/env/mpicxx.bash
+config.status: creating src/env/mpifort.sh
+config.status: creating src/env/mpifort.bash
+config.status: creating src/env/parkill
+config.status: creating src/include/mpi.h
+config.status: creating src/include/mpif90model.h
+config.status: creating doc/installguide/Makefile
+config.status: creating doc/refman/Makefile
+config.status: creating doc/userguide/Makefile
+config.status: creating test/commands/cmdtests
+config.status: creating src/binding/fortran/mpif_h/mpif.h
+config.status: creating src/binding/fortran/mpif_h/setbotf.f
+config.status: creating src/binding/fortran/mpif_h/setbot.c
+config.status: creating src/binding/fortran/use_mpi_f08/mpi_f08_compile_constants.f90
+config.status: creating src/binding/fortran/use_mpi_f08/mpi_c_interface_types.f90
+config.status: creating src/include/mpichconf.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+config.status: executing src/include/mpif.h commands
+config.status: executing external_setups commands
+config.status: executing lib/newconfig commands
+config.status: executing chmod commands
+config.status: executing gen_binding_f90 commands
+  [ ./maint/gen_binding_f90.py -f-logical-size=4 -ignore-tkr=gcc ]
+  --> [src/binding/fortran/use_mpi/mpi_base.f90]
+  --> [src/binding/fortran/use_mpi/pmpi_base.f90]
+  --> [src/binding/fortran/use_mpi/mpi_constants.f90]
+  --> [src/binding/fortran/use_mpi/mpi_sizeofs.f90]
+config.status: executing gen_binding_f08 commands
+  [ ./maint/gen_binding_f08.py -ignore-tkr-d=dir -fint-size=4 -aint-size=8 -count-size=8 -cint-size=4 ]
+  --> [src/binding/fortran/use_mpi_f08/wrappers_c/f08_cdesc.c]
+  --> [src/binding/fortran/use_mpi_f08/wrappers_c/cdesc_proto.h]
+  --> [src/binding/fortran/use_mpi_f08/wrappers_f/f08ts.f90]
+  --> [src/binding/fortran/use_mpi_f08/wrappers_f/pf08ts.f90]
+  --> [src/binding/fortran/use_mpi_f08/mpi_c_interface_cdesc.f90]
+  --> [src/binding/fortran/use_mpi_f08/mpi_c_interface_nobuf.f90]
+  --> [src/binding/fortran/use_mpi_f08/mpi_f08.f90]
+  --> [src/binding/fortran/use_mpi_f08/pmpi_f08.f90]
+  --> [src/binding/fortran/use_mpi_f08/mpi_f08_types.f90]
+  --> [src/binding/fortran/use_mpi_f08/mpi_f08_compile_constants.f90.in]
+*****************************************************
+***
+*** MPICH 5.0.0b1 (unreleased development copy)
+***
+*** Language Support
+*** ----------------
+*** C       : yes
+*** C++     : yes
+*** Fortran : mpif.h, use mpi, use mpi_f08
+***
+*** Device Configuration
+*** --------------------
+*** device      : ch4:ofi (embedded libfabric)
+*** ipc feature :  gpudirect
+*** gpu support : CUDA
+***
+  MPICH is configured with device ch4:ofi, which should work
+  for TCP networks and any high-bandwidth interconnect
+  supported by libfabric. MPICH can also be configured with
+  "--with-device=ch4:ucx", which should work for TCP networks
+  and any high-bandwidth interconnect supported by the UCX
+  library. In addition, the legacy device ch3 (--with-device=ch3)
+  is also available.
+*** MPICH Flags:
+***   libmpi.so CFLAGS:  -O2
+***   mpicc CFLAGS: 
+***   Runtime checking of AVX2/AVX512F is enabled for selected functions in libmpi.so
+***
+*****************************************************
+Configuration completed.
