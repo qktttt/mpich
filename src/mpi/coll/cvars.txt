@@ -1041,6 +1041,38 @@ cvars:
         nb                        - Force nonblocking algorithm
         pairwise_sendrecv_replace - Force pairwise_sendrecv_replace algorithm
         scattered                 - Force scattered algorithm
+        hierarchical_bruck        - Force hierarchical Bruck algorithm
+        parameterized_bruck       - Force parameterized Bruck algorithm
+
+    - name        : MPIR_CVAR_ALLTOALLV_HIEATA_RADIX
+      category    : COLLECTIVE
+      type        : int
+      default     : 2
+      class       : none
+      verbosity   : MPI_T_VERBOSITY_USER_BASIC
+      scope       : MPI_T_SCOPE_ALL_EQ
+      description : >-
+        radix for HIEATA alltoallv
+
+    - name        : MPIR_CVAR_ALLTOALLV_HIEATA_BTHSIZE
+      category    : COLLECTIVE
+      type        : int
+      default     : 32
+      class       : none
+      verbosity   : MPI_T_VERBOSITY_USER_BASIC
+      scope       : MPI_T_SCOPE_ALL_EQ
+      description : >-
+        batch size for HIEATA alltoallv
+
+    - name        : MPIR_CVAR_ALLTOALLV_PARATA_RADIX
+      category    : COLLECTIVE
+      type        : int
+      default     : 2
+      class       : none
+      verbosity   : MPI_T_VERBOSITY_USER_BASIC
+      scope       : MPI_T_SCOPE_ALL_EQ
+      description : >-
+        radix for PARATA alltoallv
 
     - name        : MPIR_CVAR_ALLTOALLV_INTER_ALGORITHM
       category    : COLLECTIVE

@@ -10,4 +10,7 @@
 mpi_core_sources +=												\
     src/mpi/coll/alltoallv/alltoallv_intra_pairwise_sendrecv_replace.c	\
     src/mpi/coll/alltoallv/alltoallv_intra_scattered.c					\
-    src/mpi/coll/alltoallv/alltoallv_inter_pairwise_exchange.c
+    src/mpi/coll/alltoallv/alltoallv_inter_pairwise_exchange.c          \
+    src/mpi/coll/alltoallv/alltoallv_intra_hierarchical_bruck.c        \
+    src/mpi/coll/alltoallv/alltoallv_intra_parameterized_bruck.c  
+  

@@ -314,6 +314,10 @@ alltoallv-intra:
         restrictions: inplace
     scattered
         restrictions: !inplace
+    hierarchical_bruck
+        restrictions: !inplace
+    parameterized_bruck
+        restrictions: !inplace
 alltoallv-inter:
     pairwise_exchange
 ialltoallv-intra:
