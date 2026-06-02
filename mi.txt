@@ -1,4 +1,5 @@
 make  install-recursive
+<<<<<<< HEAD
 make[1]: Entering directory '/home/qik/projects/mpich'
 Making install in src/mpl
 make[2]: Entering directory '/home/qik/projects/mpich/src/mpl'
@@ -112,6 +113,379 @@ libtool: finish: PATH="/home/qik/.npm-global/bin:/home/qik/.npm-global/bin:/home
 ----------------------------------------------------------------------
 Libraries have been installed in:
    /home/qik/mpich-install/lib
+=======
+make[1]: Entering directory '/home/qktttt/mpich'
+Making install in src/mpl
+make[2]: Entering directory '/home/qktttt/mpich/src/mpl'
+make[3]: Entering directory '/home/qktttt/mpich/src/mpl'
+make[3]: Leaving directory '/home/qktttt/mpich/src/mpl'
+make[2]: Leaving directory '/home/qktttt/mpich/src/mpl'
+Making install in /home/qktttt/mpich/modules/hwloc
+make[2]: Entering directory '/home/qktttt/mpich/modules/hwloc'
+Making install in include
+make[3]: Entering directory '/home/qktttt/mpich/modules/hwloc/include'
+make[4]: Entering directory '/home/qktttt/mpich/modules/hwloc/include'
+make[4]: Nothing to be done for 'install-exec-am'.
+make[4]: Leaving directory '/home/qktttt/mpich/modules/hwloc/include'
+make[3]: Leaving directory '/home/qktttt/mpich/modules/hwloc/include'
+Making install in hwloc
+make[3]: Entering directory '/home/qktttt/mpich/modules/hwloc/hwloc'
+make[4]: Entering directory '/home/qktttt/mpich/modules/hwloc/hwloc'
+make  install-exec-hook
+make[5]: Entering directory '/home/qktttt/mpich/modules/hwloc/hwloc'
+make[5]: Nothing to be done for 'install-exec-hook'.
+make[5]: Leaving directory '/home/qktttt/mpich/modules/hwloc/hwloc'
+make[4]: Leaving directory '/home/qktttt/mpich/modules/hwloc/hwloc'
+make[3]: Leaving directory '/home/qktttt/mpich/modules/hwloc/hwloc'
+make[3]: Entering directory '/home/qktttt/mpich/modules/hwloc'
+make[4]: Entering directory '/home/qktttt/mpich/modules/hwloc'
+make[4]: Nothing to be done for 'install-exec-am'.
+make[4]: Leaving directory '/home/qktttt/mpich/modules/hwloc'
+make[3]: Leaving directory '/home/qktttt/mpich/modules/hwloc'
+make[2]: Leaving directory '/home/qktttt/mpich/modules/hwloc'
+Making install in /home/qktttt/mpich/modules/json-c
+make[2]: Entering directory '/home/qktttt/mpich/modules/json-c'
+Making install in .
+make[3]: Entering directory '/home/qktttt/mpich/modules/json-c'
+make[4]: Entering directory '/home/qktttt/mpich/modules/json-c'
+make[4]: Leaving directory '/home/qktttt/mpich/modules/json-c'
+make[3]: Leaving directory '/home/qktttt/mpich/modules/json-c'
+Making install in tests
+make[3]: Entering directory '/home/qktttt/mpich/modules/json-c/tests'
+make[4]: Entering directory '/home/qktttt/mpich/modules/json-c/tests'
+make[4]: Nothing to be done for 'install-exec-am'.
+make[4]: Nothing to be done for 'install-data-am'.
+make[4]: Leaving directory '/home/qktttt/mpich/modules/json-c/tests'
+make[3]: Leaving directory '/home/qktttt/mpich/modules/json-c/tests'
+make[2]: Leaving directory '/home/qktttt/mpich/modules/json-c'
+Making install in src/mpi/datatype/typerep/yaksa
+make[2]: Entering directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
+make[3]: Entering directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
+make[3]: Leaving directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
+make[2]: Leaving directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
+Making install in src/pmi
+make[2]: Entering directory '/home/qktttt/mpich/src/pmi'
+make[3]: Entering directory '/home/qktttt/mpich/src/pmi'
+make[4]: Entering directory '/home/qktttt/mpich/src/pmi'
+make[4]: Leaving directory '/home/qktttt/mpich/src/pmi'
+make[3]: Leaving directory '/home/qktttt/mpich/src/pmi'
+make[2]: Leaving directory '/home/qktttt/mpich/src/pmi'
+Making install in src/mpi/romio
+make[2]: Entering directory '/home/qktttt/mpich/src/mpi/romio'
+Making install in .
+make[3]: Entering directory '/home/qktttt/mpich/src/mpi/romio'
+make[4]: Entering directory '/home/qktttt/mpich/src/mpi/romio'
+make[4]: Leaving directory '/home/qktttt/mpich/src/mpi/romio'
+make[3]: Leaving directory '/home/qktttt/mpich/src/mpi/romio'
+Making install in test
+make[3]: Entering directory '/home/qktttt/mpich/src/mpi/romio/test'
+make[4]: Entering directory '/home/qktttt/mpich/src/mpi/romio/test'
+make[4]: Nothing to be done for 'install-exec-am'.
+make[4]: Nothing to be done for 'install-data-am'.
+make[4]: Leaving directory '/home/qktttt/mpich/src/mpi/romio/test'
+make[3]: Leaving directory '/home/qktttt/mpich/src/mpi/romio/test'
+make[2]: Leaving directory '/home/qktttt/mpich/src/mpi/romio'
+Making install in /home/qktttt/mpich/modules/libfabric
+make[2]: Entering directory '/home/qktttt/mpich/modules/libfabric'
+make  install-am
+make[3]: Entering directory '/home/qktttt/mpich/modules/libfabric'
+make[4]: Entering directory '/home/qktttt/mpich/modules/libfabric'
+ mkdir -p '/home/qktttt/mpich-install/bin'
+make[4]: Leaving directory '/home/qktttt/mpich/modules/libfabric'
+make[3]: Leaving directory '/home/qktttt/mpich/modules/libfabric'
+make[2]: Leaving directory '/home/qktttt/mpich/modules/libfabric'
+Making install in src/pm/hydra
+make[2]: Entering directory '/home/qktttt/mpich/src/pm/hydra'
+Making install in .
+make[3]: Entering directory '/home/qktttt/mpich/src/pm/hydra'
+make[4]: Entering directory '/home/qktttt/mpich/src/pm/hydra'
+make[4]: Nothing to be done for 'install-data-am'.
+ mkdir -p '/home/qktttt/mpich-install/bin'
+  /bin/sh ./libtool   --mode=install /usr/bin/install -c mpiexec.hydra hydra_pmi_proxy hydra_nameserver hydra_persist '/home/qktttt/mpich-install/bin'
+libtool: install: /usr/bin/install -c mpiexec.hydra /home/qktttt/mpich-install/bin/mpiexec.hydra
+libtool: install: /usr/bin/install -c hydra_pmi_proxy /home/qktttt/mpich-install/bin/hydra_pmi_proxy
+libtool: install: /usr/bin/install -c hydra_nameserver /home/qktttt/mpich-install/bin/hydra_nameserver
+libtool: install: /usr/bin/install -c hydra_persist /home/qktttt/mpich-install/bin/hydra_persist
+make  install-exec-hook
+make[5]: Entering directory '/home/qktttt/mpich/src/pm/hydra'
+if [ -x /home/qktttt/mpich-install/bin/mpiexec.hydra ] ; then \
+    cd /home/qktttt/mpich-install/bin && ln -f -s mpiexec.hydra mpiexec ; \
+    cd /home/qktttt/mpich-install/bin && ln -f -s mpiexec.hydra mpirun ; \
+fi
+make[5]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
+make[4]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
+make[3]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
+make[2]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
+Making install in .
+make[2]: Entering directory '/home/qktttt/mpich'
+  CC       src/mpi/coll/algorithms/treealgo/lib_libmpi_la-treealgo.lo
+  CC       src/mpi/coll/algorithms/treealgo/lib_libmpi_la-treeutil.lo
+  CC       src/mpi/coll/algorithms/recexchalgo/lib_libmpi_la-recexchalgo.lo
+  CC       src/mpi/coll/algorithms/stubalgo/lib_libmpi_la-stubalgo.lo
+  CC       src/mpi/coll/algorithms/circ_graph/lib_libmpi_la-circ_graph.lo
+  CC       src/mpi/coll/algorithms/circ_graph/lib_libmpi_la-cga_init.lo
+  CC       src/mpi/coll/algorithms/circ_graph/lib_libmpi_la-cga_request_queue.lo
+  CC       src/mpi/coll/lib_libmpi_la-mpir_coll_sched_auto.lo
+  CC       src/mpi/coll/lib_libmpi_la-mpir_coll.lo
+  CC       src/mpi/coll/lib_libmpi_la-helper_fns.lo
+  CC       src/mpi/coll/lib_libmpi_la-nbcutil.lo
+  CC       src/mpi/comm/lib_libmpi_la-comm_impl.lo
+  CC       src/mpi/comm/lib_libmpi_la-comm_split.lo
+  CC       src/mpi/comm/lib_libmpi_la-comm_split_type.lo
+  CC       src/mpi/comm/lib_libmpi_la-comm_split_type_nbhd.lo
+  CC       src/mpi/comm/lib_libmpi_la-ulfm_impl.lo
+  CC       src/mpi/comm/lib_libmpi_la-builtin_comms.lo
+  CC       src/mpi/comm/lib_libmpi_la-commutil.lo
+  CC       src/mpi/comm/lib_libmpi_la-contextid.lo
+  CC       src/mpi/datatype/typerep/src/lib_libmpi_la-typerep_ext32.lo
+  CC       src/mpi/datatype/typerep/src/lib_libmpi_la-typerep_flatten.lo
+  CC       src/mpi/datatype/typerep/src/lib_libmpi_la-typerep_op.lo
+  CC       src/mpi/datatype/typerep/src/lib_libmpi_la-typerep_yaksa_create.lo
+  CC       src/mpi/datatype/typerep/src/lib_libmpi_la-typerep_yaksa_init.lo
+  CC       src/mpi/datatype/typerep/src/lib_libmpi_la-typerep_yaksa_pack.lo
+  CC       src/mpi/datatype/typerep/src/lib_libmpi_la-typerep_yaksa_pack_external.lo
+  CC       src/mpi/datatype/typerep/src/lib_libmpi_la-typerep_yaksa_iov.lo
+  CC       src/mpi/datatype/typerep/src/lib_libmpi_la-typerep_yaksa_commit.lo
+  CC       src/mpi/datatype/typerep/src/lib_libmpi_la-typerep_yaksa_debug.lo
+  CC       src/mpi/datatype/lib_libmpi_la-datatype_impl.lo
+  CC       src/mpi/datatype/lib_libmpi_la-typeutil.lo
+  CC       src/mpi/datatype/lib_libmpi_la-type_contents.lo
+  CC       src/mpi/datatype/lib_libmpi_la-get_elements_x.lo
+  CC       src/mpi/datatype/lib_libmpi_la-type_create.lo
+  CC       src/mpi/datatype/lib_libmpi_la-type_create_darray.lo
+  CC       src/mpi/datatype/lib_libmpi_la-type_create_subarray.lo
+  CC       src/mpi/datatype/lib_libmpi_la-pairtypes.lo
+  CC       src/mpi/datatype/lib_libmpi_la-create_f90.lo
+  CC       src/mpi/datatype/lib_libmpi_la-type_debug.lo
+  CC       src/mpi/errhan/lib_libmpi_la-errhan_impl.lo
+  CC       src/mpi/errhan/lib_libmpi_la-errhan_file.lo
+  CC       src/mpi/errhan/lib_libmpi_la-errutil.lo
+  CC       src/mpi/errhan/lib_libmpi_la-dynerrutil.lo
+  CC       src/mpi/group/lib_libmpi_la-group_impl.lo
+  CC       src/mpi/group/lib_libmpi_la-grouputil.lo
+  CC       src/mpi/info/lib_libmpi_la-info_impl.lo
+  CC       src/mpi/info/lib_libmpi_la-infoutil.lo
+  CC       src/mpi/init/lib_libmpi_la-init_impl.lo
+  CC       src/mpi/init/lib_libmpi_la-init_util.lo
+  CC       src/mpi/init/lib_libmpi_la-mpir_init.lo
+  CC       src/mpi/init/lib_libmpi_la-globals.lo
+  CC       src/mpi/init/lib_libmpi_la-initinfo.lo
+  CC       src/mpi/init/lib_libmpi_la-local_proc_attrs.lo
+  CC       src/mpi/init/lib_libmpi_la-mutex.lo
+  CC       src/mpi/init/lib_libmpi_la-init_async.lo
+  CC       src/mpi/init/lib_libmpi_la-init_windows.lo
+  CC       src/mpi/init/lib_libmpi_la-init_bindings.lo
+  CC       src/mpi/init/lib_libmpi_la-init_dbg_logging.lo
+  CC       src/mpi/init/lib_libmpi_la-init_gpu.lo
+  CC       src/mpi/misc/lib_libmpi_la-utils.lo
+  CC       src/mpi/misc/lib_libmpi_la-f2c_impl.lo
+  CC       src/mpi/misc/lib_libmpi_la-memory_alloc_kinds.lo
+  CC       src/mpi/misc/lib_libmpi_la-gpu_query.lo
+  CC       src/mpi/pt2pt/lib_libmpi_la-sendrecv.lo
+  CC       src/mpi/pt2pt/lib_libmpi_la-bsendutil.lo
+  CC       src/mpi/request/lib_libmpi_la-request_impl.lo
+  CC       src/mpi/request/lib_libmpi_la-mpir_greq.lo
+  CC       src/mpi/request/lib_libmpi_la-mpir_request.lo
+  CC       src/mpi/rma/lib_libmpi_la-rma_impl.lo
+  CC       src/mpi/rma/lib_libmpi_la-winutil.lo
+  CC       src/mpi/rma/lib_libmpi_la-rmatypeutil.lo
+  CC       src/mpi/session/lib_libmpi_la-session_impl.lo
+  CC       src/mpi/session/lib_libmpi_la-session_util.lo
+  CC       src/mpi/session/lib_libmpi_la-mpir_pset.lo
+  CC       src/mpi/spawn/lib_libmpi_la-spawn_impl.lo
+  CC       src/mpi/topo/lib_libmpi_la-dims_create.lo
+  CC       src/mpi/topo/lib_libmpi_la-dist_graph_create.lo
+  CC       src/mpi/topo/lib_libmpi_la-topo_impl.lo
+  CC       src/mpi/topo/lib_libmpi_la-topoutil.lo
+  CC       src/mpi/stream/lib_libmpi_la-stream_impl.lo
+  CC       src/mpi/stream/lib_libmpi_la-stream_enqueue.lo
+  CC       src/mpi/stream/lib_libmpi_la-stream_util.lo
+  CC       src/mpi/threadcomm/lib_libmpi_la-threadcomm_impl.lo
+  CC       src/mpi/threadcomm/lib_libmpi_la-threadcomm_pt2pt_impl.lo
+  CC       src/mpi/threadcomm/lib_libmpi_la-threadcomm_coll_impl.lo
+  CC       src/util/ccl/lib_libmpi_la-cclcomm.lo
+  CC       src/util/ccl/lib_libmpi_la-ccl_impl.lo
+  CC       src/util/ccl/lib_libmpi_la-nccl.lo
+  CC       src/util/ccl/lib_libmpi_la-rccl.lo
+  CC       src/util/lib_libmpi_la-mpir_assert.lo
+  CC       src/util/lib_libmpi_la-mpir_cvars.lo
+  CC       src/util/lib_libmpi_la-mpir_pmi.lo
+  CC       src/util/lib_libmpi_la-mpir_nodemap.lo
+  CC       src/util/lib_libmpi_la-mpir_handlemem.lo
+  CC       src/util/lib_libmpi_la-mpir_strerror.lo
+  CC       src/util/lib_libmpi_la-mpir_netloc.lo
+  CC       src/util/lib_libmpi_la-mpir_hwtopo.lo
+  CC       src/util/lib_libmpi_la-mpir_nettopo.lo
+  CC       src/util/lib_libmpi_la-mpir_async_things.lo
+  CC       src/util/lib_libmpi_la-mpir_progress_hook.lo
+  CC       src/glue/romio/lib_libmpi_la-glue_romio.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_globals.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_impl.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_init.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_comm.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_spawn.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_win.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_part.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_self.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4i_comm.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_proc.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_stream_enqueue.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_persist.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-ch4_vci.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-mpidig_init.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-mpidig_recvq.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-mpidig_pt2pt_callbacks.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-mpidig_rma_callbacks.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-mpidig_win.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-mpidig_part.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-mpidig_part_callbacks.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-mpidig_comm_abort.lo
+  CC       src/mpid/ch4/src/lib_libmpi_la-mpid_ch4_net_array.lo
+  CC       src/mpid/ch4/netmod/src/lib_libmpi_la-netmod_impl.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-func_table.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_init.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_comm.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_datatype.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_op.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rma.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_spawn.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_win.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_part.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_events.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv_read.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv_write.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_pipeline.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_progress.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_am_events.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_nic.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_vci.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-globals.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_provider.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_settings.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_addrxchg.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-util.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_init.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_hooks.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_mem.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_rma.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_part.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-topotree.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-topotree_util.lo
+  CC       src/mpid/ch4/shm/posix/release_gather/lib_libmpi_la-release_gather.lo
+  CC       src/mpid/ch4/shm/posix/release_gather/lib_libmpi_la-nb_release_gather.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-globals.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_comm.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_init.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_op.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_datatype.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_win.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_part.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_vci.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_eager_array.lo
+  CC       src/mpid/ch4/shm/posix/eager/src/lib_libmpi_la-posix_eager_impl.lo
+  CC       src/mpid/ch4/shm/posix/eager/iqueue/lib_libmpi_la-func_table.lo
+  CC       src/mpid/ch4/shm/posix/eager/iqueue/lib_libmpi_la-iqueue_init.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-globals.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_init.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_control.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_win.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_fd.lo
+  CC       src/mpid/ch4/shm/ipc/cma/lib_libmpi_la-cma_init.lo
+  CC       src/mpid/ch4/shm/ipc/cma/lib_libmpi_la-cma_post.lo
+  CC       src/mpid/ch4/shm/ipc/gpu/lib_libmpi_la-gpu_post.lo
+  CC       src/mpid/common/sched/lib_libmpi_la-mpidu_sched.lo
+  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_init_shm_alloc.lo
+  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_init_shm.lo
+  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_shm_alloc.lo
+  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_private_pool.lo
+  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_shmem_pool.lo
+  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_shmem_queue.lo
+  CC       src/mpid/common/stream_workq/lib_libmpi_la-stream_workq.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit_finalize.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit_initthread.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit_impl.lo
+  CC       src/mpi_t/lib_libmpi_la-pvar_impl.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit.lo
+  CC       src/mpi_t/lib_libmpi_la-events_impl.lo
+  CC       src/mpi_t/lib_libmpi_la-qmpi_register.lo
+  CC       src/nameserv/pmi/lib_libmpi_la-pmi_nameserv.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-fortran_binding.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-user_proxy.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-fdebug.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-setbot.lo
+  F77      src/binding/fortran/mpif_h/setbotf.lo
+rm -f src/binding/fortran/use_mpi/mpifnoext.h
+sed -e 's/^C/\!/g' -e '/EXTERNAL/d' \
+-e '/PMPI_/d' src/binding/fortran/mpif_h/mpif.h > src/binding/fortran/use_mpi/mpifnoext.h
+  CXX      src/binding/cxx/initcxx.lo
+  CC       src/env/mpichversion.o
+  CC       src/env/mpivars.o
+cp -p src/env/mpicc.bash src/env/mpicc
+cp -p src/env/mpifort.bash src/env/mpifort
+cp -p src/env/mpicxx.bash src/env/mpicxx
+  MOD      src/binding/fortran/use_mpi/mpi_constants.mod-stamp
+  MOD      src/binding/fortran/use_mpi/mpi_sizeofs.mod-stamp
+  GEN      lib/libmpi.la
+  MOD      src/binding/fortran/use_mpi/mpi_base.mod-stamp
+  MOD      src/binding/fortran/use_mpi/pmpi_base.mod-stamp
+  MOD      src/binding/fortran/use_mpi/mpi.mod-stamp
+  FCLD     lib/libf90_mpi.la
+  F77LD    lib/libf77_mpi.la
+copying selected object files to avoid basename conflicts...
+  GEN      lib/libmpifort.la
+  CXXLD    lib/libmpicxx.la
+  CCLD     src/env/mpichversion
+  CCLD     src/env/mpivars
+make[3]: Entering directory '/home/qktttt/mpich'
+if [ ! -e /home/qktttt/mpich-install/share/doc/mpich ] ; then mkdir -p /home/qktttt/mpich-install/share/doc/mpich ; fi
+ mkdir -p '/home/qktttt/mpich-install/lib'
+ mkdir -p '/home/qktttt/mpich-install/bin'
+ mkdir -p '/home/qktttt/mpich-install/etc'
+ mkdir -p '/home/qktttt/mpich-install/include'
+ mkdir -p '/home/qktttt/mpich-install/include'
+ /bin/sh ./libtool   --mode=install /usr/bin/install -c   lib/libmpi.la lib/libmpifort.la lib/libmpicxx.la '/home/qktttt/mpich-install/lib'
+ mkdir -p '/home/qktttt/mpich-install/include'
+ mkdir -p '/home/qktttt/mpich-install/lib/pkgconfig'
+ /usr/bin/install -c -m 644 src/env/mpixxx_opts.conf '/home/qktttt/mpich-install/etc'
+ /usr/bin/install -c src/env/mpicc src/env/parkill src/env/mpifort src/env/mpicxx '/home/qktttt/mpich-install/bin'
+if [ -s ./doc/userguide/user.pdf ] ; then /usr/bin/install -c -m 644 ./doc/userguide/user.pdf /home/qktttt/mpich-install/share/doc/mpich/user.pdf ; fi
+ /usr/bin/install -c -m 644 src/include/mpi_proto.h '/home/qktttt/mpich-install/include'
+ /usr/bin/install -c -m 644 src/binding/fortran/use_mpi/mpi.mod src/binding/fortran/use_mpi/mpi_sizeofs.mod src/binding/fortran/use_mpi/mpi_constants.mod src/binding/fortran/use_mpi/mpi_base.mod src/binding/fortran/use_mpi/pmpi_base.mod '/home/qktttt/mpich-install/include'
+ /usr/bin/install -c -m 644 src/binding/cxx/mpicxx.h src/binding/fortran/mpif_h/mpif.h src/include/mpi.h '/home/qktttt/mpich-install/include'
+ /usr/bin/install -c -m 644 src/packaging/pkgconfig/mpich.pc '/home/qktttt/mpich-install/lib/pkgconfig'
+if [ -s ./doc/installguide/install.pdf ] ; then /usr/bin/install -c -m 644 ./doc/installguide/install.pdf /home/qktttt/mpich-install/share/doc/mpich/install.pdf ; fi
+if [ -s ./doc/logging/logging.pdf ] ; then /usr/bin/install -c -m 644 ./doc/logging/logging.pdf /home/qktttt/mpich-install/share/doc/mpich/logging.pdf ; fi
+libtool: install: /usr/bin/install -c lib/.libs/libmpi.so.0.0.0 /home/qktttt/mpich-install/lib/libmpi.so.0.0.0
+libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpi.so.0.0.0 libmpi.so.0 || { rm -f libmpi.so.0 && ln -s libmpi.so.0.0.0 libmpi.so.0; }; })
+libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpi.so.0.0.0 libmpi.so || { rm -f libmpi.so && ln -s libmpi.so.0.0.0 libmpi.so; }; })
+libtool: install: /usr/bin/install -c lib/.libs/libmpi.lai /home/qktttt/mpich-install/lib/libmpi.la
+libtool: warning: relinking 'lib/libmpifort.la'
+libtool: install: (cd /home/qktttt/mpich; /bin/sh "/home/qktttt/mpich/libtool"  --silent --tag FC --mode=relink gfortran -Isrc/binding/fortran/use_mpi -O2 -version-info 0:0:0 -o lib/libmpifort.la -rpath /home/qktttt/mpich-install/lib lib/libmpi.la src/mpl/libmpl.la lib/libf77_mpi.la lib/libf90_mpi.la )
+libtool: install: /usr/bin/install -c lib/.libs/libmpifort.so.0.0.0T /home/qktttt/mpich-install/lib/libmpifort.so.0.0.0
+libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpifort.so.0.0.0 libmpifort.so.0 || { rm -f libmpifort.so.0 && ln -s libmpifort.so.0.0.0 libmpifort.so.0; }; })
+libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpifort.so.0.0.0 libmpifort.so || { rm -f libmpifort.so && ln -s libmpifort.so.0.0.0 libmpifort.so; }; })
+libtool: install: /usr/bin/install -c lib/.libs/libmpifort.lai /home/qktttt/mpich-install/lib/libmpifort.la
+libtool: warning: relinking 'lib/libmpicxx.la'
+libtool: install: (cd /home/qktttt/mpich; /bin/sh "/home/qktttt/mpich/libtool"  --silent --tag CXX --mode=relink g++ -O2 -version-info 0:0:0 -o lib/libmpicxx.la -rpath /home/qktttt/mpich-install/lib src/binding/cxx/initcxx.lo lib/libmpi.la )
+libtool: install: /usr/bin/install -c lib/.libs/libmpicxx.so.0.0.0T /home/qktttt/mpich-install/lib/libmpicxx.so.0.0.0
+libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpicxx.so.0.0.0 libmpicxx.so.0 || { rm -f libmpicxx.so.0 && ln -s libmpicxx.so.0.0.0 libmpicxx.so.0; }; })
+libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpicxx.so.0.0.0 libmpicxx.so || { rm -f libmpicxx.so && ln -s libmpicxx.so.0.0.0 libmpicxx.so; }; })
+libtool: install: /usr/bin/install -c lib/.libs/libmpicxx.lai /home/qktttt/mpich-install/lib/libmpicxx.la
+libtool: install: /usr/bin/install -c lib/.libs/libmpi.a /home/qktttt/mpich-install/lib/libmpi.a
+libtool: install: chmod 644 /home/qktttt/mpich-install/lib/libmpi.a
+libtool: install: ranlib /home/qktttt/mpich-install/lib/libmpi.a
+libtool: install: /usr/bin/install -c lib/.libs/libmpifort.a /home/qktttt/mpich-install/lib/libmpifort.a
+libtool: install: chmod 644 /home/qktttt/mpich-install/lib/libmpifort.a
+libtool: install: ranlib /home/qktttt/mpich-install/lib/libmpifort.a
+libtool: install: /usr/bin/install -c lib/.libs/libmpicxx.a /home/qktttt/mpich-install/lib/libmpicxx.a
+libtool: install: chmod 644 /home/qktttt/mpich-install/lib/libmpicxx.a
+libtool: install: ranlib /home/qktttt/mpich-install/lib/libmpicxx.a
+libtool: finish: PATH="/home/qktttt/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/home/qktttt/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/home/qktttt/.codex/tmp/arg0/codex-arg0KOgcNW:/home/qktttt/.vscode-server/cli/servers/Stable-10c8e557c8b9f9ed0a87f61f1c9a44bde731c409/server/bin/remote-cli:/home/qktttt/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/home/qktttt/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/home/qktttt/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/home/qktttt/.cargo/bin:/home/qktttt/bin:/home/qktttt/opt/souffle/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/soft/xalt/3.2.1-1-g67d304d4-202511121555/bin:/opt/cray/pe/perftools/25.09.0/bin:/opt/cray/pe/papi/7.2.0.2/bin:/opt/cray/libfabric/2.2.0rc1/bin:/soft/perftools/darshan/darshan-3.4.4/bin:/opt/cray/pals/1.7/bin:/opt/cray/pe/mpich/9.0.1/ofi/nvidia/23.3/bin:/opt/cray/pe/mpich/9.0.1/bin:/opt/cray/pe/craype/2.7.35/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/25.5/compilers/extras/qd/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/25.5/compilers/bin:/opt/clmgr/sbin:/opt/clmgr/bin:/opt/sgi/sbin:/opt/sgi/bin:/home/qktttt/.local/bin:/home/qktttt/bin:/usr/local/bin:/usr/bin:/bin:/opt/c3/bin:/dbhome/db2cat/sqllib/bin:/dbhome/db2cat/sqllib/adm:/dbhome/db2cat/sqllib/misc:/dbhome/db2cat/sqllib/gskit/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/pbs/bin:/opt/cray/pe/bin:/home/qktttt/.local/bin:/home/qktttt/bin:/home/qktttt/.local/bin:/home/qktttt/bin:/home/qktttt/.vscode-server/extensions/openai.chatgpt-26.5519.32039-linux-x64/bin/linux-x86_64:/home/qktttt/.local/bin:/home/qktttt/bin:/sbin" ldconfig -n /home/qktttt/mpich-install/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /home/qktttt/mpich-install/lib
+>>>>>>> a23b5dde5 (merged on polaris)
 
 If you ever happen to want to link against installed libraries
 in a given directory, LIBDIR, you must either use libtool, and
@@ -127,6 +501,7 @@ flag during linking and do at least one of the following:
 See any operating system documentation about shared libraries for
 more information, such as the ld(1) and ld.so(8) manual pages.
 ----------------------------------------------------------------------
+<<<<<<< HEAD
  mkdir -p '/home/qik/mpich-install/bin'
   /bin/bash ./libtool   --mode=install /usr/bin/install -c src/env/mpichversion src/env/mpivars '/home/qik/mpich-install/bin'
 libtool: install: /usr/bin/install -c src/env/.libs/mpichversion /home/qik/mpich-install/bin/mpichversion
@@ -137,11 +512,20 @@ libtool: install: /usr/bin/install -c src/env/.libs/mpivars /home/qik/mpich-inst
  /usr/bin/install -c -m 644 src/env/mpixxx_opts.conf '/home/qik/mpich-install/etc'
 make  install-exec-hook
 make[4]: Entering directory '/home/qik/projects/mpich'
+=======
+ mkdir -p '/home/qktttt/mpich-install/bin'
+  /bin/sh ./libtool   --mode=install /usr/bin/install -c src/env/mpichversion src/env/mpivars '/home/qktttt/mpich-install/bin'
+libtool: install: /usr/bin/install -c src/env/.libs/mpichversion /home/qktttt/mpich-install/bin/mpichversion
+libtool: install: /usr/bin/install -c src/env/.libs/mpivars /home/qktttt/mpich-install/bin/mpivars
+make  install-exec-hook
+make[4]: Entering directory '/home/qktttt/mpich'
+>>>>>>> a23b5dde5 (merged on polaris)
 if test -e lib/libpmpi.la ; then \
     . lib/libpmpi.la ; \
 elif test -e lib/libmpi.la ; then \
     . lib/libmpi.la ; \
 fi ; \
+<<<<<<< HEAD
 for e in /home/qik/mpich-install/bin/mpicc \
 	/home/qik/mpich-install/bin/mpicxx \
 	/home/qik/mpich-install/bin/mpifort ; do \
@@ -151,11 +535,23 @@ for e in /home/qik/mpich-install/bin/mpicc \
 			-e 's|__SYSCONFDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qik/mpich-install/etc|g' \
 			-e 's|__INCLUDEDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qik/mpich-install/include|g' \
 			-e 's|__LIBDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qik/mpich-install/lib|g' \
+=======
+for e in /home/qktttt/mpich-install/bin/mpicc \
+	/home/qktttt/mpich-install/bin/mpicxx \
+	/home/qktttt/mpich-install/bin/mpifort ; do \
+	if test -e ${e} ; then \
+		sed -e 's|__PREFIX_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qktttt/mpich-install|g' \
+			-e 's|__EXEC_PREFIX_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qktttt/mpich-install|g' \
+			-e 's|__SYSCONFDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qktttt/mpich-install/etc|g' \
+			-e 's|__INCLUDEDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qktttt/mpich-install/include|g' \
+			-e 's|__LIBDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qktttt/mpich-install/lib|g' \
+>>>>>>> a23b5dde5 (merged on polaris)
 			-e "s|__LIBS_TO_BE_FILLED_AT_INSTALL_TIME__|$dependency_libs|g" ${e} > ${e}.tmp ; \
 		/usr/bin/install -c ${e}.tmp ${e} ; \
 		rm -f ${e}.tmp ; \
 	fi ; \
 done ; \
+<<<<<<< HEAD
 if test -e /home/qik/mpich-install/bin/mpicxx ; then \
 	if test "mpicxx" != "mpic++" ; then \
 		cd /home/qik/mpich-install/bin && ln -f -s mpicxx mpic++ ; \
@@ -218,3 +614,57 @@ make[3]: Nothing to be done for 'install-data-am'.
 make[3]: Leaving directory '/home/qik/projects/mpich/examples'
 make[2]: Leaving directory '/home/qik/projects/mpich/examples'
 make[1]: Leaving directory '/home/qik/projects/mpich'
+=======
+if test -e /home/qktttt/mpich-install/bin/mpicxx ; then \
+	if test "mpicxx" != "mpic++" ; then \
+		cd /home/qktttt/mpich-install/bin && ln -f -s mpicxx mpic++ ; \
+	fi ; \
+fi ;
+if test -e /home/qktttt/mpich-install/bin/mpifort ; then \
+	if test "mpifort" != "mpif90" ; then \
+		cd /home/qktttt/mpich-install/bin && ln -f -s mpifort mpif90 ; \
+	fi ; \
+fi ;
+if test -e /home/qktttt/mpich-install/bin/mpifort ; then \
+	if test "mpifort" != "mpif77" ; then \
+		cd /home/qktttt/mpich-install/bin && ln -f -s mpifort mpif77 ; \
+	fi ; \
+fi ;
+if test -e /home/qktttt/mpich-install/lib/libmpi.so ; then \
+	if test "mpi" != "mpl" ; then \
+		cd /home/qktttt/mpich-install/lib && ln -f -s libmpi.so libmpl.so ; \
+	fi ; \
+	if test "mpi" != "opa" ; then \
+		cd /home/qktttt/mpich-install/lib && ln -f -s libmpi.so libopa.so ; \
+	fi ; \
+	if test "mpi" != "mpich" ; then \
+		cd /home/qktttt/mpich-install/lib && ln -f -s libmpi.so libmpich.so ; \
+	fi ; \
+fi ; \
+if test -e /home/qktttt/mpich-install/lib/libmpifort.so ; then \
+	if test "mpifort" != "fmpich" ; then \
+		cd /home/qktttt/mpich-install/lib && ln -f -s libmpifort.so libfmpich.so ; \
+	fi ; \
+	if test "mpifort" != "mpichf90" ; then \
+		cd /home/qktttt/mpich-install/lib && ln -f -s libmpifort.so libmpichf90.so ; \
+	fi ; \
+fi ; \
+if test -e /home/qktttt/mpich-install/lib/libmpicxx.so ; then \
+	if test "mpicxx" != "mpichcxx" ; then \
+		cd /home/qktttt/mpich-install/lib && ln -f -s libmpicxx.so libmpichcxx.so ; \
+	fi ; \
+fi
+make[4]: Leaving directory '/home/qktttt/mpich'
+make[3]: Leaving directory '/home/qktttt/mpich'
+make[2]: Leaving directory '/home/qktttt/mpich'
+Making install in examples
+make[2]: Entering directory '/home/qktttt/mpich/examples'
+  CC       cpi.o
+  CCLD     cpi
+make[3]: Entering directory '/home/qktttt/mpich/examples'
+make[3]: Nothing to be done for 'install-exec-am'.
+make[3]: Nothing to be done for 'install-data-am'.
+make[3]: Leaving directory '/home/qktttt/mpich/examples'
+make[2]: Leaving directory '/home/qktttt/mpich/examples'
+make[1]: Leaving directory '/home/qktttt/mpich'
+>>>>>>> a23b5dde5 (merged on polaris)

@@ -291,12 +291,13 @@ MPII_Csel_container_s *MPIR_Csel_search(MPIR_Csel_node_s * csel, MPIR_Csel_coll_
     MPIR_Csel_node_s *node = csel;
     while (node) {
         switch (node->type) {
-            case CSEL_NODE_TYPE__OPERATOR__CALL:
+            case CSEL_NODE_TYPE__OPERATOR__CALL: {
                 MPIR_Csel_node_s * tree = csel_get_tree_by_idx(node->u.call.idx);
                 if (!tree) {
                     goto fn_fail;
                 }
                 return MPIR_Csel_search(tree, coll_sig);
+            }
 
             case CSEL_NODE_TYPE__OPERATOR__COLLECTIVE:
                 if (node->u.collective.coll_type == coll_sig->coll_type)
