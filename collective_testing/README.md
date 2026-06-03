@@ -26,6 +26,10 @@ Run:
     --output collective_testing/alltoallv_algorithm_results.csv
 ```
 
+At the end of the run, the test sets `MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS=0`
+through MPI_T, captures the rank 0 MPICH collective algorithm counter dump during
+`MPI_Finalize`, and reprints only the `MPIR_Alltoallv_` entries.
+
 The test assumes the Alltoallv algorithm CVAR enum has this generated order:
 
 ```text

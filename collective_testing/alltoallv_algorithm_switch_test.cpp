@@ -1,6 +1,7 @@
 #include <mpi.h>
 
 #include <algorithm>
+#include <cstdio>
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
@@ -11,6 +12,8 @@
 #include <string>
 #include <vector>
 
+#include <unistd.h>
+
 namespace {
 
 struct Algorithm {
@@ -20,7 +23,6 @@ struct Algorithm {
 };
 
 const Algorithm kAlgorithms[] = {
-    {"auto", 0, false},
     {"nb", 1, false},
     {"pairwise_sendrecv_replace", 2, true},
     {"scattered", 3, false},
@@ -99,10 +101,110 @@ int find_cvar_index(const char *target_name)
 void set_cvar(MPI_T_cvar_handle handle, int value)
 {
     int rc = MPI_T_cvar_write(handle, &value);
+    MPII_Coll_type_init();
     if (rc != MPI_SUCCESS) {
         std::cerr << "MPI_T_cvar_write failed for value " << value << ", rc=" << rc << "\n";
         MPI_Abort(MPI_COMM_WORLD, rc);
     }
+}
+
+void request_counter_dump(MPI_Comm comm)
+{
+    int rank = 0;
+    MPI_Comm_rank(comm, &rank);
+
+    int cvar_index = find_cvar_index("MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS");
+    if (cvar_index < 0) {
+        if (rank == 0) {
+            std::cerr << "Could not find MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS; "
+                      << "MPICH collective algorithm counters will not be dumped.\n";
+        }
+        return;
+    }
+
+    MPI_T_cvar_handle handle = nullptr;
+    int count = 0;
+    int rc = MPI_T_cvar_handle_alloc(cvar_index, nullptr, &handle, &count);
+    if (rc != MPI_SUCCESS) {
+        if (rank == 0) {
+            std::cerr << "MPI_T_cvar_handle_alloc failed for "
+                      << "MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS, rc=" << rc << "\n";
+        }
+        return;
+    }
+
+    int dump_rank = 0;
+    rc = MPI_T_cvar_write(handle, &dump_rank);
+    if (rc != MPI_SUCCESS && rank == 0) {
+        std::cerr << "MPI_T_cvar_write failed for MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS, "
+                  << "rc=" << rc << "\n";
+    }
+
+    MPI_T_cvar_handle_free(&handle);
+}
+
+void print_filtered_alltoallv_counter_dump(const std::string &capture_path)
+{
+    std::ifstream capture(capture_path.c_str());
+    if (!capture) {
+        std::cerr << "Could not read captured MPICH collective counter dump: "
+                  << capture_path << "\n";
+        return;
+    }
+
+    std::cout << "==== Dump Alltoallv collective algorithm counters ====\n";
+    std::string line;
+    while (std::getline(capture, line)) {
+        if (line.find("MPIR_Alltoallv_") != std::string::npos) {
+            std::cout << line << '\n';
+        }
+    }
+    std::cout << "==== END Alltoallv collective algorithm counters ====\n";
+}
+
+int finalize_with_alltoallv_counter_dump(MPI_Comm comm)
+{
+    int rank = 0;
+    MPI_Comm_rank(comm, &rank);
+
+    request_counter_dump(comm);
+
+    if (rank != 0) {
+        return MPI_Finalize();
+    }
+
+    char path_template[] = "/tmp/mpich_alltoallv_counters_XXXXXX";
+    int capture_fd = mkstemp(path_template);
+    if (capture_fd < 0) {
+        std::cerr << "Could not create temporary file for MPICH counter dump capture.\n";
+        return MPI_Finalize();
+    }
+
+    std::cout.flush();
+    std::fflush(stdout);
+
+    int saved_stdout = dup(STDOUT_FILENO);
+    if (saved_stdout < 0 || dup2(capture_fd, STDOUT_FILENO) < 0) {
+        std::cerr << "Could not redirect stdout for MPICH counter dump capture.\n";
+        close(capture_fd);
+        if (saved_stdout >= 0) {
+            close(saved_stdout);
+        }
+        std::remove(path_template);
+        return MPI_Finalize();
+    }
+    close(capture_fd);
+
+    int finalize_rc = MPI_Finalize();
+
+    std::fflush(stdout);
+    dup2(saved_stdout, STDOUT_FILENO);
+    close(saved_stdout);
+
+    print_filtered_alltoallv_counter_dump(path_template);
+    std::remove(path_template);
+
+    return finalize_rc;
 }
 
 int symmetric_count(int rank, int peer, int max_bytes)
@@ -189,6 +291,7 @@ RunResult run_alltoallv(const Algorithm &algorithm, MPI_T_cvar_handle cvar_handl
     int rank = 0;
     MPI_Comm_rank(comm, &rank);
 
+    MPI_Barrier(comm);
     set_cvar(cvar_handle, algorithm.cvar_value);
     MPI_Barrier(comm);
 
@@ -366,7 +469,7 @@ int main(int argc, char **argv)
     }
 
     MPI_T_cvar_handle_free(&cvar_handle);
-    MPI_Finalize();
+    int finalize_rc = finalize_with_alltoallv_counter_dump(MPI_COMM_WORLD);
     MPI_T_finalize();
-    return 0;
+    return finalize_rc == MPI_SUCCESS ? 0 : finalize_rc;
 }

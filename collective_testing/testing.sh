@@ -13,7 +13,7 @@ PROJECT_ROOT="/home/qik/projects/mpich"
 "$MPICH_PREFIX/bin/mpicxx" -std=c++11 -O2 $PROJECT_ROOT/$TEST_SRC -o $PROJECT_ROOT/$TEST_BIN
 
 "$MPICH_PREFIX/bin/mpiexec" -n 32 $PROJECT_ROOT/$TEST_BIN \
-  --iters 5 \
+  --iters 10 \
   --output $PROJECT_ROOT/$CSV_OUT
 
 echo "Wrote: $CSV_OUT"
