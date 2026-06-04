@@ -63,6 +63,7 @@ int MPIR_Alltoallv_intra_parameterized_bruck(const void *sendbuf,
     MPIR_COMM_RANK_SIZE(comm_ptr, rank, nprocs);
 
     if (sendbuf == MPI_IN_PLACE) {
+        //printf("ParAta - Warning: MPI_IN_PLACE is not supported by MPIR_Alltoallv_intra_parameterized_bruck, falling back to MPIR_Alltoallv_intra_pairwise_sendrecv_replace\n");
         mpi_errno = MPIR_Alltoallv_intra_pairwise_sendrecv_replace(sendbuf, sendcounts,
                                                                    sdispls, sendtype, recvbuf,
                                                                    recvcounts, rdispls, recvtype,
@@ -79,6 +80,7 @@ int MPIR_Alltoallv_intra_parameterized_bruck(const void *sendbuf,
 
     if (!sendtype_is_contig || !recvtype_is_contig || sendtype_size != recvtype_size ||
         send_extent != sendtype_size || recv_extent != recvtype_size) {
+        //printf("ParAta - Warning: non-contiguous or non-matching datatypes, falling back to MPIR_Alltoallv_intra_scattered\n");
         mpi_errno = MPIR_Alltoallv_intra_scattered(sendbuf, sendcounts, sdispls, sendtype,
                                                    recvbuf, recvcounts, rdispls, recvtype,
                                                    comm_ptr, coll_attr);
@@ -114,7 +116,7 @@ int MPIR_Alltoallv_intra_parameterized_bruck(const void *sendbuf,
         }
     }
 
-    mpi_errno = MPIR_Allreduce(&local_max_count, &max_send_count, 1, MPI_AINT, MPI_MAX,
+    mpi_errno = MPIR_Allreduce(&local_max_count, &max_send_count, 1, MPIR_AINT_INTERNAL, MPI_MAX,
                                comm_ptr, coll_attr);
     MPIR_ERR_CHECK(mpi_errno);
 
@@ -182,9 +184,10 @@ int MPIR_Alltoallv_intra_parameterized_bruck(const void *sendbuf,
             int recvrank = (rank + spoint) % nprocs;
             int sendrank = (rank - spoint + nprocs) % nprocs;
 
-            mpi_errno = MPIC_Sendrecv(metadata_send, di, MPI_AINT, sendrank,
-                                      MPIR_ALLTOALLV_TAG, metadata_recv, di, MPI_AINT, recvrank,
-                                      MPIR_ALLTOALLV_TAG, comm_ptr, MPI_STATUS_IGNORE, coll_attr);
+            mpi_errno = MPIC_Sendrecv(metadata_send, di, MPIR_AINT_INTERNAL, sendrank,
+                                      MPIR_ALLTOALLV_TAG, metadata_recv, di, MPIR_AINT_INTERNAL,
+                                      recvrank, MPIR_ALLTOALLV_TAG, comm_ptr, MPI_STATUS_IGNORE,
+                                      coll_attr);
             MPIR_ERR_CHECK(mpi_errno);
 
             for (int i = 0; i < di; i++) {

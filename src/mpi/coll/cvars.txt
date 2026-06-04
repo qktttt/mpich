@@ -1037,7 +1037,7 @@ cvars:
       scope       : MPI_T_SCOPE_ALL_EQ
       description : |-
         Variable to select alltoallv algorithm
-        auto - Internal algorithm selection (can be overridden with MPIR_CVAR_COLL_SELECTION_JSON_FILE)
+        auto                      - Internal algorithm selection (can be overridden with MPIR_CVAR_COLL_SELECTION_JSON_FILE)
         nb                        - Force nonblocking algorithm
         pairwise_sendrecv_replace - Force pairwise_sendrecv_replace algorithm
         scattered                 - Force scattered algorithm

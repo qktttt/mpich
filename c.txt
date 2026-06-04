@@ -136,13 +136,13 @@ checking for C compiler vendor... gnu
 checking whether C compiler accepts option --diag_suppress=branch_past_initialization... no
 checking whether C compiler accepts option -fPIE... yes
 checking whether routines compiled with -fPIE can be linked with ones compiled without -fPIE... yes
-checking for hcoll/api/hcoll_api.h... no
 configure: RUNNING PREREQ FOR CH4 DEVICE
 checking for rdma/fabric.h... no
 checking for ucp/api/ucp.h... no
 configure: CH4 select netmod: ofi 
 Parsing POSIX eager arguments
 There are 1 POSIX eager modules (iqueue)
+checking for hcoll/api/hcoll_api.h... no
 checking for type of weak symbol alias support... pragma weak
 checking whether __attribute__ ((weak,alias(...))) allowed... yes
 checking for multiple weak symbol support... yes
@@ -1237,11 +1237,13 @@ checking for fcntl.h... yes
 checking for mmap... yes
 checking for gethostname... yes
 checking whether gethostname needs a declaration... no
-configure: RUNNING CONFIGURE FOR ch4:shm:cma
-checking for sys/uio.h... (cached) yes
-checking for process_vm_readv... yes
 configure: RUNNING CONFIGURE FOR ch4:shm:xpmem
 checking for xpmem.h... no
+configure: RUNNING CONFIGURE FOR ch4:shm:posix
+checking for random.h... no
+checking for struct random_data... yes
+checking for random_r... yes
+configure: Using a symmetric heap
 configure: RUNNING CONFIGURE FOR ch4:ofi
 configure: Using runtime capability set due to no selected provider or explicitly runtime selection
 configure: CH4 OFI Netmod:  Using an embedded libfabric
@@ -1534,11 +1536,9 @@ config.status: executing libtool commands
 ***
 configure: ===== done with modules/libfabric configure =====
 checking if fi_info struct has nic field... yes
-configure: RUNNING CONFIGURE FOR ch4:shm:posix
-checking for random.h... no
-checking for struct random_data... yes
-checking for random_r... yes
-configure: Using a symmetric heap
+configure: RUNNING CONFIGURE FOR ch4:shm:cma
+checking for sys/uio.h... (cached) yes
+checking for process_vm_readv... yes
 configure: ===== configuring src/pm/hydra =====
 configure: running /bin/bash ./configure --disable-option-checking '--prefix=/home/qik/mpich-install'  --cache-file=/dev/null --srcdir=.
 checking for gcc... gcc

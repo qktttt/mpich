@@ -11,7 +11,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
 #include <unistd.h>
 
 namespace {
@@ -26,8 +25,8 @@ const Algorithm kAlgorithms[] = {
     {"nb", 1, false},
     {"pairwise_sendrecv_replace", 2, true},
     {"scattered", 3, false},
-    {"hierarchical_bruck", 4, false},
     {"parameterized_bruck", 5, false},
+    {"hierarchical_bruck", 4, false},
 };
 
 const int kScatteredValue = 3;
@@ -100,8 +99,7 @@ int find_cvar_index(const char *target_name)
 
 void set_cvar(MPI_T_cvar_handle handle, int value)
 {
-    int rc = MPI_T_cvar_write(handle, &value);
-    MPII_Coll_type_init();
+    int rc = MPI_T_cvar_write(handle, &value); 
     if (rc != MPI_SUCCESS) {
         std::cerr << "MPI_T_cvar_write failed for value " << value << ", rc=" << rc << "\n";
         MPI_Abort(MPI_COMM_WORLD, rc);
@@ -155,7 +153,9 @@ void print_filtered_alltoallv_counter_dump(const std::string &capture_path)
     std::cout << "==== Dump Alltoallv collective algorithm counters ====\n";
     std::string line;
     while (std::getline(capture, line)) {
-        if (line.find("MPIR_Alltoallv_") != std::string::npos) {
+        if (line.find("MPIR_Alltoallv_") != std::string::npos ||
+            line.find("MPIR_Ialltoallv_") != std::string::npos ||
+            line.find("MPIR_TSP_Ialltoallv_") != std::string::npos) {
             std::cout << line << '\n';
         }
     }

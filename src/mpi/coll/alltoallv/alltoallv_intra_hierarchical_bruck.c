@@ -85,6 +85,7 @@ int MPIR_Alltoallv_intra_hierarchical_bruck(
 
 	if (sendbuf == MPI_IN_PLACE)
 	{
+		//printf("HieAta - Warning: MPI_IN_PLACE is not supported by MPIR_Alltoallv_intra_hierarchical_bruck, falling back to MPIR_Alltoallv_intra_pairwise_sendrecv_replace\n");
 		mpi_errno = MPIR_Alltoallv_intra_pairwise_sendrecv_replace(sendbuf, sendcounts,
 																   sdispls, sendtype, recvbuf, recvcounts, rdispls, recvtype, comm_ptr, coll_attr);
 		goto fn_exit;
@@ -92,6 +93,7 @@ int MPIR_Alltoallv_intra_hierarchical_bruck(
 
 	if (!MPII_Comm_is_node_canonical(comm_ptr))
 	{
+		//printf("HieAta - Warning: non-canonical node-aware communicator, falling back to MPIR_Alltoallv_intra_scattered\n");
 		mpi_errno = MPIR_Alltoallv_intra_scattered(sendbuf, sendcounts, sdispls, sendtype,
 												   recvbuf, recvcounts, rdispls, recvtype, comm_ptr, coll_attr);
 		goto fn_exit;
@@ -129,6 +131,7 @@ int MPIR_Alltoallv_intra_hierarchical_bruck(
 	if (!sendtype_is_contig || !recvtype_is_contig || sendtype_size != recvtype_size ||
 		send_extent != sendtype_size || recv_extent != recvtype_size)
 	{
+		//printf("HieAra - Warning: non-contiguous or non-matching datatypes, falling back to MPIR_Alltoallv_intra_scattered\n");
 		mpi_errno = MPIR_Alltoallv_intra_scattered(sendbuf, sendcounts, sdispls, sendtype,
 												   recvbuf, recvcounts, rdispls, recvtype, comm_ptr, coll_attr);
 		goto fn_exit;
@@ -175,7 +178,7 @@ int MPIR_Alltoallv_intra_hierarchical_bruck(
 		if (sendcounts[i] > local_max_count)
 			local_max_count = sendcounts[i];
 	}
-	mpi_errno = MPIR_Allreduce(&local_max_count, &max_send_count, 1, MPI_AINT, MPI_MAX,
+	mpi_errno = MPIR_Allreduce(&local_max_count, &max_send_count, 1, MPIR_AINT_INTERNAL, MPI_MAX,
 							   comm_ptr, coll_attr);
 	MPIR_ERR_CHECK(mpi_errno);
 
@@ -247,9 +250,10 @@ int MPIR_Alltoallv_intra_hierarchical_bruck(
 			int send_proc = gid * n + (grank - spoint + n) % n; // send data from rank - 2^k process
 
 			// 3) exchange metadata
-			mpi_errno = MPIC_Sendrecv(metadata_send, di, MPI_AINT, send_proc,
-									  MPIR_ALLTOALLV_TAG, metadata_recv, di, MPI_AINT, recv_proc,
-									  MPIR_ALLTOALLV_TAG, comm_ptr, MPI_STATUS_IGNORE, coll_attr);
+			mpi_errno = MPIC_Sendrecv(metadata_send, di, MPIR_AINT_INTERNAL, send_proc,
+									  MPIR_ALLTOALLV_TAG, metadata_recv, di, MPIR_AINT_INTERNAL,
+									  recv_proc, MPIR_ALLTOALLV_TAG, comm_ptr, MPI_STATUS_IGNORE,
+									  coll_attr);
 			MPIR_ERR_CHECK(mpi_errno);
 
 			for (int i = 0; i < di; i++)
