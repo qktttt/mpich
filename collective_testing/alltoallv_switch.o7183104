@@ -1,0 +1,4 @@
+PROJECT_ROOT=/var/spool/pbs/mom_priv
+MPICH_PREFIX=/home/qktttt/mpich-install
+NUM_OF_NODES=4 TOTAL_NUM_RANKS=128 RANKS_PER_NODE=32
+g++: error: /var/spool/pbs/mom_priv/collective_testing/alltoallv_algorithm_switch_test.cpp: No such file or directory

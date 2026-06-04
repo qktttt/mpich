@@ -71,6 +71,7 @@ make[4]: Leaving directory '/home/qik/projects/mpich/modules/json-c/tests'
 make[3]: Leaving directory '/home/qik/projects/mpich/modules/json-c'
 make[2]: Leaving directory '/home/qik/projects/mpich/modules/json-c'
 Making all in src/mpi/datatype/typerep/yaksa
+<<<<<<< HEAD
 make[2]: Entering directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/yaksa'
   NVCC     src/backend/cuda/pup/yaksuri_cudai_pup__Bool.lo
   NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector__Bool.lo
@@ -384,6 +385,44 @@ make[2]: Entering directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/y
   CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_resized_builtin.lo
   CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_builtin.lo
   CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns.lo
+=======
+make[2]: Entering directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
+  CC       src/util/yaksu_buffer_pool.lo
+  CC       src/util/yaksu_handle_pool.lo
+  CC       src/frontend/bounds/yaksa_bounds.lo
+  CC       src/frontend/flatten/yaksa_flatten_size.lo
+  CC       src/frontend/flatten/yaksa_flatten.lo
+  CC       src/frontend/flatten/yaksa_unflatten.lo
+  CC       src/frontend/info/yaksa_info.lo
+  CC       src/frontend/init/yaksa_init.lo
+  CC       src/frontend/iov/yaksa_iov_len.lo
+  CC       src/frontend/iov/yaksa_iov_len_max.lo
+  CC       src/frontend/iov/yaksa_iov.lo
+  CC       src/frontend/pup/yaksa_ipack.lo
+  CC       src/frontend/pup/yaksa_pack.lo
+  CC       src/frontend/pup/yaksa_iunpack.lo
+  CC       src/frontend/pup/yaksa_unpack.lo
+  CC       src/frontend/pup/yaksa_pack_stream.lo
+  CC       src/frontend/pup/yaksa_unpack_stream.lo
+  CC       src/frontend/pup/yaksa_request.lo
+  CC       src/frontend/pup/yaksi_ipack.lo
+  CC       src/frontend/pup/yaksi_ipack_element.lo
+  CC       src/frontend/pup/yaksi_ipack_backend.lo
+  CC       src/frontend/pup/yaksi_iunpack.lo
+  CC       src/frontend/pup/yaksi_iunpack_element.lo
+  CC       src/frontend/pup/yaksi_iunpack_backend.lo
+  CC       src/frontend/pup/yaksi_request.lo
+  CC       src/frontend/types/yaksa_vector.lo
+  CC       src/frontend/types/yaksa_contig.lo
+  CC       src/frontend/types/yaksa_dup.lo
+  CC       src/frontend/types/yaksa_resized.lo
+  CC       src/frontend/types/yaksa_blkindx.lo
+  CC       src/frontend/types/yaksa_indexed.lo
+  CC       src/frontend/types/yaksa_subarray.lo
+  CC       src/frontend/types/yaksa_struct.lo
+  CC       src/frontend/types/yaksa_free.lo
+  CC       src/frontend/types/yaksi_type.lo
+>>>>>>> 338f3bbb0 (polaris test)
   CC       src/backend/seq/hooks/yaksuri_seq_hooks.lo
   CC       src/backend/seq/pup/yaksuri_seqi_pup__Bool.lo
   CC       src/backend/seq/pup/yaksuri_seqi_pup_hvector__Bool.lo
@@ -1027,6 +1066,7 @@ make[2]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
 make  all-recursive
 make[3]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
 Making all in .
+<<<<<<< HEAD
 make[4]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
   CC       mpiexec/hydra-mpiexec.o
   CC       mpiexec/hydra-options.o
@@ -1043,7 +1083,11 @@ make[4]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
   CC       mpiexec/hydra-pmiserv_pmci.o
   CC       mpiexec/hydra-pmiserv_utils.o
   CC       lib/pmiserv_common.lo
+=======
+make[4]: Entering directory '/home/qktttt/mpich/src/pm/hydra'
+>>>>>>> 338f3bbb0 (polaris test)
   CC       lib/utils/alloc.lo
+  CC       lib/pmiserv_common.lo
   CC       lib/utils/args.lo
   CC       lib/utils/dbg.lo
   CC       lib/utils/env.lo
@@ -1117,6 +1161,7 @@ make[4]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
   CC       nameserver/hydra_nameserver-hydra_nameserver.o
   CC       persist_server/hydra_persist-persist_server.o
   CCLD     libhydra.la
+<<<<<<< HEAD
   CCLD     mpiexec.hydra
   CCLD     hydra_nameserver
   CCLD     hydra_persist
@@ -1124,6 +1169,15 @@ make[4]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
 make[4]: Leaving directory '/home/qik/projects/mpich/src/pm/hydra'
 make[3]: Leaving directory '/home/qik/projects/mpich/src/pm/hydra'
 make[2]: Leaving directory '/home/qik/projects/mpich/src/pm/hydra'
+=======
+  CCLD     hydra_pmi_proxy
+  CCLD     hydra_persist
+  CCLD     hydra_nameserver
+  CCLD     mpiexec.hydra
+make[4]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
+make[3]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
+make[2]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
+>>>>>>> 338f3bbb0 (polaris test)
 Making all in .
 make[2]: Entering directory '/home/qik/projects/mpich'
   CC       src/env/mpichversion.o
@@ -1236,8 +1290,8 @@ cp -p src/env/mpicxx.bash src/env/mpicxx
   CC       src/binding/c/abi/lib_libmpi_la-abi_get_fortran_info.lo
   CC       src/binding/c/abi/lib_libmpi_la-abi_get_info.lo
   CC       src/binding/c/abi/lib_libmpi_la-abi_get_version.lo
-  CC       src/binding/c/abi/lib_libmpi_la-abi_set_fortran_booleans.lo
   CC       src/binding/c/abi/lib_libmpi_la-abi_set_fortran_info.lo
+  CC       src/binding/c/abi/lib_libmpi_la-abi_set_fortran_booleans.lo
   CC       src/binding/c/abi/lib_libmpi_la-comm_toint.lo
   CC       src/binding/c/abi/lib_libmpi_la-comm_fromint.lo
   CC       src/binding/c/abi/lib_libmpi_la-errhandler_toint.lo
@@ -2105,6 +2159,7 @@ In file included from ./src/include/mpiimpl.h:203,
   CC       src/mpid/ch4/src/lib_libmpi_la-mpidig_comm_abort.lo
   CC       src/mpid/ch4/src/lib_libmpi_la-mpid_ch4_net_array.lo
   CC       src/mpid/ch4/netmod/src/lib_libmpi_la-netmod_impl.lo
+<<<<<<< HEAD
   F77LD    lib/libf77_mpi.la
   MOD      src/binding/fortran/use_mpi/mpi_constants.mod-stamp
   MOD      src/binding/fortran/use_mpi/mpi_sizeofs.mod-stamp
@@ -2126,3 +2181,107 @@ make[2]: Entering directory '/home/qik/projects/mpich/examples'
   CCLD     cpi
 make[2]: Leaving directory '/home/qik/projects/mpich/examples'
 make[1]: Leaving directory '/home/qik/projects/mpich'
+=======
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-func_table.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_init.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_comm.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_datatype.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_op.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rma.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_spawn.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_win.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_part.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_events.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv_read.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv_write.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_pipeline.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_progress.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_am_events.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_nic.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_vci.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-globals.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_provider.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_settings.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_addrxchg.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-util.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_init.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_hooks.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_mem.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_rma.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_part.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-topotree.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-topotree_util.lo
+  CC       src/mpid/ch4/shm/posix/release_gather/lib_libmpi_la-release_gather.lo
+  CC       src/mpid/ch4/shm/posix/release_gather/lib_libmpi_la-nb_release_gather.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-globals.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_comm.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_init.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_op.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_datatype.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_win.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_part.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_vci.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_eager_array.lo
+  CC       src/mpid/ch4/shm/posix/eager/src/lib_libmpi_la-posix_eager_impl.lo
+  CC       src/mpid/ch4/shm/posix/eager/iqueue/lib_libmpi_la-func_table.lo
+  CC       src/mpid/ch4/shm/posix/eager/iqueue/lib_libmpi_la-iqueue_init.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-globals.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_init.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_control.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_win.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_fd.lo
+  CC       src/mpid/ch4/shm/ipc/cma/lib_libmpi_la-cma_init.lo
+  CC       src/mpid/ch4/shm/ipc/cma/lib_libmpi_la-cma_post.lo
+  CC       src/mpid/ch4/shm/ipc/gpu/lib_libmpi_la-gpu_post.lo
+  CC       src/mpid/common/sched/lib_libmpi_la-mpidu_sched.lo
+  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_init_shm_alloc.lo
+  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_init_shm.lo
+  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_shm_alloc.lo
+  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_private_pool.lo
+  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_shmem_pool.lo
+  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_shmem_queue.lo
+  CC       src/mpid/common/stream_workq/lib_libmpi_la-stream_workq.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit_finalize.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit_initthread.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit_impl.lo
+  CC       src/mpi_t/lib_libmpi_la-pvar_impl.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit.lo
+  CC       src/mpi_t/lib_libmpi_la-events_impl.lo
+  CC       src/mpi_t/lib_libmpi_la-qmpi_register.lo
+  CC       src/nameserv/pmi/lib_libmpi_la-pmi_nameserv.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-fortran_binding.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-user_proxy.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-fdebug.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-setbot.lo
+  F77      src/binding/fortran/mpif_h/setbotf.lo
+rm -f src/binding/fortran/use_mpi/mpifnoext.h
+sed -e 's/^C/\!/g' -e '/EXTERNAL/d' \
+-e '/PMPI_/d' src/binding/fortran/mpif_h/mpif.h > src/binding/fortran/use_mpi/mpifnoext.h
+  CXX      src/binding/cxx/initcxx.lo
+  CC       src/env/mpichversion.o
+  CC       src/env/mpivars.o
+cp -p src/env/mpicc.bash src/env/mpicc
+cp -p src/env/mpifort.bash src/env/mpifort
+cp -p src/env/mpicxx.bash src/env/mpicxx
+  MOD      src/binding/fortran/use_mpi/mpi_sizeofs.mod-stamp
+  MOD      src/binding/fortran/use_mpi/mpi_constants.mod-stamp
+  GEN      lib/libmpi.la
+  MOD      src/binding/fortran/use_mpi/mpi_base.mod-stamp
+  MOD      src/binding/fortran/use_mpi/pmpi_base.mod-stamp
+  MOD      src/binding/fortran/use_mpi/mpi.mod-stamp
+  FCLD     lib/libf90_mpi.la
+  F77LD    lib/libf77_mpi.la
+copying selected object files to avoid basename conflicts...
+  CXXLD    lib/libmpicxx.la
+  GEN      lib/libmpifort.la
+  CCLD     src/env/mpichversion
+  CCLD     src/env/mpivars
+make[2]: Leaving directory '/home/qktttt/mpich'
+Making all in examples
+make[2]: Entering directory '/home/qktttt/mpich/examples'
+  CC       cpi.o
+  CCLD     cpi
+make[2]: Leaving directory '/home/qktttt/mpich/examples'
+make[1]: Leaving directory '/home/qktttt/mpich'
+>>>>>>> 338f3bbb0 (polaris test)

@@ -36,7 +36,7 @@ const int kScatteredValue = 3;
 //};
 
 const int kDefaultSizes[] = {
-    4, 8, 16, 32
+    4, 8, 16
 };
 
 struct Options {

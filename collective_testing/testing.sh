@@ -8,7 +8,7 @@ TEST_SRC="/collective_testing/alltoallv_algorithm_switch_test.cpp"
 TEST_BIN="/collective_testing/alltoallv_algorithm_switch_test"
 CSV_OUT="/collective_testing/alltoallv_algorithm_results.csv"
 
-PROJECT_ROOT="/home/qik/projects/mpich"
+PROJECT_ROOT="/home/qktttt/mpich"
 
 "$MPICH_PREFIX/bin/mpicxx" -std=c++11 -O2 $PROJECT_ROOT/$TEST_SRC -o $PROJECT_ROOT/$TEST_BIN
 
