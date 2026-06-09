@@ -187,17 +187,14 @@ int MPIR_T_cvar_write_impl(MPI_T_cvar_handle handle, const void *buf)
             mpi_errno = MPI_T_ERR_INVALID;
             goto fn_fail;
     }
-    // recalling the MPII_Coll_type_init to re-initialize the collective algorithm selection 
-    // logic after the cvar value is changed. This is necessary for the test to work,
-    // we may expect a nicer way to do this. 
-    bool is_alltoallv_intra_algorithm_cvar = (addr == &MPIR_CVAR_ALLTOALLV_INTRA_ALGORITHM);
-    if (is_alltoallv_intra_algorithm_cvar && MPIR_Coll_cvar_table) {
+    /*
+     * Refresh collective algorithm selection after MPI_T writes. The collective
+     * cvar table snapshots CVAR values during init, so runtime collective tests
+     * need the table updated after CVAR changes.
+     */
+    if (MPIR_Coll_cvar_table) {
         MPII_Coll_type_init();
     }
-    //if (is_alltoallv_intra_algorithm_cvar && hnd->datatype == MPI_INT) {
-    //    printf("MPIR CVAR WRITE, INPUT VAL: = %d, MPIR_CVAR_ALLTOALLV_INTRA_ALGORITHM = %d\n",
-    //           *(int *) buf, MPIR_CVAR_ALLTOALLV_INTRA_ALGORITHM);
-    //}
   fn_exit:
     return mpi_errno;
   fn_fail:

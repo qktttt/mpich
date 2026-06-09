@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -N alltoallv_switch
+#PBS -N bcast_switch
 #PBS -l select=4:system=polaris
 #PBS -l place=scatter
 #PBS -l walltime=0:05:00
@@ -22,9 +22,9 @@ echo "NUM_OF_NODES=4 TOTAL_NUM_RANKS=128 RANKS_PER_NODE=32"
 
 cd "$TEST_DIR"
 
-TEST_SRC="alltoallv_algorithm_switch_test.cpp"
-TEST_BIN="./alltoallv_algorithm_switch_test"
-CSV_OUT="alltoallv_algorithm_results_polaris_128r.csv"
+TEST_SRC="bcast_algorithm_switch_test.cpp"
+TEST_BIN="./bcast_algorithm_switch_test"
+CSV_OUT="bcast_algorithm_results_polaris_128r.csv"
 
 "$MPICH_PREFIX/bin/mpicxx" -std=c++11 -O2 "$TEST_SRC" -o "$TEST_BIN"
 

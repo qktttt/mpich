@@ -1,0 +1,404 @@
+#include <mpi.h>
+
+#include <algorithm>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+#include <numeric>
+#include <string>
+#include <vector>
+#include <unistd.h>
+
+namespace {
+
+struct Algorithm {
+    const char *name;
+    int cvar_value;
+};
+
+const Algorithm kAlgorithms[] = {
+    {"binomial", 1},
+    {"nb", 2},
+    {"circ_graph", 3},
+    {"smp", 4},
+    {"scatter_recursive_doubling_allgather", 5},
+    {"scatter_ring_allgather", 6},
+    {"pipelined_tree", 7},
+    {"tree", 8},
+};
+
+const int kBaselineValue = 1;
+
+const int kDefaultSizes[] = {
+    4, 8, 16
+};
+
+struct Options {
+    std::string output = "collective_testing/bcast_algorithm_results.csv";
+    int iterations = 1;
+};
+
+void usage(const char *prog)
+{
+    std::cerr << "Usage: " << prog << " [--output path] [--iters N]\n";
+}
+
+Options parse_options(int argc, char **argv)
+{
+    Options options;
+    for (int i = 1; i < argc; i++) {
+        std::string arg = argv[i];
+        if (arg == "--output" && i + 1 < argc) {
+            options.output = argv[++i];
+        } else if (arg == "--iters" && i + 1 < argc) {
+            options.iterations = std::max(1, std::atoi(argv[++i]));
+        } else if (arg == "--help" || arg == "-h") {
+            usage(argv[0]);
+            std::exit(0);
+        } else {
+            usage(argv[0]);
+            std::exit(1);
+        }
+    }
+    return options;
+}
+
+int find_cvar_index(const char *target_name)
+{
+    int num_cvars = 0;
+    if (MPI_T_cvar_get_num(&num_cvars) != MPI_SUCCESS) {
+        return -1;
+    }
+
+    for (int i = 0; i < num_cvars; i++) {
+        char name[MPI_MAX_OBJECT_NAME] = {0};
+        int name_len = MPI_MAX_OBJECT_NAME;
+        int verbosity = 0;
+        MPI_Datatype datatype = MPI_DATATYPE_NULL;
+        MPI_T_enum enumtype = MPI_T_ENUM_NULL;
+        char desc[1] = {0};
+        int desc_len = 1;
+        int bind = 0;
+        int scope = 0;
+
+        int rc = MPI_T_cvar_get_info(i, name, &name_len, &verbosity, &datatype, &enumtype,
+                                     desc, &desc_len, &bind, &scope);
+        if (rc == MPI_SUCCESS && std::strcmp(name, target_name) == 0) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+void set_cvar(MPI_T_cvar_handle handle, int value)
+{
+    int rc = MPI_T_cvar_write(handle, &value);
+    if (rc != MPI_SUCCESS) {
+        std::cerr << "MPI_T_cvar_write failed for value " << value << ", rc=" << rc << "\n";
+        MPI_Abort(MPI_COMM_WORLD, rc);
+    }
+}
+
+void request_counter_dump(MPI_Comm comm)
+{
+    int rank = 0;
+    MPI_Comm_rank(comm, &rank);
+
+    int cvar_index = find_cvar_index("MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS");
+    if (cvar_index < 0) {
+        if (rank == 0) {
+            std::cerr << "Could not find MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS; "
+                      << "MPICH collective algorithm counters will not be dumped.\n";
+        }
+        return;
+    }
+
+    MPI_T_cvar_handle handle = nullptr;
+    int count = 0;
+    int rc = MPI_T_cvar_handle_alloc(cvar_index, nullptr, &handle, &count);
+    if (rc != MPI_SUCCESS) {
+        if (rank == 0) {
+            std::cerr << "MPI_T_cvar_handle_alloc failed for "
+                      << "MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS, rc=" << rc << "\n";
+        }
+        return;
+    }
+
+    int dump_rank = 0;
+    rc = MPI_T_cvar_write(handle, &dump_rank);
+    if (rc != MPI_SUCCESS && rank == 0) {
+        std::cerr << "MPI_T_cvar_write failed for MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS, "
+                  << "rc=" << rc << "\n";
+    }
+
+    MPI_T_cvar_handle_free(&handle);
+}
+
+void print_filtered_bcast_counter_dump(const std::string &capture_path)
+{
+    std::ifstream capture(capture_path.c_str());
+    if (!capture) {
+        std::cerr << "Could not read captured MPICH collective counter dump: "
+                  << capture_path << "\n";
+        return;
+    }
+
+    std::cout << "==== Dump Bcast collective algorithm counters ====\n";
+    std::string line;
+    while (std::getline(capture, line)) {
+        if (line.find("MPIR_Bcast_") != std::string::npos ||
+            line.find("MPIR_Ibcast_") != std::string::npos ||
+            line.find("MPIR_TSP_Ibcast_") != std::string::npos ||
+            line.find("MPIR_Coll_nb") != std::string::npos) {
+            std::cout << line << '\n';
+        }
+    }
+    std::cout << "==== END Bcast collective algorithm counters ====\n";
+}
+
+int finalize_with_bcast_counter_dump(MPI_Comm comm)
+{
+    int rank = 0;
+    MPI_Comm_rank(comm, &rank);
+
+    request_counter_dump(comm);
+
+    if (rank != 0) {
+        return MPI_Finalize();
+    }
+
+    char path_template[] = "/tmp/mpich_bcast_counters_XXXXXX";
+    int capture_fd = mkstemp(path_template);
+    if (capture_fd < 0) {
+        std::cerr << "Could not create temporary file for MPICH counter dump capture.\n";
+        return MPI_Finalize();
+    }
+
+    std::cout.flush();
+    std::fflush(stdout);
+
+    int saved_stdout = dup(STDOUT_FILENO);
+    if (saved_stdout < 0 || dup2(capture_fd, STDOUT_FILENO) < 0) {
+        std::cerr << "Could not redirect stdout for MPICH counter dump capture.\n";
+        close(capture_fd);
+        if (saved_stdout >= 0) {
+            close(saved_stdout);
+        }
+        std::remove(path_template);
+        return MPI_Finalize();
+    }
+    close(capture_fd);
+
+    int finalize_rc = MPI_Finalize();
+
+    std::fflush(stdout);
+    dup2(saved_stdout, STDOUT_FILENO);
+    close(saved_stdout);
+
+    print_filtered_bcast_counter_dump(path_template);
+    std::remove(path_template);
+
+    return finalize_rc;
+}
+
+std::uint8_t payload_byte(int root, int offset, int message_bytes)
+{
+    unsigned int value = 0x9e3779b9u;
+    value ^= static_cast<unsigned int>((root + 1) * 0x45d9f3bu);
+    value ^= static_cast<unsigned int>((offset + 3) * 0x119de1f3u);
+    value ^= static_cast<unsigned int>((message_bytes + 7) * 0x27d4eb2du);
+    return static_cast<std::uint8_t>(value & 0xffu);
+}
+
+std::vector<std::uint8_t> build_payload(int root, int message_bytes)
+{
+    std::vector<std::uint8_t> payload(message_bytes);
+    for (int i = 0; i < message_bytes; i++) {
+        payload[i] = payload_byte(root, i, message_bytes);
+    }
+    return payload;
+}
+
+struct RunResult {
+    std::vector<std::uint8_t> recvbuf;
+    double elapsed = 0.0;
+    int mpi_error = MPI_SUCCESS;
+};
+
+RunResult run_bcast(const Algorithm &algorithm, MPI_T_cvar_handle cvar_handle,
+                    const std::vector<std::uint8_t> &payload, int root, MPI_Comm comm)
+{
+    int rank = 0;
+    MPI_Comm_rank(comm, &rank);
+
+    MPI_Barrier(comm);
+    set_cvar(cvar_handle, algorithm.cvar_value);
+    MPI_Barrier(comm);
+
+    RunResult result;
+    result.recvbuf.assign(payload.size(), 0);
+    if (rank == root) {
+        result.recvbuf = payload;
+    }
+
+    double t0 = MPI_Wtime();
+    result.mpi_error = MPI_Bcast(result.recvbuf.data(), static_cast<int>(result.recvbuf.size()),
+                                 MPI_BYTE, root, comm);
+    double t1 = MPI_Wtime();
+    result.elapsed = t1 - t0;
+
+    MPI_Barrier(comm);
+    return result;
+}
+
+bool same_buffer(const std::vector<std::uint8_t> &a, const std::vector<std::uint8_t> &b)
+{
+    return a.size() == b.size() && std::equal(a.begin(), a.end(), b.begin());
+}
+
+void write_csv_row(std::ofstream &csv, int message_bytes, int iteration, int root,
+                   const Algorithm &algorithm, bool is_baseline, bool correct,
+                   int mpi_error, double time_min, double time_avg, double time_max,
+                   long long payload_bytes)
+{
+    csv << message_bytes << ','
+        << iteration << ','
+        << root << ','
+        << algorithm.name << ','
+        << algorithm.cvar_value << ','
+        << (is_baseline ? 1 : 0) << ','
+        << (correct ? 1 : 0) << ','
+        << mpi_error << ','
+        << time_min << ','
+        << time_avg << ','
+        << time_max << ','
+        << payload_bytes << '\n';
+}
+
+void reduce_and_write_row(std::ofstream &csv, int message_bytes, int iteration, int root,
+                          const Algorithm &algorithm, bool is_baseline, bool local_correct,
+                          int local_mpi_error, double elapsed, long long local_payload_bytes,
+                          MPI_Comm comm)
+{
+    int rank = 0;
+    int comm_size = 0;
+    MPI_Comm_rank(comm, &rank);
+    MPI_Comm_size(comm, &comm_size);
+
+    int local_correct_int = local_correct ? 1 : 0;
+    int global_correct_int = 0;
+    int global_mpi_error = 0;
+    double time_min = 0.0;
+    double time_sum = 0.0;
+    double time_max = 0.0;
+    long long payload_bytes = 0;
+
+    MPI_Reduce(&local_correct_int, &global_correct_int, 1, MPI_INT, MPI_MIN, 0, comm);
+    MPI_Reduce(&local_mpi_error, &global_mpi_error, 1, MPI_INT, MPI_MAX, 0, comm);
+    MPI_Reduce(&elapsed, &time_min, 1, MPI_DOUBLE, MPI_MIN, 0, comm);
+    MPI_Reduce(&elapsed, &time_sum, 1, MPI_DOUBLE, MPI_SUM, 0, comm);
+    MPI_Reduce(&elapsed, &time_max, 1, MPI_DOUBLE, MPI_MAX, 0, comm);
+    MPI_Reduce(&local_payload_bytes, &payload_bytes, 1, MPI_LONG_LONG, MPI_SUM, 0, comm);
+
+    if (rank == 0) {
+        write_csv_row(csv, message_bytes, iteration, root, algorithm, is_baseline,
+                      global_correct_int == 1, global_mpi_error, time_min,
+                      time_sum / comm_size, time_max, payload_bytes);
+    }
+}
+
+} // namespace
+
+int main(int argc, char **argv)
+{
+    int provided = 0;
+    MPI_T_init_thread(MPI_THREAD_SINGLE, &provided);
+    MPI_Init(&argc, &argv);
+    MPI_Comm_set_errhandler(MPI_COMM_WORLD, MPI_ERRORS_RETURN);
+
+    Options options = parse_options(argc, argv);
+
+    int rank = 0;
+    int comm_size = 0;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
+
+    int cvar_index = find_cvar_index("MPIR_CVAR_BCAST_INTRA_ALGORITHM");
+    if (cvar_index < 0) {
+        if (rank == 0) {
+            std::cerr << "Could not find MPIR_CVAR_BCAST_INTRA_ALGORITHM. "
+                      << "Make sure this test is linked with MPICH.\n";
+        }
+        MPI_Abort(MPI_COMM_WORLD, 1);
+    }
+
+    MPI_T_cvar_handle cvar_handle = nullptr;
+    int cvar_count = 0;
+    int rc = MPI_T_cvar_handle_alloc(cvar_index, nullptr, &cvar_handle, &cvar_count);
+    if (rc != MPI_SUCCESS) {
+        if (rank == 0) {
+            std::cerr << "MPI_T_cvar_handle_alloc failed, rc=" << rc << "\n";
+        }
+        MPI_Abort(MPI_COMM_WORLD, rc);
+    }
+
+    std::ofstream csv;
+    if (rank == 0) {
+        csv.open(options.output.c_str(), std::ios::out | std::ios::trunc);
+        if (!csv) {
+            std::cerr << "Could not open output CSV: " << options.output << "\n";
+            MPI_Abort(MPI_COMM_WORLD, 1);
+        }
+        csv << "message_bytes,iteration,root,algorithm,cvar_value,is_baseline,correct,"
+               "mpi_error,time_min_sec,time_avg_sec,time_max_sec,payload_bytes\n";
+    }
+
+    const Algorithm baseline_algorithm = {"binomial", kBaselineValue};
+
+    for (int size_index = 0; size_index < static_cast<int>(sizeof(kDefaultSizes) / sizeof(int));
+         size_index++) {
+        int message_bytes = kDefaultSizes[size_index];
+
+        for (int iter = 0; iter < options.iterations; iter++) {
+            int root = iter % comm_size;
+            std::vector<std::uint8_t> payload = build_payload(root, message_bytes);
+            long long local_payload_bytes = rank == root ? message_bytes : 0;
+
+            RunResult baseline = run_bcast(baseline_algorithm, cvar_handle, payload, root,
+                                           MPI_COMM_WORLD);
+            bool local_correct = baseline.mpi_error == MPI_SUCCESS &&
+                                 same_buffer(baseline.recvbuf, payload);
+            reduce_and_write_row(csv, message_bytes, iter, root, baseline_algorithm, true,
+                                 local_correct, baseline.mpi_error, baseline.elapsed,
+                                 local_payload_bytes, MPI_COMM_WORLD);
+
+            for (const Algorithm &algorithm : kAlgorithms) {
+                if (std::strcmp(algorithm.name, "binomial") == 0) {
+                    continue;
+                }
+
+                RunResult result = run_bcast(algorithm, cvar_handle, payload, root,
+                                             MPI_COMM_WORLD);
+                local_correct = result.mpi_error == MPI_SUCCESS &&
+                                same_buffer(result.recvbuf, payload);
+                reduce_and_write_row(csv, message_bytes, iter, root, algorithm, false,
+                                     local_correct, result.mpi_error, result.elapsed,
+                                     local_payload_bytes, MPI_COMM_WORLD);
+            }
+        }
+    }
+
+    if (rank == 0) {
+        csv.close();
+        std::cout << "Wrote " << options.output << "\n";
+    }
+
+    MPI_T_cvar_handle_free(&cvar_handle);
+    int finalize_rc = finalize_with_bcast_counter_dump(MPI_COMM_WORLD);
+    MPI_T_finalize();
+    return finalize_rc == MPI_SUCCESS ? 0 : finalize_rc;
+}
