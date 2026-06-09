@@ -1,0 +1,1029 @@
+TEST_DIR=/home/qktttt/mpich/collective_testing
+MPICH_PREFIX=/home/qktttt/mpich-install
+MPIEXEC=/opt/cray/pals/1.7/bin/mpiexec
+NUM_OF_NODES=4 TOTAL_NUM_RANKS=128 RANKS_PER_NODE=32
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote alltoallv_algorithm_results_polaris_128r.csv
+==== Dump Alltoallv collective algorithm counters ====
+        15  MPIR_Alltoallv_intra_pairwise_sendrecv_replace
+        15  MPIR_Alltoallv_intra_scattered
+        15  MPIR_Alltoallv_intra_hierarchical_bruck
+        15  MPIR_Alltoallv_intra_parameterized_bruck
+        15  MPIR_Ialltoallv_intra_sched_blocked
+==== END Alltoallv collective algorithm counters ====
+Wrote: alltoallv_algorithm_results_polaris_128r.csv
