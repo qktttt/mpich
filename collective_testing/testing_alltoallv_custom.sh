@@ -8,7 +8,7 @@ TEST_DIR="$PROJECT_ROOT/collective_testing"
 MPIEXEC="$MPICH_PREFIX/bin/mpiexec"
 NP="${NP:-4}"
 ITERS="${ITERS:-10}"
-CSV_OUT="${CSV_OUT:-allreduce_algorithm_results.csv}"
+CSV_OUT="${CSV_OUT:-alltoallv_custom_algorithm_results.csv}"
 
 if [[ -n "${LD_LIBRARY_PATH:-}" ]]; then
     export LD_LIBRARY_PATH="$MPICH_PREFIX/lib:$LD_LIBRARY_PATH"
@@ -18,8 +18,8 @@ fi
 
 cd "$TEST_DIR"
 
-TEST_SRC="allreduce_algorithm_switch_test.cpp"
-TEST_BIN="./allreduce_algorithm_switch_test"
+TEST_SRC="alltoallv_custom_algorithm_test.cpp"
+TEST_BIN="./alltoallv_custom_algorithm_test"
 
 "$MPICH_PREFIX/bin/mpicxx" -std=c++11 -O2 "$TEST_SRC" -o "$TEST_BIN"
 

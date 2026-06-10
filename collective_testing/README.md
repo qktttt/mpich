@@ -8,6 +8,7 @@ The current tests cover:
 
 ```text
 alltoallv_algorithm_switch_test.cpp  MPIR_CVAR_ALLTOALLV_INTRA_ALGORITHM
+alltoallv_custom_algorithm_test.cpp  MPIR_CVAR_ALLTOALLV_{HIEATA,PARATA}_*
 allreduce_algorithm_switch_test.cpp  MPIR_CVAR_ALLREDUCE_INTRA_ALGORITHM
 bcast_algorithm_switch_test.cpp      MPIR_CVAR_BCAST_INTRA_ALGORITHM
 ```
@@ -42,6 +43,7 @@ Local helper scripts are split by collective:
 
 ```bash
 bash collective_testing/testing.sh             # Alltoallv
+bash collective_testing/testing_alltoallv_custom.sh  # Tuned hierarchical/parameterized Alltoallv
 bash collective_testing/testing_allreduce.sh   # Allreduce
 bash collective_testing/testing_bcast.sh       # Bcast
 ```
@@ -110,3 +112,40 @@ release_gather=9
 
 The default Bcast test list skips `release_gather` because it depends on the
 optional CH4 POSIX release-gather backend. The baseline is `binomial`.
+
+The custom Alltoallv test focuses only on the two tunable custom algorithms:
+
+```text
+hierarchical_bruck   MPIR_CVAR_ALLTOALLV_HIEATA_RADIX
+                     MPIR_CVAR_ALLTOALLV_HIEATA_BTHSIZE
+parameterized_bruck  MPIR_CVAR_ALLTOALLV_PARATA_RADIX
+```
+
+By default it sweeps:
+
+```text
+HIEATA radix      = 2,3,4
+HIEATA batch size = 1,2,4,8,32
+PARATA radix      = 2,3,4
+```
+
+Run it with:
+
+```bash
+bash collective_testing/testing_alltoallv_custom.sh
+```
+
+Override the tuning lists when needed:
+
+```bash
+bash collective_testing/testing_alltoallv_custom.sh \
+    --hieata-radix 2,4 \
+    --hieata-batch 1,8,32 \
+    --parata-radix 2,4
+```
+
+The custom test writes the requested tuning parameters to CSV and prints two
+summaries at finalize: a parameter-tuple summary from the test itself
+(`algorithm`, `radix`, `batch_size`) and the MPICH collective counter summary
+showing the total counted `MPI_Alltoallv` calls and the per-algorithm counter
+values observed by MPICH.

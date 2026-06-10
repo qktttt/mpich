@@ -1,140 +1,117 @@
 make  install-recursive
-make[1]: Entering directory '/home/qktttt/mpich'
+make[1]: Entering directory '/home/qik/projects/mpich'
 Making install in src/mpl
-make[2]: Entering directory '/home/qktttt/mpich/src/mpl'
-make[3]: Entering directory '/home/qktttt/mpich/src/mpl'
-make[3]: Leaving directory '/home/qktttt/mpich/src/mpl'
-make[2]: Leaving directory '/home/qktttt/mpich/src/mpl'
-Making install in /home/qktttt/mpich/modules/hwloc
-make[2]: Entering directory '/home/qktttt/mpich/modules/hwloc'
-Making install in include
-make[3]: Entering directory '/home/qktttt/mpich/modules/hwloc/include'
-make[4]: Entering directory '/home/qktttt/mpich/modules/hwloc/include'
-make[4]: Nothing to be done for 'install-exec-am'.
-make[4]: Leaving directory '/home/qktttt/mpich/modules/hwloc/include'
-make[3]: Leaving directory '/home/qktttt/mpich/modules/hwloc/include'
-Making install in hwloc
-make[3]: Entering directory '/home/qktttt/mpich/modules/hwloc/hwloc'
-make[4]: Entering directory '/home/qktttt/mpich/modules/hwloc/hwloc'
-make  install-exec-hook
-make[5]: Entering directory '/home/qktttt/mpich/modules/hwloc/hwloc'
-make[5]: Nothing to be done for 'install-exec-hook'.
-make[5]: Leaving directory '/home/qktttt/mpich/modules/hwloc/hwloc'
-make[4]: Leaving directory '/home/qktttt/mpich/modules/hwloc/hwloc'
-make[3]: Leaving directory '/home/qktttt/mpich/modules/hwloc/hwloc'
-make[3]: Entering directory '/home/qktttt/mpich/modules/hwloc'
-make[4]: Entering directory '/home/qktttt/mpich/modules/hwloc'
-make[4]: Nothing to be done for 'install-exec-am'.
-make[4]: Leaving directory '/home/qktttt/mpich/modules/hwloc'
-make[3]: Leaving directory '/home/qktttt/mpich/modules/hwloc'
-make[2]: Leaving directory '/home/qktttt/mpich/modules/hwloc'
-Making install in /home/qktttt/mpich/modules/json-c
-make[2]: Entering directory '/home/qktttt/mpich/modules/json-c'
+make[2]: Entering directory '/home/qik/projects/mpich/src/mpl'
+make[3]: Entering directory '/home/qik/projects/mpich/src/mpl'
+make[3]: Leaving directory '/home/qik/projects/mpich/src/mpl'
+make[2]: Leaving directory '/home/qik/projects/mpich/src/mpl'
+Making install in /home/qik/projects/mpich/modules/json-c
+make[2]: Entering directory '/home/qik/projects/mpich/modules/json-c'
 Making install in .
-make[3]: Entering directory '/home/qktttt/mpich/modules/json-c'
-make[4]: Entering directory '/home/qktttt/mpich/modules/json-c'
-make[4]: Leaving directory '/home/qktttt/mpich/modules/json-c'
-make[3]: Leaving directory '/home/qktttt/mpich/modules/json-c'
+make[3]: Entering directory '/home/qik/projects/mpich/modules/json-c'
+make[4]: Entering directory '/home/qik/projects/mpich/modules/json-c'
+make[4]: Leaving directory '/home/qik/projects/mpich/modules/json-c'
+make[3]: Leaving directory '/home/qik/projects/mpich/modules/json-c'
 Making install in tests
-make[3]: Entering directory '/home/qktttt/mpich/modules/json-c/tests'
-make[4]: Entering directory '/home/qktttt/mpich/modules/json-c/tests'
+make[3]: Entering directory '/home/qik/projects/mpich/modules/json-c/tests'
+make[4]: Entering directory '/home/qik/projects/mpich/modules/json-c/tests'
 make[4]: Nothing to be done for 'install-exec-am'.
 make[4]: Nothing to be done for 'install-data-am'.
-make[4]: Leaving directory '/home/qktttt/mpich/modules/json-c/tests'
-make[3]: Leaving directory '/home/qktttt/mpich/modules/json-c/tests'
-make[2]: Leaving directory '/home/qktttt/mpich/modules/json-c'
+make[4]: Leaving directory '/home/qik/projects/mpich/modules/json-c/tests'
+make[3]: Leaving directory '/home/qik/projects/mpich/modules/json-c/tests'
+make[2]: Leaving directory '/home/qik/projects/mpich/modules/json-c'
 Making install in src/mpi/datatype/typerep/yaksa
-make[2]: Entering directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
-make[3]: Entering directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
-make[3]: Leaving directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
-make[2]: Leaving directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
+make[2]: Entering directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/yaksa'
+make[3]: Entering directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/yaksa'
+make[3]: Leaving directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/yaksa'
+make[2]: Leaving directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/yaksa'
 Making install in src/pmi
-make[2]: Entering directory '/home/qktttt/mpich/src/pmi'
-make[3]: Entering directory '/home/qktttt/mpich/src/pmi'
-make[4]: Entering directory '/home/qktttt/mpich/src/pmi'
-make[4]: Leaving directory '/home/qktttt/mpich/src/pmi'
-make[3]: Leaving directory '/home/qktttt/mpich/src/pmi'
-make[2]: Leaving directory '/home/qktttt/mpich/src/pmi'
+make[2]: Entering directory '/home/qik/projects/mpich/src/pmi'
+make[3]: Entering directory '/home/qik/projects/mpich/src/pmi'
+make[4]: Entering directory '/home/qik/projects/mpich/src/pmi'
+make[4]: Leaving directory '/home/qik/projects/mpich/src/pmi'
+make[3]: Leaving directory '/home/qik/projects/mpich/src/pmi'
+make[2]: Leaving directory '/home/qik/projects/mpich/src/pmi'
 Making install in src/mpi/romio
-make[2]: Entering directory '/home/qktttt/mpich/src/mpi/romio'
+make[2]: Entering directory '/home/qik/projects/mpich/src/mpi/romio'
 Making install in .
-make[3]: Entering directory '/home/qktttt/mpich/src/mpi/romio'
-make[4]: Entering directory '/home/qktttt/mpich/src/mpi/romio'
-make[4]: Leaving directory '/home/qktttt/mpich/src/mpi/romio'
-make[3]: Leaving directory '/home/qktttt/mpich/src/mpi/romio'
+make[3]: Entering directory '/home/qik/projects/mpich/src/mpi/romio'
+make[4]: Entering directory '/home/qik/projects/mpich/src/mpi/romio'
+make[4]: Leaving directory '/home/qik/projects/mpich/src/mpi/romio'
+make[3]: Leaving directory '/home/qik/projects/mpich/src/mpi/romio'
 Making install in test
-make[3]: Entering directory '/home/qktttt/mpich/src/mpi/romio/test'
-make[4]: Entering directory '/home/qktttt/mpich/src/mpi/romio/test'
+make[3]: Entering directory '/home/qik/projects/mpich/src/mpi/romio/test'
+make[4]: Entering directory '/home/qik/projects/mpich/src/mpi/romio/test'
 make[4]: Nothing to be done for 'install-exec-am'.
 make[4]: Nothing to be done for 'install-data-am'.
-make[4]: Leaving directory '/home/qktttt/mpich/src/mpi/romio/test'
-make[3]: Leaving directory '/home/qktttt/mpich/src/mpi/romio/test'
-make[2]: Leaving directory '/home/qktttt/mpich/src/mpi/romio'
-Making install in /home/qktttt/mpich/modules/libfabric
-make[2]: Entering directory '/home/qktttt/mpich/modules/libfabric'
+make[4]: Leaving directory '/home/qik/projects/mpich/src/mpi/romio/test'
+make[3]: Leaving directory '/home/qik/projects/mpich/src/mpi/romio/test'
+make[2]: Leaving directory '/home/qik/projects/mpich/src/mpi/romio'
+Making install in /home/qik/projects/mpich/modules/libfabric
+make[2]: Entering directory '/home/qik/projects/mpich/modules/libfabric'
 make  install-am
-make[3]: Entering directory '/home/qktttt/mpich/modules/libfabric'
-make[4]: Entering directory '/home/qktttt/mpich/modules/libfabric'
- mkdir -p '/home/qktttt/mpich-install/bin'
-make[4]: Leaving directory '/home/qktttt/mpich/modules/libfabric'
-make[3]: Leaving directory '/home/qktttt/mpich/modules/libfabric'
-make[2]: Leaving directory '/home/qktttt/mpich/modules/libfabric'
+make[3]: Entering directory '/home/qik/projects/mpich/modules/libfabric'
+make[4]: Entering directory '/home/qik/projects/mpich/modules/libfabric'
+ mkdir -p '/home/qik/mpich-install/bin'
+make[4]: Leaving directory '/home/qik/projects/mpich/modules/libfabric'
+make[3]: Leaving directory '/home/qik/projects/mpich/modules/libfabric'
+make[2]: Leaving directory '/home/qik/projects/mpich/modules/libfabric'
 Making install in src/pm/hydra
-make[2]: Entering directory '/home/qktttt/mpich/src/pm/hydra'
+make[2]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
 Making install in .
-make[3]: Entering directory '/home/qktttt/mpich/src/pm/hydra'
-make[4]: Entering directory '/home/qktttt/mpich/src/pm/hydra'
- mkdir -p '/home/qktttt/mpich-install/bin'
-  /bin/sh ./libtool   --mode=install /usr/bin/install -c mpiexec.hydra hydra_pmi_proxy hydra_nameserver hydra_persist '/home/qktttt/mpich-install/bin'
-libtool: install: /usr/bin/install -c mpiexec.hydra /home/qktttt/mpich-install/bin/mpiexec.hydra
-libtool: install: /usr/bin/install -c hydra_pmi_proxy /home/qktttt/mpich-install/bin/hydra_pmi_proxy
-libtool: install: /usr/bin/install -c hydra_nameserver /home/qktttt/mpich-install/bin/hydra_nameserver
-libtool: install: /usr/bin/install -c hydra_persist /home/qktttt/mpich-install/bin/hydra_persist
+make[3]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
+make[4]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
+ mkdir -p '/home/qik/mpich-install/bin'
+  /bin/bash ./libtool   --mode=install /usr/bin/install -c mpiexec.hydra hydra_pmi_proxy hydra_nameserver hydra_persist '/home/qik/mpich-install/bin'
+libtool: install: /usr/bin/install -c mpiexec.hydra /home/qik/mpich-install/bin/mpiexec.hydra
+libtool: install: /usr/bin/install -c hydra_pmi_proxy /home/qik/mpich-install/bin/hydra_pmi_proxy
+libtool: install: /usr/bin/install -c hydra_nameserver /home/qik/mpich-install/bin/hydra_nameserver
+libtool: install: /usr/bin/install -c hydra_persist /home/qik/mpich-install/bin/hydra_persist
 make  install-exec-hook
-make[5]: Entering directory '/home/qktttt/mpich/src/pm/hydra'
-if [ -x /home/qktttt/mpich-install/bin/mpiexec.hydra ] ; then \
-    cd /home/qktttt/mpich-install/bin && ln -f -s mpiexec.hydra mpiexec ; \
-    cd /home/qktttt/mpich-install/bin && ln -f -s mpiexec.hydra mpirun ; \
+make[5]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
+if [ -x /home/qik/mpich-install/bin/mpiexec.hydra ] ; then \
+    cd /home/qik/mpich-install/bin && ln -f -s mpiexec.hydra mpiexec ; \
+    cd /home/qik/mpich-install/bin && ln -f -s mpiexec.hydra mpirun ; \
 fi
-make[5]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
+make[5]: Leaving directory '/home/qik/projects/mpich/src/pm/hydra'
 make[4]: Nothing to be done for 'install-data-am'.
-make[4]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
-make[3]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
-make[2]: Leaving directory '/home/qktttt/mpich/src/pm/hydra'
+make[4]: Leaving directory '/home/qik/projects/mpich/src/pm/hydra'
+make[3]: Leaving directory '/home/qik/projects/mpich/src/pm/hydra'
+make[2]: Leaving directory '/home/qik/projects/mpich/src/pm/hydra'
 Making install in .
-make[2]: Entering directory '/home/qktttt/mpich'
-make[3]: Entering directory '/home/qktttt/mpich'
- mkdir -p '/home/qktttt/mpich-install/lib'
- /bin/sh ./libtool   --mode=install /usr/bin/install -c   lib/libmpi.la lib/libmpifort.la lib/libmpicxx.la '/home/qktttt/mpich-install/lib'
-libtool: install: /usr/bin/install -c lib/.libs/libmpi.so.0.0.0 /home/qktttt/mpich-install/lib/libmpi.so.0.0.0
-libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpi.so.0.0.0 libmpi.so.0 || { rm -f libmpi.so.0 && ln -s libmpi.so.0.0.0 libmpi.so.0; }; })
-libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpi.so.0.0.0 libmpi.so || { rm -f libmpi.so && ln -s libmpi.so.0.0.0 libmpi.so; }; })
-libtool: install: /usr/bin/install -c lib/.libs/libmpi.lai /home/qktttt/mpich-install/lib/libmpi.la
+make[2]: Entering directory '/home/qik/projects/mpich'
+make[3]: Entering directory '/home/qik/projects/mpich'
+ mkdir -p '/home/qik/mpich-install/lib'
+ /bin/bash ./libtool   --mode=install /usr/bin/install -c   lib/libmpi.la lib/libmpifort.la lib/libmpicxx.la '/home/qik/mpich-install/lib'
+libtool: install: /usr/bin/install -c lib/.libs/libmpi.so.0.0.0 /home/qik/mpich-install/lib/libmpi.so.0.0.0
+libtool: install: (cd /home/qik/mpich-install/lib && { ln -s -f libmpi.so.0.0.0 libmpi.so.0 || { rm -f libmpi.so.0 && ln -s libmpi.so.0.0.0 libmpi.so.0; }; })
+libtool: install: (cd /home/qik/mpich-install/lib && { ln -s -f libmpi.so.0.0.0 libmpi.so || { rm -f libmpi.so && ln -s libmpi.so.0.0.0 libmpi.so; }; })
+libtool: install: /usr/bin/install -c lib/.libs/libmpi.lai /home/qik/mpich-install/lib/libmpi.la
 libtool: warning: relinking 'lib/libmpifort.la'
-libtool: install: (cd /home/qktttt/mpich; /bin/sh "/home/qktttt/mpich/libtool"  --silent --tag FC --mode=relink gfortran -Isrc/binding/fortran/use_mpi -O2 -version-info 0:0:0 -o lib/libmpifort.la -rpath /home/qktttt/mpich-install/lib lib/libmpi.la src/mpl/libmpl.la lib/libf77_mpi.la lib/libf90_mpi.la )
-libtool: install: /usr/bin/install -c lib/.libs/libmpifort.so.0.0.0T /home/qktttt/mpich-install/lib/libmpifort.so.0.0.0
-libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpifort.so.0.0.0 libmpifort.so.0 || { rm -f libmpifort.so.0 && ln -s libmpifort.so.0.0.0 libmpifort.so.0; }; })
-libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpifort.so.0.0.0 libmpifort.so || { rm -f libmpifort.so && ln -s libmpifort.so.0.0.0 libmpifort.so; }; })
-libtool: install: /usr/bin/install -c lib/.libs/libmpifort.lai /home/qktttt/mpich-install/lib/libmpifort.la
+libtool: install: (cd /home/qik/projects/mpich; /bin/bash "/home/qik/projects/mpich/libtool"  --silent --tag FC --mode=relink gfortran -Isrc/binding/fortran/use_mpi -Isrc/binding/fortran/use_mpi_f08 -O2 -version-info 0:0:0 -o lib/libmpifort.la -rpath /home/qik/mpich-install/lib lib/libmpi.la src/mpl/libmpl.la lib/libf77_mpi.la lib/libf90_mpi.la lib/libf08_mpi.la )
+libtool: install: /usr/bin/install -c lib/.libs/libmpifort.so.0.0.0T /home/qik/mpich-install/lib/libmpifort.so.0.0.0
+libtool: install: (cd /home/qik/mpich-install/lib && { ln -s -f libmpifort.so.0.0.0 libmpifort.so.0 || { rm -f libmpifort.so.0 && ln -s libmpifort.so.0.0.0 libmpifort.so.0; }; })
+libtool: install: (cd /home/qik/mpich-install/lib && { ln -s -f libmpifort.so.0.0.0 libmpifort.so || { rm -f libmpifort.so && ln -s libmpifort.so.0.0.0 libmpifort.so; }; })
+libtool: install: /usr/bin/install -c lib/.libs/libmpifort.lai /home/qik/mpich-install/lib/libmpifort.la
 libtool: warning: relinking 'lib/libmpicxx.la'
-libtool: install: (cd /home/qktttt/mpich; /bin/sh "/home/qktttt/mpich/libtool"  --silent --tag CXX --mode=relink g++ -O2 -version-info 0:0:0 -o lib/libmpicxx.la -rpath /home/qktttt/mpich-install/lib src/binding/cxx/initcxx.lo lib/libmpi.la )
-libtool: install: /usr/bin/install -c lib/.libs/libmpicxx.so.0.0.0T /home/qktttt/mpich-install/lib/libmpicxx.so.0.0.0
-libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpicxx.so.0.0.0 libmpicxx.so.0 || { rm -f libmpicxx.so.0 && ln -s libmpicxx.so.0.0.0 libmpicxx.so.0; }; })
-libtool: install: (cd /home/qktttt/mpich-install/lib && { ln -s -f libmpicxx.so.0.0.0 libmpicxx.so || { rm -f libmpicxx.so && ln -s libmpicxx.so.0.0.0 libmpicxx.so; }; })
-libtool: install: /usr/bin/install -c lib/.libs/libmpicxx.lai /home/qktttt/mpich-install/lib/libmpicxx.la
-libtool: install: /usr/bin/install -c lib/.libs/libmpi.a /home/qktttt/mpich-install/lib/libmpi.a
-libtool: install: chmod 644 /home/qktttt/mpich-install/lib/libmpi.a
-libtool: install: ranlib /home/qktttt/mpich-install/lib/libmpi.a
-libtool: install: /usr/bin/install -c lib/.libs/libmpifort.a /home/qktttt/mpich-install/lib/libmpifort.a
-libtool: install: chmod 644 /home/qktttt/mpich-install/lib/libmpifort.a
-libtool: install: ranlib /home/qktttt/mpich-install/lib/libmpifort.a
-libtool: install: /usr/bin/install -c lib/.libs/libmpicxx.a /home/qktttt/mpich-install/lib/libmpicxx.a
-libtool: install: chmod 644 /home/qktttt/mpich-install/lib/libmpicxx.a
-libtool: install: ranlib /home/qktttt/mpich-install/lib/libmpicxx.a
-libtool: finish: PATH="/home/qktttt/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/home/qktttt/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/qktttt/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/qktttt/.vscode-server/cli/servers/Stable-10c8e557c8b9f9ed0a87f61f1c9a44bde731c409/server/bin/remote-cli:/home/qktttt/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/home/qktttt/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/home/qktttt/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/home/qktttt/.cargo/bin:/home/qktttt/bin:/home/qktttt/opt/souffle/bin:/home/qktttt/.nimble/bin:/home/qktttt/.local/bin:/home/qktttt/.local/opt/xmake/bin:/soft/xalt/3.2.1-1-g67d304d4-202511121555/bin:/opt/cray/pe/perftools/25.09.0/bin:/opt/cray/pe/papi/7.2.0.2/bin:/opt/cray/libfabric/2.2.0rc1/bin:/soft/perftools/darshan/darshan-3.4.4/bin:/opt/cray/pals/1.7/bin:/opt/cray/pe/mpich/9.0.1/ofi/nvidia/23.3/bin:/opt/cray/pe/mpich/9.0.1/bin:/opt/cray/pe/craype/2.7.35/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/25.5/compilers/extras/qd/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/25.5/compilers/bin:/opt/clmgr/sbin:/opt/clmgr/bin:/opt/sgi/sbin:/opt/sgi/bin:/home/qktttt/.local/bin:/home/qktttt/bin:/usr/local/bin:/usr/bin:/bin:/opt/c3/bin:/dbhome/db2cat/sqllib/bin:/dbhome/db2cat/sqllib/adm:/dbhome/db2cat/sqllib/misc:/dbhome/db2cat/sqllib/gskit/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/pbs/bin:/opt/cray/pe/bin:/home/qktttt/.local/bin:/home/qktttt/bin:/home/qktttt/.local/bin:/home/qktttt/bin:/sbin" ldconfig -n /home/qktttt/mpich-install/lib
+libtool: install: (cd /home/qik/projects/mpich; /bin/bash "/home/qik/projects/mpich/libtool"  --silent --tag CXX --mode=relink g++ -O2 -version-info 0:0:0 -o lib/libmpicxx.la -rpath /home/qik/mpich-install/lib src/binding/cxx/initcxx.lo lib/libmpi.la )
+libtool: install: /usr/bin/install -c lib/.libs/libmpicxx.so.0.0.0T /home/qik/mpich-install/lib/libmpicxx.so.0.0.0
+libtool: install: (cd /home/qik/mpich-install/lib && { ln -s -f libmpicxx.so.0.0.0 libmpicxx.so.0 || { rm -f libmpicxx.so.0 && ln -s libmpicxx.so.0.0.0 libmpicxx.so.0; }; })
+libtool: install: (cd /home/qik/mpich-install/lib && { ln -s -f libmpicxx.so.0.0.0 libmpicxx.so || { rm -f libmpicxx.so && ln -s libmpicxx.so.0.0.0 libmpicxx.so; }; })
+libtool: install: /usr/bin/install -c lib/.libs/libmpicxx.lai /home/qik/mpich-install/lib/libmpicxx.la
+libtool: install: /usr/bin/install -c lib/.libs/libmpi.a /home/qik/mpich-install/lib/libmpi.a
+libtool: install: chmod 644 /home/qik/mpich-install/lib/libmpi.a
+libtool: install: ranlib /home/qik/mpich-install/lib/libmpi.a
+libtool: install: /usr/bin/install -c lib/.libs/libmpifort.a /home/qik/mpich-install/lib/libmpifort.a
+libtool: install: chmod 644 /home/qik/mpich-install/lib/libmpifort.a
+libtool: install: ranlib /home/qik/mpich-install/lib/libmpifort.a
+libtool: install: /usr/bin/install -c lib/.libs/libmpicxx.a /home/qik/mpich-install/lib/libmpicxx.a
+libtool: install: chmod 644 /home/qik/mpich-install/lib/libmpicxx.a
+libtool: install: ranlib /home/qik/mpich-install/lib/libmpicxx.a
+libtool: finish: PATH="/home/qik/.npm-global/bin:/home/qik/.npm-global/bin:/home/qik/.nimble/bin:/home/qik/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/qik/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/qik/.vscode-server/cli/servers/Stable-10c8e557c8b9f9ed0a87f61f1c9a44bde731c409/server/bin/remote-cli:/home/qik/.local/bin:/home/qik/.npm-global/bin:/home/qik/.npm-global/bin:/home/qik/.nimble/bin:/home/qik/anaconda3/bin:/home/qik/anaconda3/condabin:/home/qik/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/qik/.vscode-server/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts:/sbin" ldconfig -n /home/qik/mpich-install/lib
 ----------------------------------------------------------------------
 Libraries have been installed in:
-   /home/qktttt/mpich-install/lib
+   /home/qik/mpich-install/lib
 
 If you ever happen to want to link against installed libraries
 in a given directory, LIBDIR, you must either use libtool, and
@@ -150,94 +127,94 @@ flag during linking and do at least one of the following:
 See any operating system documentation about shared libraries for
 more information, such as the ld(1) and ld.so(8) manual pages.
 ----------------------------------------------------------------------
- mkdir -p '/home/qktttt/mpich-install/bin'
-  /bin/sh ./libtool   --mode=install /usr/bin/install -c src/env/mpichversion src/env/mpivars '/home/qktttt/mpich-install/bin'
-libtool: install: /usr/bin/install -c src/env/.libs/mpichversion /home/qktttt/mpich-install/bin/mpichversion
-libtool: install: /usr/bin/install -c src/env/.libs/mpivars /home/qktttt/mpich-install/bin/mpivars
- mkdir -p '/home/qktttt/mpich-install/bin'
- /usr/bin/install -c src/env/mpicc src/env/parkill src/env/mpifort src/env/mpicxx '/home/qktttt/mpich-install/bin'
- mkdir -p '/home/qktttt/mpich-install/etc'
- /usr/bin/install -c -m 644 src/env/mpixxx_opts.conf '/home/qktttt/mpich-install/etc'
+ mkdir -p '/home/qik/mpich-install/bin'
+  /bin/bash ./libtool   --mode=install /usr/bin/install -c src/env/mpichversion src/env/mpivars '/home/qik/mpich-install/bin'
+libtool: install: /usr/bin/install -c src/env/.libs/mpichversion /home/qik/mpich-install/bin/mpichversion
+libtool: install: /usr/bin/install -c src/env/.libs/mpivars /home/qik/mpich-install/bin/mpivars
+ mkdir -p '/home/qik/mpich-install/bin'
+ /usr/bin/install -c src/env/mpicc src/env/parkill src/env/mpifort src/env/mpicxx '/home/qik/mpich-install/bin'
+ mkdir -p '/home/qik/mpich-install/etc'
+ /usr/bin/install -c -m 644 src/env/mpixxx_opts.conf '/home/qik/mpich-install/etc'
 make  install-exec-hook
-make[4]: Entering directory '/home/qktttt/mpich'
+make[4]: Entering directory '/home/qik/projects/mpich'
 if test -e lib/libpmpi.la ; then \
     . lib/libpmpi.la ; \
 elif test -e lib/libmpi.la ; then \
     . lib/libmpi.la ; \
 fi ; \
-for e in /home/qktttt/mpich-install/bin/mpicc \
-	/home/qktttt/mpich-install/bin/mpicxx \
-	/home/qktttt/mpich-install/bin/mpifort ; do \
+for e in /home/qik/mpich-install/bin/mpicc \
+	/home/qik/mpich-install/bin/mpicxx \
+	/home/qik/mpich-install/bin/mpifort ; do \
 	if test -e ${e} ; then \
-		sed -e 's|__PREFIX_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qktttt/mpich-install|g' \
-			-e 's|__EXEC_PREFIX_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qktttt/mpich-install|g' \
-			-e 's|__SYSCONFDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qktttt/mpich-install/etc|g' \
-			-e 's|__INCLUDEDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qktttt/mpich-install/include|g' \
-			-e 's|__LIBDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qktttt/mpich-install/lib|g' \
+		sed -e 's|__PREFIX_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qik/mpich-install|g' \
+			-e 's|__EXEC_PREFIX_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qik/mpich-install|g' \
+			-e 's|__SYSCONFDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qik/mpich-install/etc|g' \
+			-e 's|__INCLUDEDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qik/mpich-install/include|g' \
+			-e 's|__LIBDIR_TO_BE_FILLED_AT_INSTALL_TIME__|/home/qik/mpich-install/lib|g' \
 			-e "s|__LIBS_TO_BE_FILLED_AT_INSTALL_TIME__|$dependency_libs|g" ${e} > ${e}.tmp ; \
 		/usr/bin/install -c ${e}.tmp ${e} ; \
 		rm -f ${e}.tmp ; \
 	fi ; \
 done ; \
-if test -e /home/qktttt/mpich-install/bin/mpicxx ; then \
+if test -e /home/qik/mpich-install/bin/mpicxx ; then \
 	if test "mpicxx" != "mpic++" ; then \
-		cd /home/qktttt/mpich-install/bin && ln -f -s mpicxx mpic++ ; \
+		cd /home/qik/mpich-install/bin && ln -f -s mpicxx mpic++ ; \
 	fi ; \
 fi ;
-if test -e /home/qktttt/mpich-install/bin/mpifort ; then \
+if test -e /home/qik/mpich-install/bin/mpifort ; then \
 	if test "mpifort" != "mpif90" ; then \
-		cd /home/qktttt/mpich-install/bin && ln -f -s mpifort mpif90 ; \
+		cd /home/qik/mpich-install/bin && ln -f -s mpifort mpif90 ; \
 	fi ; \
 fi ;
-if test -e /home/qktttt/mpich-install/bin/mpifort ; then \
+if test -e /home/qik/mpich-install/bin/mpifort ; then \
 	if test "mpifort" != "mpif77" ; then \
-		cd /home/qktttt/mpich-install/bin && ln -f -s mpifort mpif77 ; \
+		cd /home/qik/mpich-install/bin && ln -f -s mpifort mpif77 ; \
 	fi ; \
 fi ;
-if test -e /home/qktttt/mpich-install/lib/libmpi.so ; then \
+if test -e /home/qik/mpich-install/lib/libmpi.so ; then \
 	if test "mpi" != "mpl" ; then \
-		cd /home/qktttt/mpich-install/lib && ln -f -s libmpi.so libmpl.so ; \
+		cd /home/qik/mpich-install/lib && ln -f -s libmpi.so libmpl.so ; \
 	fi ; \
 	if test "mpi" != "opa" ; then \
-		cd /home/qktttt/mpich-install/lib && ln -f -s libmpi.so libopa.so ; \
+		cd /home/qik/mpich-install/lib && ln -f -s libmpi.so libopa.so ; \
 	fi ; \
 	if test "mpi" != "mpich" ; then \
-		cd /home/qktttt/mpich-install/lib && ln -f -s libmpi.so libmpich.so ; \
+		cd /home/qik/mpich-install/lib && ln -f -s libmpi.so libmpich.so ; \
 	fi ; \
 fi ; \
-if test -e /home/qktttt/mpich-install/lib/libmpifort.so ; then \
+if test -e /home/qik/mpich-install/lib/libmpifort.so ; then \
 	if test "mpifort" != "fmpich" ; then \
-		cd /home/qktttt/mpich-install/lib && ln -f -s libmpifort.so libfmpich.so ; \
+		cd /home/qik/mpich-install/lib && ln -f -s libmpifort.so libfmpich.so ; \
 	fi ; \
 	if test "mpifort" != "mpichf90" ; then \
-		cd /home/qktttt/mpich-install/lib && ln -f -s libmpifort.so libmpichf90.so ; \
+		cd /home/qik/mpich-install/lib && ln -f -s libmpifort.so libmpichf90.so ; \
 	fi ; \
 fi ; \
-if test -e /home/qktttt/mpich-install/lib/libmpicxx.so ; then \
+if test -e /home/qik/mpich-install/lib/libmpicxx.so ; then \
 	if test "mpicxx" != "mpichcxx" ; then \
-		cd /home/qktttt/mpich-install/lib && ln -f -s libmpicxx.so libmpichcxx.so ; \
+		cd /home/qik/mpich-install/lib && ln -f -s libmpicxx.so libmpichcxx.so ; \
 	fi ; \
 fi
-make[4]: Leaving directory '/home/qktttt/mpich'
-if [ ! -e /home/qktttt/mpich-install/share/doc/mpich ] ; then mkdir -p /home/qktttt/mpich-install/share/doc/mpich ; fi
-if [ -s ./doc/userguide/user.pdf ] ; then /usr/bin/install -c -m 644 ./doc/userguide/user.pdf /home/qktttt/mpich-install/share/doc/mpich/user.pdf ; fi
-if [ -s ./doc/installguide/install.pdf ] ; then /usr/bin/install -c -m 644 ./doc/installguide/install.pdf /home/qktttt/mpich-install/share/doc/mpich/install.pdf ; fi
-if [ -s ./doc/logging/logging.pdf ] ; then /usr/bin/install -c -m 644 ./doc/logging/logging.pdf /home/qktttt/mpich-install/share/doc/mpich/logging.pdf ; fi
- mkdir -p '/home/qktttt/mpich-install/include'
- /usr/bin/install -c -m 644 src/include/mpi_proto.h '/home/qktttt/mpich-install/include'
- mkdir -p '/home/qktttt/mpich-install/include'
- /usr/bin/install -c -m 644 src/binding/fortran/use_mpi/mpi.mod src/binding/fortran/use_mpi/mpi_sizeofs.mod src/binding/fortran/use_mpi/mpi_constants.mod src/binding/fortran/use_mpi/mpi_base.mod src/binding/fortran/use_mpi/pmpi_base.mod '/home/qktttt/mpich-install/include'
- mkdir -p '/home/qktttt/mpich-install/include'
- /usr/bin/install -c -m 644 src/binding/cxx/mpicxx.h src/binding/fortran/mpif_h/mpif.h src/include/mpi.h '/home/qktttt/mpich-install/include'
- mkdir -p '/home/qktttt/mpich-install/lib/pkgconfig'
- /usr/bin/install -c -m 644 src/packaging/pkgconfig/mpich.pc '/home/qktttt/mpich-install/lib/pkgconfig'
-make[3]: Leaving directory '/home/qktttt/mpich'
-make[2]: Leaving directory '/home/qktttt/mpich'
+make[4]: Leaving directory '/home/qik/projects/mpich'
+if [ ! -e /home/qik/mpich-install/share/doc/mpich ] ; then mkdir -p /home/qik/mpich-install/share/doc/mpich ; fi
+if [ -s ./doc/userguide/user.pdf ] ; then /usr/bin/install -c -m 644 ./doc/userguide/user.pdf /home/qik/mpich-install/share/doc/mpich/user.pdf ; fi
+if [ -s ./doc/installguide/install.pdf ] ; then /usr/bin/install -c -m 644 ./doc/installguide/install.pdf /home/qik/mpich-install/share/doc/mpich/install.pdf ; fi
+if [ -s ./doc/logging/logging.pdf ] ; then /usr/bin/install -c -m 644 ./doc/logging/logging.pdf /home/qik/mpich-install/share/doc/mpich/logging.pdf ; fi
+ mkdir -p '/home/qik/mpich-install/include'
+ /usr/bin/install -c -m 644 src/include/mpi_proto.h '/home/qik/mpich-install/include'
+ mkdir -p '/home/qik/mpich-install/include'
+ /usr/bin/install -c -m 644 src/binding/fortran/use_mpi/mpi.mod src/binding/fortran/use_mpi/mpi_sizeofs.mod src/binding/fortran/use_mpi/mpi_constants.mod src/binding/fortran/use_mpi/mpi_base.mod src/binding/fortran/use_mpi/pmpi_base.mod src/binding/fortran/use_mpi_f08/pmpi_f08.mod src/binding/fortran/use_mpi_f08/mpi_f08.mod src/binding/fortran/use_mpi_f08/mpi_f08_callbacks.mod src/binding/fortran/use_mpi_f08/mpi_f08_compile_constants.mod src/binding/fortran/use_mpi_f08/mpi_f08_link_constants.mod src/binding/fortran/use_mpi_f08/mpi_f08_types.mod src/binding/fortran/use_mpi_f08/mpi_c_interface.mod src/binding/fortran/use_mpi_f08/mpi_c_interface_cdesc.mod src/binding/fortran/use_mpi_f08/mpi_c_interface_glue.mod src/binding/fortran/use_mpi_f08/mpi_c_interface_nobuf.mod src/binding/fortran/use_mpi_f08/mpi_c_interface_types.mod '/home/qik/mpich-install/include'
+ mkdir -p '/home/qik/mpich-install/include'
+ /usr/bin/install -c -m 644 src/binding/cxx/mpicxx.h src/binding/fortran/mpif_h/mpif.h src/include/mpi.h '/home/qik/mpich-install/include'
+ mkdir -p '/home/qik/mpich-install/lib/pkgconfig'
+ /usr/bin/install -c -m 644 src/packaging/pkgconfig/mpich.pc '/home/qik/mpich-install/lib/pkgconfig'
+make[3]: Leaving directory '/home/qik/projects/mpich'
+make[2]: Leaving directory '/home/qik/projects/mpich'
 Making install in examples
-make[2]: Entering directory '/home/qktttt/mpich/examples'
-make[3]: Entering directory '/home/qktttt/mpich/examples'
+make[2]: Entering directory '/home/qik/projects/mpich/examples'
+make[3]: Entering directory '/home/qik/projects/mpich/examples'
 make[3]: Nothing to be done for 'install-exec-am'.
 make[3]: Nothing to be done for 'install-data-am'.
-make[3]: Leaving directory '/home/qktttt/mpich/examples'
-make[2]: Leaving directory '/home/qktttt/mpich/examples'
-make[1]: Leaving directory '/home/qktttt/mpich'
+make[3]: Leaving directory '/home/qik/projects/mpich/examples'
+make[2]: Leaving directory '/home/qik/projects/mpich/examples'
+make[1]: Leaving directory '/home/qik/projects/mpich'
