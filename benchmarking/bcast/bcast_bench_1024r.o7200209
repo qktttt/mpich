@@ -1,0 +1,2 @@
+Running Bcast benchmark: total_ranks=1024 ppn=32 warmup=50 actual=50
+=>> PBS: job killed: walltime 990 exceeded limit 900

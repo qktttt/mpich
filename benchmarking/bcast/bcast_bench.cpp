@@ -14,80 +14,138 @@
 
 namespace {
 
-/*
- * Runtime configuration parsed from the command line.
- *
- * The benchmark has two phases:
- *   1. warmup rounds
- *   2. measured rounds
- *
- * Both phases are executed and both are written to the CSV output.
- */
+/* Rank 0 is both the broadcast root and the rank that owns CSV output. */
+constexpr int kRoot = 0;
+
+/* MPI_T CVARs used to force MPICH onto the requested Bcast implementation. */
+constexpr const char *kBcastIntraAlgorithmCvar = "MPIR_CVAR_BCAST_INTRA_ALGORITHM";
+constexpr const char *kBcastDeviceCollectiveCvar = "MPIR_CVAR_BCAST_DEVICE_COLLECTIVE";
+constexpr const char *kDeviceCollectivesCvar = "MPIR_CVAR_DEVICE_COLLECTIVES";
+constexpr const char *kCollectiveFallbackCvar = "MPIR_CVAR_COLLECTIVE_FALLBACK";
+
+/* Command-line configuration and benchmark defaults. */
 struct Config {
     int warmup_rounds = 5;
     int measured_rounds = 20;
     int min_msg_size = 2;
-    int max_msg_size = 65532;
-    int root = 0;
+    int max_msg_size = 65536;
     std::string output_path = "benchmarking/bcast/bcast_bench.csv";
     std::vector<std::string> algorithms;
     bool list_algorithms = false;
     bool show_help = false;
 };
 
-struct AlgorithmConfig {
-    std::string name;
-    int cvar_value;
+/* User-visible algorithm name accepted by --algorithms and --list-algorithms. */
+struct AlgorithmSpec {
+    const char *name;
 };
 
-/* These are the MPICH CVARs used to force a specific MPIR-level Bcast path. */
-constexpr const char *kBcastIntraAlgorithmCvar = "MPIR_CVAR_BCAST_INTRA_ALGORITHM";
-constexpr const char *kDeviceCollectivesCvar = "MPIR_CVAR_DEVICE_COLLECTIVES";
-constexpr const char *kBcastDeviceCollectiveCvar = "MPIR_CVAR_BCAST_DEVICE_COLLECTIVE";
-constexpr const char *kCollectiveFallbackCvar = "MPIR_CVAR_COLLECTIVE_FALLBACK";
+/* Algorithm name plus the resolved integer value written to the MPI_T CVAR. */
+struct AlgorithmConfig {
+    std::string name;
+    int cvar_value = 0;
+};
+
+/* Small RAII-like record for MPI_T integer CVAR handles. */
+struct IntCvar {
+    std::string name;
+    MPI_T_enum enum_type = MPI_T_ENUM_NULL;
+    MPI_T_cvar_handle handle = MPI_T_CVAR_HANDLE_NULL;
+    bool opened = false;
+};
+
+/* One CSV row. Rank 0 stores these in memory and writes them after the sweep. */
+struct ResultRow {
+    std::string phase;
+    int phase_iteration = 0;
+    int global_iteration = 0;
+    std::string algorithm;
+    int cvar_value = 0;
+    int root = kRoot;
+    int nproc = 0;
+    int message_size_bytes = 0;
+    double time_sum_sec = 0.0;
+    double avg_latency_sec = 0.0;
+    double min_time_sec = 0.0;
+    double max_time_sec = 0.0;
+    bool correct = false;
+};
+
+/* Matches the algorithms exercised by collective_testing/bcast_success_test.cpp. */
+const AlgorithmSpec kSupportedAlgorithms[] = {
+    { "binomial" },
+    { "nb" },
+    { "circ_graph" },
+    { "smp" },
+    { "scatter_recursive_doubling_allgather" },
+    { "scatter_ring_allgather" },
+    { "pipelined_tree" },
+    { "tree" },
+    { "release_gather" },
+};
+
+/* Convert MPI and MPI_T return codes into readable diagnostics. */
+std::string mpi_error_string(int error)
+{
+    char buffer[MPI_MAX_ERROR_STRING] = { 0 };
+    int length = 0;
+    if (MPI_Error_string(error, buffer, &length) != MPI_SUCCESS) {
+        return "MPI error code " + std::to_string(error);
+    }
+    return std::string(buffer, length);
+}
+
+/*
+ * Deterministic payload generator.
+ *
+ * The input includes algorithm, message size, iteration, and byte offset so a
+ * stale or mismatched receive buffer is likely to fail the correctness check.
+ */
+std::uint8_t payload_byte(int algorithm_index, int message_size, int iteration, int offset)
+{
+    std::uint32_t value = 0x9e3779b9u;
+    value ^= static_cast<std::uint32_t>((algorithm_index + 1) * 0x45d9f3bu);
+    value ^= static_cast<std::uint32_t>((message_size + 7) * 0x27d4eb2du);
+    value ^= static_cast<std::uint32_t>((iteration + 3) * 0x119de1f3u);
+    value ^= static_cast<std::uint32_t>((offset + 11) * 0x3449u);
+    return static_cast<std::uint8_t>(value & 0xffu);
+}
+
+/*
+ * Optional launcher sanity check.
+ *
+ * On some systems a launcher can start N processes that each become singleton
+ * MPI jobs. BCAST_EXPECTED_RANKS catches that before the benchmark writes
+ * duplicate rank-0 CSV files.
+ */
+int expected_comm_size_from_env()
+{
+    const char *expected = std::getenv("BCAST_EXPECTED_RANKS");
+    if (expected == nullptr || expected[0] == '\0') {
+        return 0;
+    }
+    return std::atoi(expected);
+}
 
 }  // namespace
 
 int main(int argc, char **argv)
 {
     /*
-     * This benchmark runs a single MPI job and changes the MPICH Bcast
-     * implementation in-process through MPI_T CVARs.
-     *
-     * Execution order:
-     *   round -> message size -> algorithm
-     *
-     * For each collective call, every rank measures its local elapsed time and
-     * rank 0 records the maximum across ranks. That makes each CSV row represent
-     * the slowest participant in that specific broadcast.
+     * MPI_T must be initialized before querying/writing MPICH CVARs. MPI itself
+     * is initialized immediately after so all ranks can parse and fail together.
      */
-    const std::vector<std::string> default_algorithms = {
-        "binomial",
-        "nb",
-        "circ_graph",
-        "smp",
-        "scatter_recursive_doubling_allgather",
-        "scatter_ring_allgather",
-        "pipelined_tree",
-        "tree",
-    };
-
     int provided = 0;
     int error = MPI_T_init_thread(MPI_THREAD_SINGLE, &provided);
     if (error != MPI_SUCCESS) {
-        char buffer[MPI_MAX_ERROR_STRING];
-        int length = 0;
-        MPI_Error_string(error, buffer, &length);
-        std::cerr << "MPI_T_init_thread failed: " << std::string(buffer, length) << std::endl;
+        std::cerr << "MPI_T_init_thread failed: " << mpi_error_string(error) << std::endl;
         return EXIT_FAILURE;
     }
 
     error = MPI_Init(&argc, &argv);
     if (error != MPI_SUCCESS) {
-        char buffer[MPI_MAX_ERROR_STRING];
-        int length = 0;
-        MPI_Error_string(error, buffer, &length);
-        std::cerr << "MPI_Init failed: " << std::string(buffer, length) << std::endl;
+        std::cerr << "MPI_Init failed: " << mpi_error_string(error) << std::endl;
+        MPI_T_finalize();
         return EXIT_FAILURE;
     }
 
@@ -97,33 +155,43 @@ int main(int argc, char **argv)
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     MPI_Comm_set_errhandler(MPI_COMM_WORLD, MPI_ERRORS_RETURN);
 
-    /* Abort the whole MPI job with a rank-qualified error message. */
+    /* Abort the whole MPI job with a rank-qualified message. */
     auto fail = [&](const std::string &message, int error_code = EXIT_FAILURE) -> void {
         std::cerr << "Rank " << rank << ": " << message << std::endl;
-        int initialized = 0;
-        MPI_Initialized(&initialized);
-        if (initialized) {
-            MPI_Abort(MPI_COMM_WORLD, error_code);
-        }
+        MPI_Abort(MPI_COMM_WORLD, error_code);
         std::exit(error_code);
     };
 
-    /* Small helper to route all MPI/MPI_T return-code checks through fail(). */
+    /* Route all MPI and MPI_T return-code checks through the same failure path. */
     auto mpi_check = [&](int mpi_errno, const std::string &context) -> void {
-        if (mpi_errno == MPI_SUCCESS) {
-            return;
+        if (mpi_errno != MPI_SUCCESS) {
+            fail(context + ": " + mpi_error_string(mpi_errno), mpi_errno);
         }
-
-        char buffer[MPI_MAX_ERROR_STRING];
-        int length = 0;
-        buffer[0] = '\0';
-        if (MPI_Error_string(mpi_errno, buffer, &length) != MPI_SUCCESS) {
-            fail(context + ": unable to retrieve MPI error string", mpi_errno);
-        }
-        fail(context + ": " + std::string(buffer, length), mpi_errno);
     };
 
-    /* Strict integer parsing so malformed CLI values fail early and clearly. */
+    /* Fail early if the launcher did not form the communicator size we expected. */
+    const int expected_comm_size = expected_comm_size_from_env();
+    if (expected_comm_size > 0 && world_size != expected_comm_size) {
+        if (rank == kRoot) {
+            std::cerr << "ERROR: MPI_COMM_WORLD has " << world_size
+                      << " rank(s), expected " << expected_comm_size
+                      << ". The MPI launcher started processes, but this MPICH "
+                      << "library did not connect them into one MPI job. Set "
+                      << "BCAST_EXPECTED_RANKS to catch launcher/library mismatches.\n";
+        }
+        MPI_Finalize();
+        MPI_T_finalize();
+        return EXIT_FAILURE;
+    }
+
+    /* Build the default algorithm list from the supported algorithm table. */
+    std::vector<std::string> default_algorithms;
+    default_algorithms.reserve(sizeof(kSupportedAlgorithms) / sizeof(kSupportedAlgorithms[0]));
+    for (const AlgorithmSpec &algorithm : kSupportedAlgorithms) {
+        default_algorithms.push_back(algorithm.name);
+    }
+
+    /* Strict integer parsing so malformed CLI values fail before benchmarking. */
     auto parse_int = [&](const std::string &name, const std::string &value) -> int {
         std::size_t consumed = 0;
         long long parsed = 0;
@@ -142,16 +210,15 @@ int main(int argc, char **argv)
         return static_cast<int>(parsed);
     };
 
-    /* Print the CLI and document the meaning of the main runtime parameters. */
+    /* Human-readable command-line help, including benchmark loop semantics. */
     auto print_usage = [&](std::ostream &os) -> void {
         os << "Usage: " << argv[0] << " [options]\n"
            << "Options:\n"
-           << "  --warmup-rounds N      Warmup iterations per phase (default: 5)\n"
-           << "  --measured-rounds N    Measured iterations per phase (default: 20)\n"
+           << "  --warmup-rounds N      Warmup iterations per algorithm/message size (default: 5)\n"
+           << "  --measured-rounds N    Measured iterations per algorithm/message size (default: 20)\n"
            << "  --rounds N             Alias for --measured-rounds\n"
            << "  --min-msg-size N       First message size in bytes (default: 2)\n"
-           << "  --max-msg-size N       Final message size in bytes (default: 65532)\n"
-           << "  --root N               Root rank for MPI_Bcast (default: 0)\n"
+           << "  --max-msg-size N       Final message size in bytes (default: 65536)\n"
            << "  --output PATH          CSV output path (default: benchmarking/bcast/bcast_bench.csv)\n"
            << "  --algorithms LIST      Comma-separated subset of algorithms to benchmark\n"
            << "                         Default: ";
@@ -165,15 +232,14 @@ int main(int argc, char **argv)
            << "  --list-algorithms      Print the supported algorithm names and exit\n"
            << "  -h, --help             Print this help text and exit\n"
            << "\n"
-           << "Message sizes are generated by doubling from the minimum size and the maximum\n"
-           << "size is appended if it is not already present.\n"
-           << "The CSV contains one row per collective call and labels each row as warmup\n"
-           << "or actual with the phase column.\n";
+           << "Execution order: algorithm -> message size -> warmup/measured iteration.\n"
+           << "Each MPI_Bcast is preceded by MPI_Barrier. Rank 0 stores one CSV row per\n"
+           << "collective call and writes all rows at the end of the run.\n";
     };
 
+    /* Parse command-line options on every rank so all ranks agree on the run. */
     Config config;
     try {
-        /* Parse all CLI arguments first, then validate the final configuration. */
         for (int i = 1; i < argc; ++i) {
             const std::string arg = argv[i];
             auto require_value = [&](const std::string &option) -> std::string {
@@ -191,8 +257,6 @@ int main(int argc, char **argv)
                 config.min_msg_size = parse_int(arg, require_value(arg));
             } else if (arg == "--max-msg-size") {
                 config.max_msg_size = parse_int(arg, require_value(arg));
-            } else if (arg == "--root") {
-                config.root = parse_int(arg, require_value(arg));
             } else if (arg == "--output") {
                 config.output_path = require_value(arg);
             } else if (arg == "--algorithms") {
@@ -230,9 +294,6 @@ int main(int argc, char **argv)
         if (config.max_msg_size < config.min_msg_size) {
             throw std::runtime_error("--max-msg-size must be >= --min-msg-size");
         }
-        if (config.root < 0 || config.root >= world_size) {
-            throw std::runtime_error("--root must be in [0, " + std::to_string(world_size - 1) + "]");
-        }
     } catch (const std::exception &ex) {
         if (rank == 0) {
             std::cerr << ex.what() << "\n\n";
@@ -241,68 +302,40 @@ int main(int argc, char **argv)
         MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
     }
 
-    /* Early-exit utility modes after MPI is up and arguments are validated. */
+    /* Utility modes exit after MPI setup so launcher issues are still visible. */
     if (config.show_help) {
         if (rank == 0) {
             print_usage(std::cout);
         }
-        MPI_T_finalize();
-        MPI_Finalize();
+        mpi_check(MPI_T_finalize(), "MPI_T_finalize");
+        mpi_check(MPI_Finalize(), "MPI_Finalize");
         return EXIT_SUCCESS;
     }
 
     if (config.list_algorithms) {
         if (rank == 0) {
-            for (const std::string &name : default_algorithms) {
-                std::cout << name << '\n';
+            for (const AlgorithmSpec &algorithm : kSupportedAlgorithms) {
+                std::cout << algorithm.name << '\n';
             }
         }
-        MPI_T_finalize();
-        MPI_Finalize();
+        mpi_check(MPI_T_finalize(), "MPI_T_finalize");
+        mpi_check(MPI_Finalize(), "MPI_Finalize");
         return EXIT_SUCCESS;
     }
 
-    /*
-     * Estimate processes per node with MPI_COMM_TYPE_SHARED. If the job is not
-     * perfectly balanced across nodes, keep the maximum local size in the CSV.
-     */
-    MPI_Comm shared_comm = MPI_COMM_NULL;
-    mpi_check(MPI_Comm_split_type(MPI_COMM_WORLD, MPI_COMM_TYPE_SHARED, rank, MPI_INFO_NULL,
-                                  &shared_comm),
-              "MPI_Comm_split_type(MPI_COMM_TYPE_SHARED)");
-    int local_size = 0;
-    mpi_check(MPI_Comm_size(shared_comm, &local_size), "MPI_Comm_size(shared_comm)");
-    mpi_check(MPI_Comm_free(&shared_comm), "MPI_Comm_free(shared_comm)");
-
-    int min_ppn = 0;
-    int max_ppn = 0;
-    mpi_check(MPI_Allreduce(&local_size, &min_ppn, 1, MPI_INT, MPI_MIN, MPI_COMM_WORLD),
-              "MPI_Allreduce(ppn min)");
-    mpi_check(MPI_Allreduce(&local_size, &max_ppn, 1, MPI_INT, MPI_MAX, MPI_COMM_WORLD),
-              "MPI_Allreduce(ppn max)");
-    if (rank == 0 && min_ppn != max_ppn) {
-        std::cerr << "Warning: detected non-uniform processes-per-node layout; csv will record "
-                  << "the maximum local process count (" << max_ppn << ")." << std::endl;
-    }
-
-    struct IntCvar {
-        std::string name;
-        MPI_T_enum enum_type = MPI_T_ENUM_NULL;
-        MPI_T_cvar_handle handle = MPI_T_CVAR_HANDLE_NULL;
-    };
-
-    /*
-     * Open one integer CVAR handle once and keep it for the whole run.
-     *
-     * The benchmark rewrites the Bcast algorithm CVAR on every iteration, so
-     * opening the handle once avoids repeated MPI_T lookup/allocation overhead.
-     */
-    auto open_int_cvar = [&](const std::string &name) -> IntCvar {
+    /* Open an integer MPI_T CVAR. Optional CVARs return an unopened handle. */
+    auto open_int_cvar = [&](const std::string &name, bool required) -> IntCvar {
         IntCvar cvar;
         cvar.name = name;
 
         int index = -1;
-        mpi_check(MPI_T_cvar_get_index(name.c_str(), &index), "MPI_T_cvar_get_index(" + name + ")");
+        int rc = MPI_T_cvar_get_index(name.c_str(), &index);
+        if (rc != MPI_SUCCESS) {
+            if (required) {
+                fail("MPI_T_cvar_get_index(" + name + "): " + mpi_error_string(rc), rc);
+            }
+            return cvar;
+        }
 
         char cvar_name[MPI_MAX_OBJECT_NAME] = { 0 };
         int name_len = MPI_MAX_OBJECT_NAME;
@@ -322,33 +355,36 @@ int main(int argc, char **argv)
         if (count != 1) {
             fail("unexpected MPI_T count for " + name + ": " + std::to_string(count));
         }
-
+        cvar.opened = true;
         return cvar;
     };
 
-    /* Release the corresponding MPI_T handle when the benchmark is done. */
+    /* Free a CVAR handle only if this build exposed and opened it. */
     auto close_int_cvar = [&](IntCvar &cvar) -> void {
-        if (cvar.handle != MPI_T_CVAR_HANDLE_NULL) {
-            MPI_T_cvar_handle_free(&cvar.handle);
+        if (cvar.opened) {
+            mpi_check(MPI_T_cvar_handle_free(&cvar.handle),
+                      "MPI_T_cvar_handle_free(" + cvar.name + ")");
+            cvar.opened = false;
             cvar.handle = MPI_T_CVAR_HANDLE_NULL;
         }
     };
 
-    /* Write a new integer value into a CVAR. */
+    /* Write a value to an opened CVAR; silently ignore unavailable optional CVARs. */
     auto write_int_cvar = [&](const IntCvar &cvar, int value) -> void {
-        mpi_check(MPI_T_cvar_write(cvar.handle, &value), "MPI_T_cvar_write(" + cvar.name + ")");
+        if (cvar.opened) {
+            mpi_check(MPI_T_cvar_write(cvar.handle, &value),
+                      "MPI_T_cvar_write(" + cvar.name + ")");
+        }
     };
 
     /*
-     * Convert a symbolic enum name such as "binomial" to the integer value
-     * expected by MPI_T.
+     * Resolve a symbolic MPI_T enum item to its integer value.
      *
-     * Some MPICH builds expose the enum metadata through MPI_T and some only
-     * expose raw integers, so this helper first tries the MPI_T enum object and
-     * then falls back to a hard-coded MPICH mapping.
+     * Newer MPICH builds expose enum metadata through MPI_T. The fallback table
+     * keeps this benchmark usable with builds that expose only raw integers.
      */
     auto enum_value = [&](const IntCvar &cvar, const std::string &item_name) -> int {
-        auto fallback_value = [&](void) -> int {
+        auto fallback_value = [&]() -> int {
             if (cvar.name == kBcastIntraAlgorithmCvar) {
                 if (item_name == "auto")
                     return 0;
@@ -368,6 +404,8 @@ int main(int argc, char **argv)
                     return 7;
                 if (item_name == "tree")
                     return 8;
+                if (item_name == "release_gather")
+                    return 9;
             } else if (cvar.name == kDeviceCollectivesCvar) {
                 if (item_name == "all")
                     return 0;
@@ -412,36 +450,53 @@ int main(int argc, char **argv)
         return fallback_value();
     };
 
-    IntCvar bcast_algorithm_cvar = open_int_cvar(kBcastIntraAlgorithmCvar);
-    IntCvar device_collectives_cvar = open_int_cvar(kDeviceCollectivesCvar);
-    IntCvar bcast_device_collective_cvar = open_int_cvar(kBcastDeviceCollectiveCvar);
-    IntCvar collective_fallback_cvar = open_int_cvar(kCollectiveFallbackCvar);
+    /* Required algorithm selector plus optional CVARs that avoid device overrides. */
+    IntCvar bcast_algorithm_cvar = open_int_cvar(kBcastIntraAlgorithmCvar, true);
+    IntCvar bcast_device_collective_cvar = open_int_cvar(kBcastDeviceCollectiveCvar, false);
+    IntCvar device_collectives_cvar = open_int_cvar(kDeviceCollectivesCvar, false);
+    IntCvar collective_fallback_cvar = open_int_cvar(kCollectiveFallbackCvar, false);
 
     /*
-     * Force the benchmark through the MPIR-level Bcast path. Otherwise device
-     * overrides may bypass the implementation selected by the Bcast algorithm CVAR.
+     * Force the benchmark through the MPIR Bcast path. Without these writes,
+     * device collectives may bypass MPIR_CVAR_BCAST_INTRA_ALGORITHM.
      */
-    write_int_cvar(device_collectives_cvar, enum_value(device_collectives_cvar, "none"));
     write_int_cvar(bcast_device_collective_cvar, 0);
-    write_int_cvar(collective_fallback_cvar, enum_value(collective_fallback_cvar, "error"));
+    if (device_collectives_cvar.opened) {
+        write_int_cvar(device_collectives_cvar, enum_value(device_collectives_cvar, "none"));
+    }
+    if (collective_fallback_cvar.opened) {
+        write_int_cvar(collective_fallback_cvar, enum_value(collective_fallback_cvar, "error"));
+    }
 
-    /*
-     * Resolve the requested algorithm names once up front.
-     *
-     * After this point the hot loop only writes the already-resolved integer
-     * values, rather than repeating enum lookups every time.
-     */
+    /* Validate the requested algorithms and resolve their CVAR values once. */
     std::vector<AlgorithmConfig> selected_algorithms;
     selected_algorithms.reserve(config.algorithms.size());
     for (const std::string &name : config.algorithms) {
-        auto it = std::find_if(selected_algorithms.begin(), selected_algorithms.end(),
-                               [&](const AlgorithmConfig &entry) { return entry.name == name; });
-        if (it == selected_algorithms.end()) {
-            selected_algorithms.push_back(AlgorithmConfig{ name, enum_value(bcast_algorithm_cvar, name) });
+        auto duplicate = std::find_if(selected_algorithms.begin(), selected_algorithms.end(),
+                                      [&](const AlgorithmConfig &algorithm) {
+                                          return algorithm.name == name;
+                                      });
+        if (duplicate != selected_algorithms.end()) {
+            continue;
         }
+
+        auto supported = std::find_if(std::begin(kSupportedAlgorithms),
+                                      std::end(kSupportedAlgorithms),
+                                      [&](const AlgorithmSpec &algorithm) {
+                                          return name == algorithm.name;
+                                      });
+        if (supported == std::end(kSupportedAlgorithms)) {
+            fail("unsupported algorithm '" + name +
+                 "'. Use --list-algorithms to see the accepted names.");
+        }
+
+        AlgorithmConfig algorithm;
+        algorithm.name = name;
+        algorithm.cvar_value = enum_value(bcast_algorithm_cvar, name);
+        selected_algorithms.push_back(algorithm);
     }
 
-    /* Generate 2x message sizes and force the configured max size into the sweep. */
+    /* Generate 2, 4, 8, ... message sizes and include max_msg_size exactly. */
     std::vector<int> message_sizes;
     std::int64_t current = config.min_msg_size;
     while (current <= config.max_msg_size) {
@@ -457,99 +512,149 @@ int main(int argc, char **argv)
     std::sort(message_sizes.begin(), message_sizes.end());
     message_sizes.erase(std::unique(message_sizes.begin(), message_sizes.end()), message_sizes.end());
 
-    std::vector<unsigned char> buffer(static_cast<std::size_t>(config.max_msg_size));
+    /* One reusable byte buffer, sized for the largest configured message. */
+    std::vector<std::uint8_t> buffer(static_cast<std::size_t>(config.max_msg_size), 0);
 
-    std::ofstream csv;
+    /* Only rank 0 needs storage because only rank 0 writes the final CSV. */
+    std::vector<ResultRow> results;
+    const int total_iterations = config.warmup_rounds + config.measured_rounds;
     if (rank == 0) {
-        csv.open(config.output_path, std::ios::out | std::ios::trunc);
-        if (!csv.is_open()) {
-            fail("failed to open output file: " + config.output_path);
-        }
-
-        /*
-         * CSV columns:
-         *   phase        -> "warmup" or "actual"
-         *   phase_round  -> round number within that phase
-         *   global_round -> round number in the combined run
-         *   algorithm    -> MPICH Bcast algorithm name
-         *   nproc, ppn   -> global process count and max processes per node
-         *   message_size_bytes
-         *   max_time_sec -> slowest-rank elapsed time for this collective call
-         */
-        csv << "phase,phase_round,global_round,algorithm,nproc,ppn,message_size_bytes,max_time_sec\n";
-        csv << std::fixed << std::setprecision(9);
+        results.reserve(selected_algorithms.size() * message_sizes.size() *
+                        static_cast<std::size_t>(total_iterations));
     }
 
     /*
-     * Benchmark order:
-     *   outer  -> round
-     *   middle -> message size
-     *   inner  -> algorithm
+     * Main benchmark loop:
+     *   algorithm -> message size -> warmup/measured iteration
      *
-     * Each row records the slowest-rank time for one collective call. Warmup and
-     * measured rounds are both written to the CSV and distinguished by the phase column.
+     * The algorithm CVAR is written once per algorithm, outside the message and
+     * iteration loops, so per-call timing is not polluted by MPI_T writes.
      */
-    const int total_rounds = config.warmup_rounds + config.measured_rounds;
-    for (int round = 0; round < total_rounds; ++round) {
-        const bool is_warmup = round < config.warmup_rounds;
-        const char *phase = is_warmup ? "warmup" : "actual";
-        const int phase_round = is_warmup ? round : round - config.warmup_rounds;
+    for (std::size_t algorithm_index = 0; algorithm_index < selected_algorithms.size();
+         ++algorithm_index) {
+        const AlgorithmConfig &algorithm = selected_algorithms[algorithm_index];
+        write_int_cvar(bcast_algorithm_cvar, algorithm.cvar_value);
+        mpi_check(MPI_Barrier(MPI_COMM_WORLD),
+                  "MPI_Barrier(after selecting " + algorithm.name + ")");
 
-        for (std::size_t message_size_index = 0; message_size_index < message_sizes.size();
-             ++message_size_index) {
-            const int message_size = message_sizes[message_size_index];
+        for (const int message_size : message_sizes) {
+            for (int iteration = 0; iteration < total_iterations; ++iteration) {
+                const bool is_warmup = iteration < config.warmup_rounds;
+                const int phase_iteration =
+                    is_warmup ? iteration : iteration - config.warmup_rounds;
 
-            for (std::size_t algorithm_index = 0; algorithm_index < selected_algorithms.size();
-                 ++algorithm_index) {
-                const AlgorithmConfig &algorithm = selected_algorithms[algorithm_index];
+                /* Rebuild the active message range before every broadcast. */
+                std::fill(buffer.begin(), buffer.begin() + message_size, 0);
+                if (rank == kRoot) {
+                    for (int offset = 0; offset < message_size; ++offset) {
+                        buffer[static_cast<std::size_t>(offset)] =
+                            payload_byte(static_cast<int>(algorithm_index), message_size, iteration,
+                                         offset);
+                    }
+                }
 
-                /* Switch MPICH to the target Bcast implementation for this call. */
-                write_int_cvar(bcast_algorithm_cvar, algorithm.cvar_value);
-
-                /* Reinitialize only the active range to avoid broadcasting stale bytes. */
-                const unsigned char value =
-                    static_cast<unsigned char>((message_size + round + algorithm_index) & 0xff);
-                std::fill(buffer.begin(), buffer.begin() + message_size, value);
-
-                /*
-                 * A barrier before and after the broadcast makes each sample a clean
-                 * per-call timing and avoids overlap with the previous/next test case.
-                 */
+                /* The requested pre-call barrier makes each timing sample aligned. */
                 mpi_check(MPI_Barrier(MPI_COMM_WORLD), "MPI_Barrier(before MPI_Bcast)");
                 const double start = MPI_Wtime();
-                error = MPI_Bcast(buffer.data(), message_size, MPI_BYTE, config.root, MPI_COMM_WORLD);
+                error = MPI_Bcast(buffer.data(), message_size, MPI_BYTE, kRoot, MPI_COMM_WORLD);
                 const double stop = MPI_Wtime();
                 mpi_check(error, "MPI_Bcast(" + algorithm.name + ")");
-                mpi_check(MPI_Barrier(MPI_COMM_WORLD), "MPI_Barrier(after MPI_Bcast)");
 
                 const double local_elapsed = stop - start;
-                double max_elapsed = 0.0;
-                mpi_check(MPI_Reduce(&local_elapsed, &max_elapsed, 1, MPI_DOUBLE, MPI_MAX, 0,
+                double time_sum = 0.0;
+                double time_min = 0.0;
+                double time_max = 0.0;
+                int local_correct = 1;
+
+                /* Verify every rank received the root payload for this call. */
+                for (int offset = 0; offset < message_size; ++offset) {
+                    if (buffer[static_cast<std::size_t>(offset)] !=
+                        payload_byte(static_cast<int>(algorithm_index), message_size, iteration,
+                                     offset)) {
+                        local_correct = 0;
+                        break;
+                    }
+                }
+                int global_correct = 0;
+
+                /*
+                 * Timing reductions:
+                 *   sum / nproc -> requested average latency
+                 *   min/max     -> retained for comparison with average latency
+                 */
+                mpi_check(MPI_Reduce(&local_elapsed, &time_sum, 1, MPI_DOUBLE, MPI_SUM, kRoot,
+                                     MPI_COMM_WORLD),
+                          "MPI_Reduce(sum elapsed)");
+                mpi_check(MPI_Reduce(&local_elapsed, &time_min, 1, MPI_DOUBLE, MPI_MIN, kRoot,
+                                     MPI_COMM_WORLD),
+                          "MPI_Reduce(min elapsed)");
+                mpi_check(MPI_Reduce(&local_elapsed, &time_max, 1, MPI_DOUBLE, MPI_MAX, kRoot,
                                      MPI_COMM_WORLD),
                           "MPI_Reduce(max elapsed)");
+                mpi_check(MPI_Reduce(&local_correct, &global_correct, 1, MPI_INT, MPI_MIN, kRoot,
+                                     MPI_COMM_WORLD),
+                          "MPI_Reduce(correct)");
 
-                /* Only rank 0 writes the CSV row, using the slowest-rank timing. */
-                if (rank == 0) {
-                    csv << phase << ','
-                        << phase_round << ','
-                        << round << ','
-                        << algorithm.name << ','
-                        << world_size << ','
-                        << max_ppn << ','
-                        << message_size << ','
-                        << max_elapsed << '\n';
+                if (rank == kRoot) {
+                    /* Store the row now; defer actual file I/O until the sweep finishes. */
+                    ResultRow row;
+                    row.phase = is_warmup ? "warmup" : "actual";
+                    row.phase_iteration = phase_iteration;
+                    row.global_iteration = iteration;
+                    row.algorithm = algorithm.name;
+                    row.cvar_value = algorithm.cvar_value;
+                    row.root = kRoot;
+                    row.nproc = world_size;
+                    row.message_size_bytes = message_size;
+                    row.time_sum_sec = time_sum;
+                    row.avg_latency_sec = time_sum / static_cast<double>(world_size);
+                    row.min_time_sec = time_min;
+                    row.max_time_sec = time_max;
+                    row.correct = global_correct == 1;
+                    results.push_back(row);
                 }
             }
         }
     }
 
-    if (rank == 0) {
+    /* Rank 0 writes all stored benchmark rows in one CSV pass. */
+    if (rank == kRoot) {
+        std::ofstream csv(config.output_path.c_str(), std::ios::out | std::ios::trunc);
+        if (!csv.is_open()) {
+            fail("failed to open output file: " + config.output_path);
+        }
+
+        csv << "phase,phase_iteration,global_iteration,algorithm,cvar_value,root,nproc,"
+               "message_size_bytes,time_sum_sec,avg_latency_sec,min_time_sec,max_time_sec,"
+               "correct\n";
+        csv << std::fixed << std::setprecision(9);
+        for (const ResultRow &row : results) {
+            csv << row.phase << ','
+                << row.phase_iteration << ','
+                << row.global_iteration << ','
+                << row.algorithm << ','
+                << row.cvar_value << ','
+                << row.root << ','
+                << row.nproc << ','
+                << row.message_size_bytes << ','
+                << row.time_sum_sec << ','
+                << row.avg_latency_sec << ','
+                << row.min_time_sec << ','
+                << row.max_time_sec << ','
+                << (row.correct ? 1 : 0) << '\n';
+        }
+
         csv.close();
+        if (!csv) {
+            fail("failed while writing output file: " + config.output_path);
+        }
+        std::cout << "Wrote " << config.output_path << " (" << results.size() << " rows)\n";
     }
 
+    /* Clean up MPI_T handles before finalizing MPI_T and MPI. */
     close_int_cvar(collective_fallback_cvar);
-    close_int_cvar(bcast_device_collective_cvar);
     close_int_cvar(device_collectives_cvar);
+    close_int_cvar(bcast_device_collective_cvar);
     close_int_cvar(bcast_algorithm_cvar);
 
     mpi_check(MPI_T_finalize(), "MPI_T_finalize");
