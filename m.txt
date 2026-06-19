@@ -1,26 +1,13 @@
-cd . && /bin/bash ./config.status src/binding/fortran/use_mpi_f08/mpi_f08_compile_constants.f90
-  MOD      src/binding/fortran/use_mpi_f08/mpi_c_interface_types.stamp
-  MOD      src/binding/fortran/use_mpi_f08/mpi_f08_types.stamp
-config.status: creating src/binding/fortran/use_mpi_f08/mpi_f08_compile_constants.f90
-  MOD      src/binding/fortran/use_mpi_f08/mpi_f08_compile_constants.stamp
-  MOD      src/binding/fortran/use_mpi_f08/mpi_f08_callbacks.stamp
-  MOD      src/binding/fortran/use_mpi_f08/mpi_f08_link_constants.stamp
-  MOD      src/binding/fortran/use_mpi_f08/pmpi_f08.stamp
-  MOD      src/binding/fortran/use_mpi_f08/mpi_f08.stamp
-  MOD      src/binding/fortran/use_mpi_f08/mpi_c_interface_glue.stamp
-  MOD      src/binding/fortran/use_mpi_f08/mpi_c_interface_nobuf.stamp
-  MOD      src/binding/fortran/use_mpi_f08/mpi_c_interface_cdesc.stamp
-  MOD      src/binding/fortran/use_mpi_f08/mpi_c_interface.stamp
 make  all-recursive
-make[1]: Entering directory '/home/qik/projects/mpich'
+make[1]: Entering directory '/home/qktttt/mpich'
 Making all in src/mpl
-make[2]: Entering directory '/home/qik/projects/mpich/src/mpl'
+make[2]: Entering directory '/home/qktttt/mpich/src/mpl'
   CC       src/mpl_rankmap.lo
   CC       src/arch/mpl_arch_x86.lo
   CC       src/atomic/mpl_atomic.lo
   CC       src/bt/mpl_bt.lo
-  CC       src/env/mpl_env.lo
   CC       src/dbg/mpl_dbg.lo
+  CC       src/env/mpl_env.lo
   CC       src/mem/mpl_trmem.lo
   CC       src/mem/mpl_trmem_avx.lo
   CC       src/mem/mpl_trmem_avx512f.lo
@@ -53,337 +40,75 @@ make[2]: Entering directory '/home/qik/projects/mpich/src/mpl'
   CC       src/shm/mpl_shm_win.lo
   CC       src/shm/mpl_shm_posix.lo
   CC       src/gpu/mpl_gpu_common.lo
-  CC       src/gpu/mpl_gpu_cuda.lo
+  CC       src/gpu/mpl_gpu_fallback.lo
   CC       src/gavl/mpl_gavl.lo
   CCLD     libmpl.la
-make[2]: Leaving directory '/home/qik/projects/mpich/src/mpl'
-Making all in /home/qik/projects/mpich/modules/json-c
-make[2]: Entering directory '/home/qik/projects/mpich/modules/json-c'
+make[2]: Leaving directory '/home/qktttt/mpich/src/mpl'
+Making all in /home/qktttt/mpich/modules/hwloc
+make[2]: Entering directory '/home/qktttt/mpich/modules/hwloc'
+Making all in include
+make[3]: Entering directory '/home/qktttt/mpich/modules/hwloc/include'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/home/qktttt/mpich/modules/hwloc/include'
+Making all in hwloc
+make[3]: Entering directory '/home/qktttt/mpich/modules/hwloc/hwloc'
+  CC       components.lo
+  CCLD     libhwloc_embedded.la
+make[3]: Leaving directory '/home/qktttt/mpich/modules/hwloc/hwloc'
+make[3]: Entering directory '/home/qktttt/mpich/modules/hwloc'
+make[3]: Nothing to be done for 'all-am'.
+make[3]: Leaving directory '/home/qktttt/mpich/modules/hwloc'
+make[2]: Leaving directory '/home/qktttt/mpich/modules/hwloc'
+Making all in /home/qktttt/mpich/modules/json-c
+make[2]: Entering directory '/home/qktttt/mpich/modules/json-c'
 make  all-recursive
-make[3]: Entering directory '/home/qik/projects/mpich/modules/json-c'
+make[3]: Entering directory '/home/qktttt/mpich/modules/json-c'
 Making all in .
-make[4]: Entering directory '/home/qik/projects/mpich/modules/json-c'
-make[4]: Leaving directory '/home/qik/projects/mpich/modules/json-c'
+make[4]: Entering directory '/home/qktttt/mpich/modules/json-c'
+make[4]: Leaving directory '/home/qktttt/mpich/modules/json-c'
 Making all in tests
-make[4]: Entering directory '/home/qik/projects/mpich/modules/json-c/tests'
+make[4]: Entering directory '/home/qktttt/mpich/modules/json-c/tests'
 make[4]: Nothing to be done for 'all'.
-make[4]: Leaving directory '/home/qik/projects/mpich/modules/json-c/tests'
-make[3]: Leaving directory '/home/qik/projects/mpich/modules/json-c'
-make[2]: Leaving directory '/home/qik/projects/mpich/modules/json-c'
+make[4]: Leaving directory '/home/qktttt/mpich/modules/json-c/tests'
+make[3]: Leaving directory '/home/qktttt/mpich/modules/json-c'
+make[2]: Leaving directory '/home/qktttt/mpich/modules/json-c'
 Making all in src/mpi/datatype/typerep/yaksa
-make[2]: Entering directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/yaksa'
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hvector__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_blkhindx__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hindexed__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_contig__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_resized__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hvector__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_blkhindx__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hindexed__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_contig__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_resized__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hvector__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_blkhindx__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hindexed__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_contig__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_resized__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hvector__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_blkhindx__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hindexed__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_contig__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_resized__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hvector__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_blkhindx__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hindexed__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_contig__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_resized__Bool.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hvector_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_blkhindx_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hindexed_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_contig_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_resized_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hvector_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_blkhindx_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hindexed_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_contig_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_resized_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hvector_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_blkhindx_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hindexed_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_contig_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_resized_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hvector_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_blkhindx_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hindexed_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_contig_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_resized_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hvector_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_blkhindx_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hindexed_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_contig_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_resized_char.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hvector_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_blkhindx_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hindexed_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_contig_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_resized_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hvector_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_blkhindx_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hindexed_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_contig_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_resized_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hvector_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_blkhindx_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hindexed_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_contig_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_resized_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hvector_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_blkhindx_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hindexed_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_contig_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_resized_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hvector_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_blkhindx_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hindexed_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_contig_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_resized_wchar_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hvector_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_blkhindx_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hindexed_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_contig_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_resized_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hvector_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_blkhindx_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hindexed_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_contig_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_resized_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hvector_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_blkhindx_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hindexed_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_contig_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_resized_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hvector_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_blkhindx_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hindexed_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_contig_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_resized_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hvector_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_blkhindx_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hindexed_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_contig_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_resized_int8_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hvector_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_blkhindx_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hindexed_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_contig_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_resized_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hvector_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_blkhindx_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hindexed_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_contig_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_resized_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hvector_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_blkhindx_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hindexed_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_contig_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_resized_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hvector_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_blkhindx_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hindexed_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_contig_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_resized_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hvector_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_blkhindx_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hindexed_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_contig_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_resized_int16_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hvector_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_blkhindx_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hindexed_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_contig_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_resized_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hvector_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_blkhindx_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hindexed_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_contig_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_resized_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hvector_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_blkhindx_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hindexed_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_contig_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_resized_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hvector_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_blkhindx_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hindexed_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_contig_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_resized_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hvector_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_blkhindx_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hindexed_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_contig_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_resized_int32_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hvector_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_blkhindx_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hindexed_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_contig_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_resized_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hvector_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_blkhindx_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hindexed_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_contig_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_resized_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hvector_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_blkhindx_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hindexed_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_contig_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_resized_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hvector_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_blkhindx_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hindexed_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_contig_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_resized_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hvector_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_blkhindx_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hindexed_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_contig_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_resized_int64_t.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hvector_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_blkhindx_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hindexed_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_contig_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_resized_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hvector_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_blkhindx_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hindexed_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_contig_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_resized_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hvector_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_blkhindx_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hindexed_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_contig_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_resized_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hvector_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_blkhindx_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hindexed_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_contig_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_resized_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hvector_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_blkhindx_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hindexed_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_contig_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_resized_float.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hvector_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_blkhindx_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_hindexed_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_contig_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hvector_resized_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hvector_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_blkhindx_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_hindexed_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_contig_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_blkhindx_resized_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hvector_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_blkhindx_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_hindexed_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_contig_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_hindexed_resized_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hvector_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_blkhindx_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_hindexed_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_contig_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_contig_resized_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hvector_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_blkhindx_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_hindexed_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_contig_double.lo
-  NVCC     src/backend/cuda/pup/yaksuri_cudai_pup_resized_resized_double.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_pup.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hvector_hvector.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hvector_blkhindx.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hvector_hindexed.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hvector_contig.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hvector_resized.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hvector_builtin.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_blkhindx_hvector.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_blkhindx_blkhindx.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_blkhindx_hindexed.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_blkhindx_contig.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_blkhindx_resized.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_blkhindx_builtin.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hindexed_hvector.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hindexed_blkhindx.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hindexed_hindexed.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hindexed_contig.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hindexed_resized.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_hindexed_builtin.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_contig_hvector.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_contig_blkhindx.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_contig_hindexed.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_contig_contig.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_contig_resized.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_contig_builtin.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_resized_hvector.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_resized_blkhindx.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_resized_hindexed.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_resized_contig.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_resized_resized.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_resized_builtin.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns_builtin.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_populate_pupfns.lo
+make[2]: Entering directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
+  CC       src/util/yaksu_buffer_pool.lo
+  CC       src/util/yaksu_handle_pool.lo
+  CC       src/frontend/flatten/yaksa_flatten_size.lo
+  CC       src/frontend/info/yaksa_info.lo
+  CC       src/frontend/bounds/yaksa_bounds.lo
+  CC       src/frontend/flatten/yaksa_unflatten.lo
+  CC       src/frontend/flatten/yaksa_flatten.lo
+  CC       src/frontend/init/yaksa_init.lo
+  CC       src/frontend/iov/yaksa_iov_len.lo
+  CC       src/frontend/iov/yaksa_iov_len_max.lo
+  CC       src/frontend/iov/yaksa_iov.lo
+  CC       src/frontend/pup/yaksa_ipack.lo
+  CC       src/frontend/pup/yaksa_pack.lo
+  CC       src/frontend/pup/yaksa_iunpack.lo
+  CC       src/frontend/pup/yaksa_unpack.lo
+  CC       src/frontend/pup/yaksa_pack_stream.lo
+  CC       src/frontend/pup/yaksa_unpack_stream.lo
+  CC       src/frontend/pup/yaksa_request.lo
+  CC       src/frontend/pup/yaksi_ipack.lo
+  CC       src/frontend/pup/yaksi_ipack_element.lo
+  CC       src/frontend/pup/yaksi_ipack_backend.lo
+  CC       src/frontend/pup/yaksi_iunpack.lo
+  CC       src/frontend/pup/yaksi_iunpack_element.lo
+  CC       src/frontend/pup/yaksi_iunpack_backend.lo
+  CC       src/frontend/pup/yaksi_request.lo
+  CC       src/frontend/types/yaksa_vector.lo
+  CC       src/frontend/types/yaksa_contig.lo
+  CC       src/frontend/types/yaksa_dup.lo
+  CC       src/frontend/types/yaksa_resized.lo
+  CC       src/frontend/types/yaksa_blkindx.lo
+  CC       src/frontend/types/yaksa_indexed.lo
+  CC       src/frontend/types/yaksa_subarray.lo
+  CC       src/frontend/types/yaksa_struct.lo
+  CC       src/frontend/types/yaksa_free.lo
+  CC       src/frontend/types/yaksi_type.lo
   CC       src/backend/seq/hooks/yaksuri_seq_hooks.lo
   CC       src/backend/seq/pup/yaksuri_seqi_pup__Bool.lo
   CC       src/backend/seq/pup/yaksuri_seqi_pup_hvector__Bool.lo
@@ -430,8 +155,8 @@ make[2]: Entering directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/y
   CC       src/backend/seq/pup/yaksuri_seqi_pup_blkhindx_contig_char.lo
   CC       src/backend/seq/pup/yaksuri_seqi_pup_blkhindx_resized_char.lo
   CC       src/backend/seq/pup/yaksuri_seqi_pup_hindexed_char.lo
-  CC       src/backend/seq/pup/yaksuri_seqi_pup_hindexed_hvector_char.lo
   CC       src/backend/seq/pup/yaksuri_seqi_pup_hindexed_blkhindx_char.lo
+  CC       src/backend/seq/pup/yaksuri_seqi_pup_hindexed_hvector_char.lo
   CC       src/backend/seq/pup/yaksuri_seqi_pup_hindexed_hindexed_char.lo
   CC       src/backend/seq/pup/yaksuri_seqi_pup_hindexed_contig_char.lo
   CC       src/backend/seq/pup/yaksuri_seqi_pup_hindexed_resized_char.lo
@@ -810,8 +535,8 @@ make[2]: Entering directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/y
   CC       src/backend/seq/pup/yaksuri_seqi_populate_pupfns_contig_hvector.lo
   CC       src/backend/seq/pup/yaksuri_seqi_populate_pupfns_contig_blkhindx.lo
   CC       src/backend/seq/pup/yaksuri_seqi_populate_pupfns_contig_hindexed.lo
-  CC       src/backend/seq/pup/yaksuri_seqi_populate_pupfns_contig_contig.lo
   CC       src/backend/seq/pup/yaksuri_seqi_populate_pupfns_contig_resized.lo
+  CC       src/backend/seq/pup/yaksuri_seqi_populate_pupfns_contig_contig.lo
   CC       src/backend/seq/pup/yaksuri_seqi_populate_pupfns_contig_builtin.lo
   CC       src/backend/seq/pup/yaksuri_seqi_populate_pupfns_resized_hvector.lo
   CC       src/backend/seq/pup/yaksuri_seqi_populate_pupfns_resized_blkhindx.lo
@@ -825,88 +550,24 @@ make[2]: Entering directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/y
   CC       src/backend/src/yaksur_hooks.lo
   CC       src/backend/src/yaksur_pup.lo
   CC       src/backend/src/yaksur_request.lo
-  CC       src/util/yaksu_buffer_pool.lo
-  CC       src/util/yaksu_handle_pool.lo
-  CC       src/frontend/bounds/yaksa_bounds.lo
-  CC       src/frontend/flatten/yaksa_flatten_size.lo
-  CC       src/frontend/flatten/yaksa_flatten.lo
-  CC       src/frontend/flatten/yaksa_unflatten.lo
-  CC       src/frontend/info/yaksa_info.lo
-  CC       src/frontend/init/yaksa_init.lo
-  CC       src/frontend/iov/yaksa_iov_len.lo
-  CC       src/frontend/iov/yaksa_iov_len_max.lo
-  CC       src/frontend/iov/yaksa_iov.lo
-  CC       src/frontend/pup/yaksa_ipack.lo
-  CC       src/frontend/pup/yaksa_pack.lo
-  CC       src/frontend/pup/yaksa_iunpack.lo
-  CC       src/frontend/pup/yaksa_unpack.lo
-  CC       src/frontend/pup/yaksa_pack_stream.lo
-  CC       src/frontend/pup/yaksa_unpack_stream.lo
-  CC       src/frontend/pup/yaksa_request.lo
-  CC       src/frontend/pup/yaksi_ipack.lo
-  CC       src/frontend/pup/yaksi_ipack_element.lo
-  CC       src/frontend/pup/yaksi_ipack_backend.lo
-  CC       src/frontend/pup/yaksi_iunpack.lo
-  CC       src/frontend/pup/yaksi_iunpack_element.lo
-  CC       src/frontend/pup/yaksi_iunpack_backend.lo
-  CC       src/frontend/pup/yaksi_request.lo
-  CC       src/frontend/types/yaksa_vector.lo
-  CC       src/frontend/types/yaksa_contig.lo
-  CC       src/frontend/types/yaksa_dup.lo
-  CC       src/frontend/types/yaksa_resized.lo
-  CC       src/frontend/types/yaksa_blkindx.lo
-  CC       src/frontend/types/yaksa_indexed.lo
-  CC       src/frontend/types/yaksa_subarray.lo
-  CC       src/frontend/types/yaksa_struct.lo
-  CC       src/frontend/types/yaksa_free.lo
-  CC       src/frontend/types/yaksi_type.lo
-  CC       src/backend/cuda/hooks/yaksuri_cuda_init_hooks.lo
-  CC       src/backend/cuda/hooks/yaksuri_cudai_type_hooks.lo
-  CC       src/backend/cuda/hooks/yaksuri_cudai_info_hooks.lo
-  CC       src/backend/cuda/md/yaksuri_cudai_md.lo
-src/backend/cuda/hooks/yaksuri_cuda_init_hooks.c: In function 'yaksuri_cuda_init_hook':
-src/backend/cuda/hooks/yaksuri_cuda_init_hooks.c:207:36: warning: argument 1 range [18446744071562067968, 18446744073709551615] exceeds maximum object size 9223372036854775807 [-Walloc-size-larger-than=]
-  207 |     yaksuri_cudai_global.streams = calloc(yaksuri_cudai_global.ndevices, sizeof(cudai_stream));
-      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from ./src/external/yuthash.h:31,
-                 from ./src/frontend/include/yaksi.h:12,
-                 from src/backend/cuda/hooks/yaksuri_cuda_init_hooks.c:6:
-/usr/include/stdlib.h:675:14: note: in a call to allocation function 'calloc' declared here
-  675 | extern void *calloc (size_t __nmemb, size_t __size)
-      |              ^~~~~~
-  CC       src/backend/cuda/pup/yaksuri_cudai_event.lo
-  CC       src/backend/cuda/pup/yaksuri_cudai_get_ptr_attr.lo
   CCLD     libyaksa.la
-make[2]: Leaving directory '/home/qik/projects/mpich/src/mpi/datatype/typerep/yaksa'
-Making all in src/pmi
-make[2]: Entering directory '/home/qik/projects/mpich/src/pmi'
-make[3]: Entering directory '/home/qik/projects/mpich/src/pmi'
-  CC       src/pmi_wire.lo
-  CC       src/pmi_msg.lo
-  CC       src/pmi_common.lo
-  CC       src/pmi_util.lo
-  CC       src/pmi_v1.lo
-  CC       src/pmi_v2.lo
-  CCLD     libpmiutil.la
-  CCLD     libpmi.la
-make[3]: Leaving directory '/home/qik/projects/mpich/src/pmi'
-make[2]: Leaving directory '/home/qik/projects/mpich/src/pmi'
+make[2]: Leaving directory '/home/qktttt/mpich/src/mpi/datatype/typerep/yaksa'
 Making all in src/mpi/romio
-make[2]: Entering directory '/home/qik/projects/mpich/src/mpi/romio'
+make[2]: Entering directory '/home/qktttt/mpich/src/mpi/romio'
 Making all in .
-make[3]: Entering directory '/home/qik/projects/mpich/src/mpi/romio'
+make[3]: Entering directory '/home/qktttt/mpich/src/mpi/romio'
   CC       mpi-io/glue/mpich/mpio_file.lo
   CC       mpi-io/glue/mpich/mpio_err.lo
-  CC       mpi-io/io_impl.lo
   CC       mpi-io/mpich_fileutil.lo
-  CC       mpi-io/mpir-mpioinit.lo
-  CC       mpi-io/mpiu_greq.lo
+  CC       mpi-io/io_impl.lo
   CC       mpi-io/mpiu_external32.lo
+  CC       mpi-io/mpiu_greq.lo
+  CC       mpi-io/mpir-mpioinit.lo
   CC       mpi-io/mpir_cst_filesys.lo
   CC       adio/ad_nfs/ad_nfs_read.lo
   CC       adio/ad_nfs/ad_nfs_open.lo
-  CC       adio/ad_nfs/ad_nfs_write.lo
   CC       adio/ad_nfs/ad_nfs_done.lo
+  CC       adio/ad_nfs/ad_nfs_write.lo
   CC       adio/ad_nfs/ad_nfs_fcntl.lo
   CC       adio/ad_nfs/ad_nfs_iread.lo
   CC       adio/ad_nfs/ad_nfs_iwrite.lo
@@ -1005,233 +666,25 @@ make[3]: Entering directory '/home/qik/projects/mpich/src/mpi/romio'
   CC       adio/common/ad_tuning.lo
   CC       adio/common/utils.lo
   CCLD     libromio.la
-make[3]: Leaving directory '/home/qik/projects/mpich/src/mpi/romio'
+make[3]: Leaving directory '/home/qktttt/mpich/src/mpi/romio'
 Making all in test
-make[3]: Entering directory '/home/qik/projects/mpich/src/mpi/romio/test'
+make[3]: Entering directory '/home/qktttt/mpich/src/mpi/romio/test'
 make[3]: Nothing to be done for 'all'.
-make[3]: Leaving directory '/home/qik/projects/mpich/src/mpi/romio/test'
-make[2]: Leaving directory '/home/qik/projects/mpich/src/mpi/romio'
-Making all in /home/qik/projects/mpich/modules/libfabric
-make[2]: Entering directory '/home/qik/projects/mpich/modules/libfabric'
+make[3]: Leaving directory '/home/qktttt/mpich/src/mpi/romio/test'
+make[2]: Leaving directory '/home/qktttt/mpich/src/mpi/romio'
+Making all in /home/qktttt/mpich/modules/libfabric
+make[2]: Entering directory '/home/qktttt/mpich/modules/libfabric'
 make  all-am
-make[3]: Entering directory '/home/qik/projects/mpich/modules/libfabric'
+make[3]: Entering directory '/home/qktttt/mpich/modules/libfabric'
   CCLD     src/libfabric.la
 copying selected object files to avoid basename conflicts...
   CCLD     util/fi_info
   CCLD     util/fi_strerror
   CCLD     util/fi_pingpong
-make[3]: Leaving directory '/home/qik/projects/mpich/modules/libfabric'
-make[2]: Leaving directory '/home/qik/projects/mpich/modules/libfabric'
-Making all in src/pm/hydra
-make[2]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
-make  all-recursive
-make[3]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
+make[3]: Leaving directory '/home/qktttt/mpich/modules/libfabric'
+make[2]: Leaving directory '/home/qktttt/mpich/modules/libfabric'
 Making all in .
-make[4]: Entering directory '/home/qik/projects/mpich/src/pm/hydra'
-  CC       mpiexec/hydra-mpiexec.o
-  CC       mpiexec/hydra-options.o
-  CC       mpiexec/hydra-get_parameters.o
-  CC       mpiexec/hydra-uiu.o
-  CC       mpiexec/hydra-pg.o
-  CC       mpiexec/hydra-debugger.o
-  CC       mpiexec/hydra-pmiserv_kvs.o
-  CC       mpiexec/hydra-pmiserv_publish.o
-  CC       mpiexec/hydra-pmiserv_spawn.o
-  CC       mpiexec/hydra-pmiserv_misc.o
-  CC       mpiexec/hydra-pmiserv_cb.o
-  CC       mpiexec/hydra-pmiserv_pmi.o
-  CC       mpiexec/hydra-pmiserv_pmci.o
-  CC       mpiexec/hydra-pmiserv_utils.o
-  CC       lib/pmiserv_common.lo
-  CC       lib/utils/alloc.lo
-  CC       lib/utils/args.lo
-  CC       lib/utils/dbg.lo
-  CC       lib/utils/env.lo
-  CC       lib/utils/launch.lo
-  CC       lib/utils/others.lo
-  CC       lib/utils/rankmap.lo
-  CC       lib/utils/signals.lo
-  CC       lib/utils/sock.lo
-  CC       lib/utils/string.lo
-  CC       lib/tools/topo/topo.lo
-  CC       lib/tools/topo/hwloc/topo_hwloc.lo
-  CC       lib/tools/bootstrap/src/bsci_init.lo
-  CC       lib/tools/bootstrap/src/bsci_finalize.lo
-  CC       lib/tools/bootstrap/src/bsci_launch.lo
-  CC       lib/tools/bootstrap/src/bsci_query_node_list.lo
-  CC       lib/tools/bootstrap/src/bsci_query_proxy_id.lo
-  CC       lib/tools/bootstrap/src/bsci_query_native_int.lo
-  CC       lib/tools/bootstrap/src/bsci_wait.lo
-  CC       lib/tools/bootstrap/src/bsci_env.lo
-  CC       lib/tools/bootstrap/utils/bscu_wait.lo
-  CC       lib/tools/bootstrap/utils/bscu_cb.lo
-  CC       lib/tools/bootstrap/external/external_common.lo
-  CC       lib/tools/bootstrap/external/external_common_launch.lo
-  CC       lib/tools/bootstrap/external/fork_init.lo
-  CC       lib/tools/bootstrap/external/user_init.lo
-  CC       lib/tools/bootstrap/external/manual_init.lo
-  CC       lib/tools/bootstrap/external/rsh_init.lo
-  CC       lib/tools/bootstrap/external/rsh_env.lo
-  CC       lib/tools/bootstrap/external/ssh_init.lo
-  CC       lib/tools/bootstrap/external/ssh.lo
-  CC       lib/tools/bootstrap/external/ssh_env.lo
-  CC       lib/tools/bootstrap/external/ssh_finalize.lo
-  CC       lib/tools/bootstrap/external/slurm_init.lo
-  CC       lib/tools/bootstrap/external/slurm_launch.lo
-  CC       lib/tools/bootstrap/external/slurm_env.lo
-  CC       lib/tools/bootstrap/external/slurm_query_native_int.lo
-  CC       lib/tools/bootstrap/external/slurm_query_node_list.lo
-  CC       lib/tools/bootstrap/external/slurm_query_proxy_id.lo
-  CC       lib/tools/bootstrap/external/ll_init.lo
-  CC       lib/tools/bootstrap/external/ll_launch.lo
-  CC       lib/tools/bootstrap/external/ll_query_native_int.lo
-  CC       lib/tools/bootstrap/external/ll_query_node_list.lo
-  CC       lib/tools/bootstrap/external/ll_query_proxy_id.lo
-  CC       lib/tools/bootstrap/external/ll_env.lo
-  CC       lib/tools/bootstrap/external/lsf_init.lo
-  CC       lib/tools/bootstrap/external/lsf_query_native_int.lo
-  CC       lib/tools/bootstrap/external/lsf_query_node_list.lo
-  CC       lib/tools/bootstrap/external/lsf_env.lo
-  CC       lib/tools/bootstrap/external/sge_init.lo
-  CC       lib/tools/bootstrap/external/sge_query_native_int.lo
-  CC       lib/tools/bootstrap/external/sge_query_node_list.lo
-  CC       lib/tools/bootstrap/external/sge_env.lo
-  CC       lib/tools/bootstrap/external/pbs_init.lo
-  CC       lib/tools/bootstrap/external/pbs_query_native_int.lo
-  CC       lib/tools/bootstrap/external/pbs_query_node_list.lo
-  CC       lib/tools/bootstrap/external/cobalt_init.lo
-  CC       lib/tools/bootstrap/external/cobalt_query_native_int.lo
-  CC       lib/tools/bootstrap/external/cobalt_query_node_list.lo
-  CC       lib/tools/bootstrap/persist/persist_init.lo
-  CC       lib/tools/bootstrap/persist/persist_launch.lo
-  CC       lib/tools/bootstrap/persist/persist_wait.lo
-  CC       lib/tools/demux/demux.lo
-  CC       lib/tools/demux/demux_poll.lo
-  CC       lib/tools/demux/demux_select.lo
-  CC       proxy/hydra_pmi_proxy-pmip.o
-  CC       proxy/hydra_pmi_proxy-pmip_pg.o
-  CC       proxy/hydra_pmi_proxy-pmip_cb.o
-  CC       proxy/hydra_pmi_proxy-pmip_utils.o
-  CC       proxy/hydra_pmi_proxy-pmip_barrier.o
-  CC       proxy/hydra_pmi_proxy-pmip_pmi.o
-  CC       nameserver/hydra_nameserver-hydra_nameserver.o
-  CC       persist_server/hydra_persist-persist_server.o
-  CCLD     libhydra.la
-  CCLD     mpiexec.hydra
-  CCLD     hydra_nameserver
-  CCLD     hydra_persist
-  CCLD     hydra_pmi_proxy
-make[4]: Leaving directory '/home/qik/projects/mpich/src/pm/hydra'
-make[3]: Leaving directory '/home/qik/projects/mpich/src/pm/hydra'
-make[2]: Leaving directory '/home/qik/projects/mpich/src/pm/hydra'
-Making all in .
-make[2]: Entering directory '/home/qik/projects/mpich'
-  CC       src/env/mpichversion.o
-  CC       src/mpi/coll/src/lib_libmpi_la-csel_json_autogen.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-func_table.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_init.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_comm.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_datatype.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_op.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rma.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_spawn.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_win.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_part.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_events.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv_read.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv_write.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_pipeline.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_progress.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_am_events.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_nic.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_vci.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-globals.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_provider.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_settings.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_addrxchg.lo
-  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-util.lo
-  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_init.lo
-  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_hooks.lo
-  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_mem.lo
-  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_rma.lo
-  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_part.lo
-  CC       src/mpid/ch4/shm/src/lib_libmpi_la-topotree.lo
-  CC       src/mpid/ch4/shm/src/lib_libmpi_la-topotree_util.lo
-  CC       src/mpid/ch4/shm/posix/release_gather/lib_libmpi_la-release_gather.lo
-  CC       src/mpid/ch4/shm/posix/release_gather/lib_libmpi_la-nb_release_gather.lo
-  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-globals.lo
-  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_comm.lo
-  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_init.lo
-  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_op.lo
-  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_datatype.lo
-  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_win.lo
-  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_part.lo
-  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_vci.lo
-  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_eager_array.lo
-  CC       src/mpid/ch4/shm/posix/eager/src/lib_libmpi_la-posix_eager_impl.lo
-  CC       src/mpid/ch4/shm/posix/eager/iqueue/lib_libmpi_la-func_table.lo
-  CC       src/mpid/ch4/shm/posix/eager/iqueue/lib_libmpi_la-iqueue_init.lo
-  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-globals.lo
-  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_init.lo
-  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_control.lo
-  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_win.lo
-  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_fd.lo
-  CC       src/mpid/ch4/shm/ipc/cma/lib_libmpi_la-cma_init.lo
-  CC       src/mpid/ch4/shm/ipc/cma/lib_libmpi_la-cma_post.lo
-  CC       src/mpid/ch4/shm/ipc/gpu/lib_libmpi_la-gpu_post.lo
-  CC       src/mpid/ch4/shm/ipc/gpu/lib_libmpi_la-globals.lo
-  CC       src/mpid/ch4/shm/ipc/gpu/lib_libmpi_la-gpu_init.lo
-  CC       src/mpid/common/sched/lib_libmpi_la-mpidu_sched.lo
-  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_init_shm_alloc.lo
-  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_init_shm.lo
-In file included from /usr/include/string.h:548,
-                 from /home/qik/projects/mpich/src/mpl/include/mpl_base.h:16,
-                 from /home/qik/projects/mpich/src/mpl/include/mpl.h:9,
-                 from ./src/include/mpiimpl.h:53,
-                 from ./src/mpid/ch4/include/mpidimpl.h:17,
-                 from src/mpid/ch4/shm/ipc/gpu/gpu_post.c:119:
-In function 'memset',
-    inlined from 'ipc_mapped_cache_insert' at src/mpid/ch4/shm/ipc/gpu/gpu_post.c:227:9,
-    inlined from 'MPIDI_GPU_ipc_handle_map' at src/mpid/ch4/shm/ipc/gpu/gpu_post.c:518:13:
-/usr/include/x86_64-linux-gnu/bits/string_fortified.h:59:10: warning: '__builtin_memset' specified bound between 18446744071562067968 and 18446744073709551615 exceeds maximum object size 9223372036854775807 [-Wstringop-overflow=]
-   59 |   return __builtin___memset_chk (__dest, __ch, __len,
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   60 |                                  __glibc_objsize0 (__dest));
-      |                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~
-  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_shm_alloc.lo
-  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_private_pool.lo
-  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_shmem_pool.lo
-  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_shmem_queue.lo
-  CC       src/mpid/common/stream_workq/lib_libmpi_la-stream_workq.lo
-  CC       src/mpi_t/lib_libmpi_la-mpit_finalize.lo
-  CC       src/mpi_t/lib_libmpi_la-mpit_initthread.lo
-  CC       src/mpi_t/lib_libmpi_la-mpit_impl.lo
-  CC       src/mpi_t/lib_libmpi_la-pvar_impl.lo
-  CC       src/mpi_t/lib_libmpi_la-mpit.lo
-  CC       src/mpi_t/lib_libmpi_la-events_impl.lo
-  CC       src/mpi_t/lib_libmpi_la-qmpi_register.lo
-  CC       src/nameserv/pmi/lib_libmpi_la-pmi_nameserv.lo
-  CC       src/env/mpivars.o
-  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-fortran_binding.lo
-  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-user_proxy.lo
-  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-fdebug.lo
-  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-setbot.lo
-  F77      src/binding/fortran/mpif_h/setbotf.lo
-rm -f src/binding/fortran/use_mpi/mpifnoext.h
-sed -e 's/^C/\!/g' -e '/EXTERNAL/d' \
--e '/PMPI_/d' src/binding/fortran/mpif_h/mpif.h > src/binding/fortran/use_mpi/mpifnoext.h
-  FC       src/binding/fortran/use_mpi_f08/wrappers_f/f08ts.lo
-  FC       src/binding/fortran/use_mpi_f08/wrappers_f/pf08ts.lo
-  CC       src/binding/fortran/use_mpi_f08/wrappers_c/lib_libf08_mpi_la-f08_cdesc.lo
-  CC       src/binding/fortran/use_mpi_f08/wrappers_c/lib_libf08_mpi_la-cdesc.lo
-  CC       src/binding/fortran/use_mpi_f08/wrappers_c/lib_libf08_mpi_la-comm_spawn_c.lo
-  CC       src/binding/fortran/use_mpi_f08/wrappers_c/lib_libf08_mpi_la-comm_spawn_multiple_c.lo
-  CC       src/binding/fortran/use_mpi_f08/wrappers_c/lib_libf08_mpi_la-utils.lo
-  CXX      src/binding/cxx/initcxx.lo
-cp -p src/env/mpicc.bash src/env/mpicc
-cp -p src/env/mpifort.bash src/env/mpifort
-cp -p src/env/mpicxx.bash src/env/mpicxx
+make[2]: Entering directory '/home/qktttt/mpich'
   CC       src/binding/c/abi/lib_libmpi_la-abi_get_fortran_booleans.lo
   CC       src/binding/c/abi/lib_libmpi_la-abi_get_fortran_info.lo
   CC       src/binding/c/abi/lib_libmpi_la-abi_get_info.lo
@@ -1767,25 +1220,6 @@ cp -p src/env/mpicxx.bash src/env/mpicxx
   CC       src/mpi/coll/allgather/lib_libmpi_la-allgather_intra_recursive_doubling.lo
   CC       src/mpi/coll/allgather/lib_libmpi_la-allgather_intra_brucks.lo
   CC       src/mpi/coll/allgather/lib_libmpi_la-allgather_intra_k_brucks.lo
-In file included from /home/qik/projects/mpich/src/mpl/include/mpl_atomic_c11.h:20,
-                 from /home/qik/projects/mpich/src/mpl/include/mpl_atomic.h:101,
-                 from /home/qik/projects/mpich/src/mpl/include/mpl.h:16,
-                 from ./src/include/mpiimpl.h:53,
-                 from src/mpi/attr/attrutil.c:6:
-In function 'MPL_atomic_release_store_int',
-    inlined from 'MPID_Attr_alloc' at src/mpi/attr/attrutil.c:48:5,
-    inlined from 'MPIR_Attr_dup_list' at src/mpi/attr/attrutil.c:166:17:
-/home/qik/projects/mpich/src/mpl/include/mpl_atomic_c11.h:59:5: warning: '__atomic_store_4' writing 4 bytes into a region of size 0 overflows the destination [-Wstringop-overflow=]
-   59 |     atomic_store_explicit(&ptr->v, (CAST_TYPE)val, memory_order_release);      \
-      |     ^~~~~~~~~~~~~~~~~~~~~
-/home/qik/projects/mpich/src/mpl/include/mpl_atomic_c11.h:93:9: note: in expansion of macro 'MPLI_ATOMIC_DECL_FUNC_COMMON'
-   93 |         MPLI_ATOMIC_DECL_FUNC_COMMON(TYPE, NAME, ATOMIC_TYPE, CAST_TYPE) \
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/qik/projects/mpich/src/mpl/include/mpl_atomic_c11.h:99:1: note: in expansion of macro 'MPLI_ATOMIC_DECL_FUNC_VAL'
-   99 | MPLI_ATOMIC_DECL_FUNC_VAL(int, int, atomic_int, int)
-      | ^~~~~~~~~~~~~~~~~~~~~~~~~
-In function 'MPIR_Attr_dup_list':
-cc1: note: destination object is likely at address zero
   CC       src/mpi/coll/allgather/lib_libmpi_la-allgather_intra_recexch.lo
   CC       src/mpi/coll/allgather/lib_libmpi_la-allgather_intra_ring.lo
   CC       src/mpi/coll/allgather/lib_libmpi_la-allgather_intra_circ_graph.lo
@@ -1819,16 +1253,6 @@ cc1: note: destination object is likely at address zero
   CC       src/mpi/coll/barrier/lib_libmpi_la-barrier_intra_k_dissemination.lo
   CC       src/mpi/coll/barrier/lib_libmpi_la-barrier_intra_recexch.lo
   CC       src/mpi/coll/barrier/lib_libmpi_la-barrier_intra_smp.lo
-src/mpi/coll/barrier/barrier_intra_k_dissemination.c: In function 'MPIR_Barrier_intra_k_dissemination':
-src/mpi/coll/barrier/barrier_intra_k_dissemination.c:120:9: warning: 'MPIC_Waitall' accessing 8 bytes in a region of size 0 [-Wstringop-overflow=]
-  120 |         MPIC_Waitall(k - 1, recv_reqs + ((k - 1) * ((nphases - 1) & 1)), MPI_STATUSES_IGNORE);
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-src/mpi/coll/barrier/barrier_intra_k_dissemination.c:120:9: note: referencing argument 2 of type 'MPIR_Request *[0]'
-In file included from ./src/include/mpiimpl.h:203,
-                 from src/mpi/coll/barrier/barrier_intra_k_dissemination.c:6:
-./src/include/mpir_coll.h:238:5: note: in a call to function 'MPIC_Waitall'
-  238 | int MPIC_Waitall(int numreq, MPIR_Request * requests[], MPI_Status * statuses);
-      |     ^~~~~~~~~~~~
   CC       src/mpi/coll/barrier/lib_libmpi_la-barrier_inter_bcast.lo
   CC       src/mpi/coll/bcast/lib_libmpi_la-bcast_utils.lo
   CC       src/mpi/coll/bcast/lib_libmpi_la-bcast_intra_binomial.lo
@@ -2105,24 +1529,102 @@ In file included from ./src/include/mpiimpl.h:203,
   CC       src/mpid/ch4/src/lib_libmpi_la-mpidig_comm_abort.lo
   CC       src/mpid/ch4/src/lib_libmpi_la-mpid_ch4_net_array.lo
   CC       src/mpid/ch4/netmod/src/lib_libmpi_la-netmod_impl.lo
-  F77LD    lib/libf77_mpi.la
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_init.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_comm.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_datatype.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_op.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rma.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_spawn.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_win.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_part.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_events.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv_read.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_rndv_write.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_pipeline.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_progress.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_am_events.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_nic.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-ofi_vci.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-globals.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_provider.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_settings.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-init_addrxchg.lo
+  CC       src/mpid/ch4/netmod/ofi/lib_libmpi_la-util.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_init.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_hooks.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_mem.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_rma.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-shm_part.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-topotree.lo
+  CC       src/mpid/ch4/shm/src/lib_libmpi_la-topotree_util.lo
+  CC       src/mpid/ch4/shm/posix/release_gather/lib_libmpi_la-release_gather.lo
+  CC       src/mpid/ch4/shm/posix/release_gather/lib_libmpi_la-nb_release_gather.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-globals.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_comm.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_init.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_op.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_datatype.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_win.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_part.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_vci.lo
+  CC       src/mpid/ch4/shm/posix/lib_libmpi_la-posix_eager_array.lo
+  CC       src/mpid/ch4/shm/posix/eager/iqueue/lib_libmpi_la-iqueue_init.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-globals.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_init.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_control.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_win.lo
+  CC       src/mpid/ch4/shm/ipc/src/lib_libmpi_la-ipc_fd.lo
+  CC       src/mpid/ch4/shm/ipc/cma/lib_libmpi_la-cma_init.lo
+  CC       src/mpid/ch4/shm/ipc/cma/lib_libmpi_la-cma_post.lo
+  CC       src/mpid/ch4/shm/ipc/gpu/lib_libmpi_la-gpu_post.lo
+  CC       src/mpid/common/sched/lib_libmpi_la-mpidu_sched.lo
+  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_init_shm_alloc.lo
+  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_init_shm.lo
+  CC       src/mpid/common/shm/lib_libmpi_la-mpidu_shm_alloc.lo
+  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_private_pool.lo
+  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_shmem_pool.lo
+  CC       src/mpid/common/genq/lib_libmpi_la-mpidu_genq_shmem_queue.lo
+  CC       src/mpid/common/stream_workq/lib_libmpi_la-stream_workq.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit_finalize.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit_initthread.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit_impl.lo
+  CC       src/mpi_t/lib_libmpi_la-pvar_impl.lo
+  CC       src/mpi_t/lib_libmpi_la-mpit.lo
+  CC       src/mpi_t/lib_libmpi_la-events_impl.lo
+  CC       src/mpi_t/lib_libmpi_la-qmpi_register.lo
+  CC       src/nameserv/pmi/lib_libmpi_la-pmi_nameserv.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-fortran_binding.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-user_proxy.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-fdebug.lo
+  CC       src/binding/fortran/mpif_h/lib_libf77_mpi_la-setbot.lo
+  F77      src/binding/fortran/mpif_h/setbotf.lo
+rm -f src/binding/fortran/use_mpi/mpifnoext.h
+sed -e 's/^C/\!/g' -e '/EXTERNAL/d' \
+-e '/PMPI_/d' src/binding/fortran/mpif_h/mpif.h > src/binding/fortran/use_mpi/mpifnoext.h
+  CXX      src/binding/cxx/initcxx.lo
+  CC       src/env/mpichversion.o
+  CC       src/env/mpivars.o
+cp -p src/env/mpicc.bash src/env/mpicc
+cp -p src/env/mpifort.bash src/env/mpifort
+cp -p src/env/mpicxx.bash src/env/mpicxx
   MOD      src/binding/fortran/use_mpi/mpi_constants.mod-stamp
   MOD      src/binding/fortran/use_mpi/mpi_sizeofs.mod-stamp
-  FCLD     lib/libf08_mpi.la
+  GEN      lib/libmpi.la
   MOD      src/binding/fortran/use_mpi/mpi_base.mod-stamp
   MOD      src/binding/fortran/use_mpi/pmpi_base.mod-stamp
   MOD      src/binding/fortran/use_mpi/mpi.mod-stamp
-  GEN      lib/libmpi.la
   FCLD     lib/libf90_mpi.la
+  F77LD    lib/libf77_mpi.la
 copying selected object files to avoid basename conflicts...
   GEN      lib/libmpifort.la
   CXXLD    lib/libmpicxx.la
   CCLD     src/env/mpichversion
   CCLD     src/env/mpivars
-make[2]: Leaving directory '/home/qik/projects/mpich'
+make[2]: Leaving directory '/home/qktttt/mpich'
 Making all in examples
-make[2]: Entering directory '/home/qik/projects/mpich/examples'
+make[2]: Entering directory '/home/qktttt/mpich/examples'
   CC       cpi.o
   CCLD     cpi
-make[2]: Leaving directory '/home/qik/projects/mpich/examples'
-make[1]: Leaving directory '/home/qik/projects/mpich'
+make[2]: Leaving directory '/home/qktttt/mpich/examples'
+make[1]: Leaving directory '/home/qktttt/mpich'

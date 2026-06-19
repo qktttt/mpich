@@ -8,10 +8,12 @@ By default it benchmarks the same algorithms used by
 
 `binomial, nb, circ_graph, smp, scatter_recursive_doubling_allgather, scatter_ring_allgather, pipelined_tree, tree, release_gather`
 
-Message sizes double from `--min-msg-size` to `--max-msg-size`. With the
-defaults, the sweep is:
+Message sizes include each doubling level and the halfway point before the next
+level. With the defaults, the sweep is:
 
-`2, 4, 8, ..., 32768, 65536`
+`2, 3, 4, 6, 8, 12, ..., 8388608, 12582912, 16777216, 25165824, 33554432`
+
+That is, the default run now covers up to 32 MiB.
 
 Each `MPI_Bcast` is preceded by `MPI_Barrier`. Every rank measures its local
 `MPI_Bcast` duration, then rank 0 receives the sum with `MPI_Reduce` and
@@ -63,3 +65,37 @@ mpiexec -n 8 ./benchmarking/bcast/bcast_bench \
 ```
 
 Use `--help` for the full argument list.
+
+## Polaris ppn sweep jobs
+
+The node-count PBS wrappers run all ppn variants for one allocation. For
+example, the 1-node wrapper runs ppn 32, 16, 8, and 4 in sequence before the job
+exits:
+
+```bash
+qsub benchmarking/bcast/qsub_bcast_bench_1node.sh
+qsub benchmarking/bcast/qsub_bcast_bench_2nodes.sh
+qsub benchmarking/bcast/qsub_bcast_bench_4nodes.sh
+qsub benchmarking/bcast/qsub_bcast_bench_8nodes.sh
+qsub benchmarking/bcast/qsub_bcast_bench_16nodes.sh
+qsub benchmarking/bcast/qsub_bcast_bench_32nodes.sh
+```
+
+Each wrapper is self-contained. It compiles once and then launches four explicit
+`mpiexec` runs with:
+
+`ppn32 -> list:0:1:2:...:31`
+
+`ppn16 -> list:0:2:4:...:30`
+
+`ppn8 -> list:0:4:8:...:28`
+
+`ppn4 -> list:0:8:16:24`
+
+Output files still include the effective total rank count. A 16-node sweep
+writes `bcast_bench_ppn32_512r_<job>.csv`,
+`bcast_bench_ppn16_256r_<job>.csv`,
+`bcast_bench_ppn8_128r_<job>.csv`, and
+`bcast_bench_ppn4_64r_<job>.csv`.
+
+The run order is `ppn32`, then `ppn16`, then `ppn8`, then `ppn4`.

@@ -1,0 +1,3 @@
+Running Bcast benchmark: total_ranks=1024 ppn=32 warmup=50 actual=50
+Wrote /home/qktttt/mpich/benchmarking/bcast/bcast_bench_ppn32_1024r_7200232.csv (38700 rows)
+Wrote: /home/qktttt/mpich/benchmarking/bcast/bcast_bench_ppn32_1024r_7200232.csv

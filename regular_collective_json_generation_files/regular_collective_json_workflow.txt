@@ -1,0 +1,443 @@
+Regular collective: fitted machine learning model to generated MPICH JSON
+=======================================================================
+
+Scope
+-----
+
+This note describes the JSON generation workflow for regular collectives
+such as allreduce, bcast, alltoall, allgather, reduce, and reduce_scatter.
+It does not describe the special alltoallv path.
+
+For regular collectives, the project does not serialize the random forest
+model itself. The fitted random forest is only used as a predictor. The
+code asks the model to predict the runtime of each candidate algorithm at
+each feature-space point, chooses the predicted fastest algorithm, compresses
+those choices into threshold rules, and writes those rules into MPICH's JSON
+selection format.
+
+
+Main files involved
+-------------------
+
+1. src/json_file/json_file.py
+
+   This is the central JSON generation file for regular collectives.
+   The most important function is:
+
+     update_collective(json_file_data, collective, ppn, feature_space, rf, algs=None)
+
+   It takes the fitted model `rf` and the generated `feature_space`, then
+   produces the MPICH rule JSON for one collective.
+
+2. src/active_learner/algs.py
+
+   This file provides:
+
+     read_algs(collective)
+     add_algs(feature_space, algs)
+
+   `read_algs` loads the algorithm list for the collective.
+   `add_algs` expands every `(n, ppn, msg_size)` point into one candidate
+   row per algorithm.
+
+3. src/json_file/param_algs_to_json.py
+
+   This file handles parameterized algorithms, for example:
+
+     tree4
+     recexch8
+     recursive_multiplying2
+
+   It converts algorithm names with numeric suffixes into MPICH JSON
+   parameter rules.
+
+
+Inputs to the JSON generation step
+----------------------------------
+
+The JSON generation step starts after model fitting. At that point, the code
+has:
+
+  feature_space
+  rf
+
+`feature_space` is a two-dimensional array. Each row is one base point:
+
+  [n_log, ppn_log, msg_size_log]
+
+These are preprocessed values, not raw values. The normal preprocessing is:
+
+  n_log        = log2(n) + 1
+  ppn_log      = log2(ppn) + 1
+  msg_size_log = log2(msg_size) + 1
+
+For example, the real point:
+
+  n = 16
+  ppn = 32
+  msg_size = 4096
+
+is represented in the model feature space as:
+
+  [5, 6, 13]
+
+`rf` is the fitted RandomForestRegressor. For regular collectives, it expects
+inputs with four columns:
+
+  [n_log, ppn_log, msg_size_log, alg_id]
+
+The model predicts the runtime or normalized runtime for one algorithm at one
+problem size.
+
+
+Step 1: load the algorithm list
+-------------------------------
+
+Inside `update_collective`, if an algorithm dictionary is not passed in, the
+code calls:
+
+  algs = read_algs(collective)
+
+The algorithm list comes from the configured algorithm CSV file, usually:
+
+  utils/mpich/algorithm_config/all_algs_param.csv
+
+The result is a dictionary like:
+
+  {
+    0: "recursive_doubling",
+    1: "reduce_scatter_allgather",
+    2: "tree4"
+  }
+
+The integer key is the algorithm id used as the fourth model feature. The
+string value is the MPICH algorithm name or a parameterized algorithm name.
+
+
+Step 2: expand feature_space with all algorithms
+------------------------------------------------
+
+The random forest must compare algorithms at every base point. A base point
+has only three features:
+
+  [n_log, ppn_log, msg_size_log]
+
+The function `add_algs(feature_space, algs)` expands each base point into one
+row per algorithm:
+
+  [n_log, ppn_log, msg_size_log, 0]
+  [n_log, ppn_log, msg_size_log, 1]
+  [n_log, ppn_log, msg_size_log, 2]
+  ...
+
+If there are M feature-space points and A algorithms, the expanded matrix has:
+
+  M * A rows
+
+This expanded matrix is the actual input to the fitted random forest during
+JSON generation.
+
+
+Step 3: predict runtime for every candidate algorithm
+-----------------------------------------------------
+
+The central model call is:
+
+  y_test = rf.predict(add_algs(feature_space, algs))
+
+The output `y_test` is a flat vector. Its values are grouped by base point.
+If there are A algorithms, then:
+
+  y_test[0 : A]       belongs to feature_space[0]
+  y_test[A : 2*A]     belongs to feature_space[1]
+  y_test[2*A : 3*A]   belongs to feature_space[2]
+  ...
+
+Within each group, each value is the predicted runtime for one algorithm id.
+Lower predicted value means the model thinks that algorithm is faster.
+
+
+Step 4: choose the predicted fastest algorithm at each point
+------------------------------------------------------------
+
+The function:
+
+  get_selections(y_test, algs)
+
+converts raw predictions into algorithm selections.
+
+For every group of A predictions, it runs:
+
+  selection = argmin(predictions_for_this_point)
+
+The result is a list:
+
+  selections = [alg_id_for_point_0, alg_id_for_point_1, ...]
+
+For example, if one point has three algorithm predictions:
+
+  algorithm 0 -> 9.1
+  algorithm 1 -> 5.4
+  algorithm 2 -> 7.8
+
+then the selected algorithm id is:
+
+  1
+
+After this step, the random forest predictions have been reduced to a
+discrete best-algorithm choice for every feature-space point.
+
+
+Step 5: find algorithm switching points
+---------------------------------------
+
+The project does not directly write one JSON entry for every point. Instead,
+for regular collectives, it compresses the point-wise selections into MPICH
+threshold rules.
+
+The compression starts with:
+
+  rules = get_rules(feature_space, selections, algs, rf)
+
+`get_rules` scans the selected algorithm sequence in feature-space order. It
+records a rule only when the selected algorithm changes.
+
+For example, suppose the model selections over increasing message sizes are:
+
+  msg_size 1      -> algorithm A
+  msg_size 2      -> algorithm A
+  msg_size 4      -> algorithm A
+  msg_size 8      -> algorithm B
+  msg_size 16     -> algorithm B
+
+The code does not need to store every row. It can store a breakpoint:
+
+  up to msg_size 4: use algorithm A
+  after that:       use algorithm B
+
+The returned `rules` object maps feature-space breakpoints to algorithm ids.
+Internally, the feature-space point is stored as bytes:
+
+  feature_set.astype("int").tobytes()
+
+and the value is the selected algorithm id.
+
+Important detail: when the algorithm changes within the same n and ppn, the
+code also probes a midpoint with the random forest. That midpoint prediction
+helps decide whether the breakpoint should be placed at the previous point,
+the current point, or whether an intermediate algorithm should be inserted.
+
+
+Step 6: convert breakpoints into nested MPICH rules
+---------------------------------------------------
+
+The function:
+
+  rules_to_dict(collective, rules, algs, ppn)
+
+converts the breakpoint dictionary into the nested MPICH JSON rule structure.
+
+The generated hierarchy is generally:
+
+  comm_size<=...
+    comm_avg_ppn<=...
+      avg_msg_size<=... or total_msg_size<=...
+        algorithm=MPIR_<Collective>_intra_<algorithm>
+
+Example shape:
+
+  {
+    "comm_size<=512": {
+      "comm_avg_ppn<=32": {
+        "avg_msg_size<=4096": {
+          "algorithm=MPIR_Allreduce_intra_recursive_doubling": {}
+        }
+      }
+    }
+  }
+
+The feature-space values are converted back from log form:
+
+  real_value = 2 ** (feature_value - 1)
+
+The `comm_size` rule uses:
+
+  real_n * ppn_in
+
+where `real_n` is the node count represented by the feature-space point, and
+`ppn_in` is the max ppn passed to `update_collective`.
+
+The message-size key depends on the collective:
+
+  allgather, allgatherv, reduce_scatter -> total_msg_size
+  other regular collectives             -> avg_msg_size
+
+
+Step 7: handle parameterized algorithms
+---------------------------------------
+
+Some algorithm names contain a parameter encoded as a numeric suffix.
+Examples:
+
+  tree4
+  recexch8
+  recursive_multiplying2
+  k_brucks4
+
+Inside `rules_to_dict`, the code calls:
+
+  split_param_alg(rule_alg_str)
+
+from `param_algs_to_json.py`.
+
+This splits:
+
+  tree4
+
+into:
+
+  alg_str = "tree"
+  param_value = 4
+
+Then it calls:
+
+  get_param_rules(collective, alg_str, param_value)
+
+to generate the MPICH parameter sub-rules.
+
+For example, a tree algorithm with k=4 becomes something like:
+
+  {
+    "algorithm=MPIR_Allreduce_intra_tree": {
+      "buffer_per_child=0": {},
+      "chunk_size=0": {},
+      "k=4": {},
+      "tree_type=knomial_1": {}
+    }
+  }
+
+So the output JSON can express both:
+
+  which algorithm to use
+
+and:
+
+  which algorithm parameter to use
+
+
+Step 8: add fallback `any` rules
+--------------------------------
+
+After generating threshold rules, `update_collective` calls:
+
+  any_helper(new_json_data)
+
+This function changes the last threshold at each nested level into an `=any`
+rule.
+
+For example, the last message-size rule might change from:
+
+  avg_msg_size<=65536
+
+to:
+
+  avg_msg_size=any
+
+This creates a fallback rule for cases larger than the tuned range. Without
+this step, MPICH could fail to find a matching rule for inputs outside the
+largest tuned threshold.
+
+
+Step 9: optionally wrap the generated rules in a shell
+------------------------------------------------------
+
+Some collectives need extra MPICH conditions beyond:
+
+  comm_size
+  comm_avg_ppn
+  msg_size
+
+For example, allreduce may need conditions such as:
+
+  is_op_built_in
+  is_commutative
+
+The code checks:
+
+  has_shell_wrapper(collective)
+
+If a shell exists, it is read from:
+
+  utils/mpich/algorithm_config/<collective>_shell.json
+
+The shell contains a placeholder key:
+
+  "replace me"
+
+The function:
+
+  shell_wrapper(collective, new_json_data)
+
+replaces that placeholder with the generated tuning rules.
+
+This is how the generated RF-based rules are inserted into a larger MPICH
+decision structure that handles collective-specific conditions.
+
+
+Step 10: sort and insert into the generic MPICH JSON
+----------------------------------------------------
+
+The generated dictionary is sorted with:
+
+  sort_nested_dict(...)
+
+Then `update_collective` inserts it into the generic MPICH JSON object under:
+
+  collective=<collective>
+    comm_type=intra
+
+For example:
+
+  json_file_data["collective=allreduce"]["comm_type=intra"] = sorted_json_data
+
+The final object returned by `update_collective` is the original generic MPICH
+JSON template, but with this one collective's intra-communicator selection
+logic replaced by the RF-generated rules.
+
+
+Step 11: write final JSON file
+------------------------------
+
+The caller writes the final JSON object with:
+
+  json.dump(json_file_data, f, indent=2)
+
+The resulting file is a valid MPICH tuning JSON file. It contains threshold
+selection rules derived from the fitted random forest's predictions.
+
+
+End-to-end summary
+------------------
+
+The regular collective JSON generation workflow is:
+
+  1. Start with fitted random forest `rf` and base `feature_space`.
+  2. Load the algorithm list for the collective.
+  3. Expand each base point into one candidate per algorithm.
+  4. Use `rf.predict(...)` to predict runtime for every candidate.
+  5. Pick the predicted fastest algorithm at each feature-space point.
+  6. Scan those choices and keep only algorithm switching points.
+  7. Convert switching points into MPICH nested threshold rules.
+  8. Add parameter rules for parameterized algorithms.
+  9. Add `=any` fallback rules.
+ 10. Optionally insert the generated rules into a collective-specific shell.
+ 11. Replace the collective section in the generic MPICH JSON template.
+ 12. Write the resulting JSON to disk.
+
+The important conceptual point is:
+
+  The random forest is not exported.
+  The decision trees inside the random forest are not exported.
+  The JSON is a post-processed rule set generated from random forest
+  predictions.
+

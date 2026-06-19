@@ -16,6 +16,16 @@ namespace {
 
 /* Rank 0 is both the broadcast root and the rank that owns CSV output. */
 constexpr int kRoot = 0;
+constexpr int kDefaultMaxMsgSize = 32 * 1024 * 1024;
+const int kDefaultMessageSizes[] = {
+    2,       3,       4,       6,       8,       12,      16,      24,
+    32,      48,      64,      96,      128,     192,     256,     384,
+    512,     768,     1024,    1536,    2048,    3072,    4096,    6144,
+    8192,    12288,   16384,   24576,   32768,   49152,   65536,   98304,
+    131072,  196608,  262144,  393216,  524288,  786432,  1048576, 1572864,
+    2097152, 3145728, 4194304, 6291456, 8388608, 12582912, 16777216, 25165824,
+    33554432,
+};
 
 /* MPI_T CVARs used to force MPICH onto the requested Bcast implementation. */
 constexpr const char *kBcastIntraAlgorithmCvar = "MPIR_CVAR_BCAST_INTRA_ALGORITHM";
@@ -28,7 +38,7 @@ struct Config {
     int warmup_rounds = 5;
     int measured_rounds = 20;
     int min_msg_size = 2;
-    int max_msg_size = 65536;
+    int max_msg_size = kDefaultMaxMsgSize;
     std::string output_path = "benchmarking/bcast/bcast_bench.csv";
     std::vector<std::string> algorithms;
     bool list_algorithms = false;
@@ -218,7 +228,8 @@ int main(int argc, char **argv)
            << "  --measured-rounds N    Measured iterations per algorithm/message size (default: 20)\n"
            << "  --rounds N             Alias for --measured-rounds\n"
            << "  --min-msg-size N       First message size in bytes (default: 2)\n"
-           << "  --max-msg-size N       Final message size in bytes (default: 65536)\n"
+           << "  --max-msg-size N       Final message size in bytes (default: "
+           << kDefaultMaxMsgSize << ")\n"
            << "  --output PATH          CSV output path (default: benchmarking/bcast/bcast_bench.csv)\n"
            << "  --algorithms LIST      Comma-separated subset of algorithms to benchmark\n"
            << "                         Default: ";
@@ -496,17 +507,15 @@ int main(int argc, char **argv)
         selected_algorithms.push_back(algorithm);
     }
 
-    /* Generate 2, 4, 8, ... message sizes and include max_msg_size exactly. */
+    /* Use a fixed size list: each power of two plus the midpoint to the next level. */
     std::vector<int> message_sizes;
-    std::int64_t current = config.min_msg_size;
-    while (current <= config.max_msg_size) {
-        message_sizes.push_back(static_cast<int>(current));
-        if (current > std::numeric_limits<std::int64_t>::max() / 2) {
-            break;
+    message_sizes.push_back(config.min_msg_size);
+    for (const int message_size : kDefaultMessageSizes) {
+        if (message_size > config.min_msg_size && message_size < config.max_msg_size) {
+            message_sizes.push_back(message_size);
         }
-        current *= 2;
     }
-    if (message_sizes.empty() || message_sizes.back() != config.max_msg_size) {
+    if (config.max_msg_size != config.min_msg_size) {
         message_sizes.push_back(config.max_msg_size);
     }
     std::sort(message_sizes.begin(), message_sizes.end());

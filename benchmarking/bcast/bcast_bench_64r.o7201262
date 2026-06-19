@@ -1,0 +1,2 @@
+Running Bcast benchmark: total_ranks=64 ppn=32 warmup=250 actual=250 max_msg_size=8388608
+=>> PBS: job killed: walltime 307 exceeded limit 300

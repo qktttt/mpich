@@ -18,6 +18,7 @@ TOTAL_RANKS=1024
 RANKS_PER_NODE=32
 WARMUP_ROUNDS=50
 MEASURED_ROUNDS=50
+MAX_MSG_SIZE=33554432
 
 JOB_TAG="${PBS_JOBID:-manual}"
 JOB_TAG="${JOB_TAG%%.*}"
@@ -33,11 +34,12 @@ export MPIR_CVAR_COLLECTIVE_FALLBACK=error
 export MPIR_CVAR_PMI_VERSION=2
 export BCAST_EXPECTED_RANKS="$TOTAL_RANKS"
 
-echo "Running Bcast benchmark: total_ranks=${TOTAL_RANKS} ppn=${RANKS_PER_NODE} warmup=${WARMUP_ROUNDS} actual=${MEASURED_ROUNDS}"
+echo "Running Bcast benchmark: total_ranks=${TOTAL_RANKS} ppn=${RANKS_PER_NODE} warmup=${WARMUP_ROUNDS} actual=${MEASURED_ROUNDS} max_msg_size=${MAX_MSG_SIZE}"
 
 "$MPIEXEC" --pmi=cray -n "$TOTAL_RANKS" --ppn "$RANKS_PER_NODE" ./bcast_bench \
     --warmup-rounds "$WARMUP_ROUNDS" \
     --measured-rounds "$MEASURED_ROUNDS" \
+    --max-msg-size "$MAX_MSG_SIZE" \
     --output "$OUTPUT_CSV"
 
 echo "Wrote: $OUTPUT_CSV"

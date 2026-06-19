@@ -1,0 +1,11 @@
+TEST_DIR=/home/qktttt/mpich/collective_testing
+MPICH_PREFIX=/home/qktttt/mpich-install
+MPIEXEC=/home/qktttt/mpich-install/bin/mpiexec
+NUM_NODES=2 TOTAL_RANKS=64 RANKS_PER_NODE=32
+===== Testing MPIR_CVAR_BCAST_INTRA_ALGORITHM=binomial =====
+Warning: Permanently added 'x3007c0s25b0n0.hsn.cm.polaris.alcf.anl.gov' (ED25519) to the list of known hosts.
+qktttt@x3007c0s25b0n0.hsn.cm.polaris.alcf.anl.gov: Permission denied (publickey,keyboard-interactive,hostbased).
+[mpiexec@x3007c0s1b1n0] ui_cmd_cb (mpiexec/pmiserv_pmci.c:51): Launch proxy failed.
+[mpiexec@x3007c0s1b1n0] HYDT_dmxu_poll_wait_for_event (lib/tools/demux/demux_poll.c:76): callback returned error status
+[mpiexec@x3007c0s1b1n0] HYD_pmci_wait_for_completion (mpiexec/pmiserv_pmci.c:180): error waiting for event
+[mpiexec@x3007c0s1b1n0] main (mpiexec/mpiexec.c:261): process manager error waiting for completion

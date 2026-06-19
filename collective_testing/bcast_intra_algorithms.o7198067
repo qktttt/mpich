@@ -1,0 +1,35 @@
+TEST_DIR=/home/qktttt/mpich/collective_testing
+MPICH_PREFIX=/home/qktttt/mpich-install
+MPIEXEC=/opt/cray/pals/1.7/bin/mpiexec
+NUM_NODES=2 TOTAL_NUM_RANKS=64 RANKS_PER_NODE=32
+===== Testing MPIR_CVAR_BCAST_INTRA_ALGORITHM=binomial =====
+Abort(336742159): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(202524431): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(336742159): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(1007830799): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(470959887): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(739395343): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(605177615): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(336742159): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(605177615): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(1007830799): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(470959887): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(202524431): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(873613071): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(739395343): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(739395343): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(202524431): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(1007830799): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(470959887): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(1007830799): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(68306703): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(739395343): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(873613071): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(202524431): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(873613071): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(336742159): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+x3106c0s7b1n0.hsn.cm.polaris.alcf.anl.gov: rank 0 exited with code 15
+x3107c0s7b1n0.hsn.cm.polaris.alcf.anl.gov: rank 32 died from signal 15
+Abort(470959887): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(470959887): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)
+Abort(1007830799): Fatal error in internal_Init: Other MPI error, Invalid MPIR_CVAR_COLLECTIVE_FALLBACK value (abort)

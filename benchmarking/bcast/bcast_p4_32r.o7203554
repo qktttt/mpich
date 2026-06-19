@@ -1,0 +1,1 @@
+Running Bcast benchmark: total_ranks=32 ppn=4 warmup=250 actual=250 max_msg_size=33554432 cpu_bind=list:0:8:16:24

@@ -1,0 +1,10 @@
+TEST_DIR=/home/qktttt/mpich/collective_testing
+MPICH_PREFIX=/home/qktttt/mpich-install
+MPIEXEC=/home/qktttt/mpich-install/bin/mpiexec
+NUM_NODES=2 TOTAL_RANKS=64 RANKS_PER_NODE=32
+===== Testing MPIR_CVAR_BCAST_INTRA_ALGORITHM=binomial =====
+[mpiexec@x3003c0s37b0n0] match_arg (lib/utils/args.c:166): unrecognized argument pmi
+[mpiexec@x3003c0s37b0n0] HYDU_parse_array (lib/utils/args.c:181): argument matching returned error
+[mpiexec@x3003c0s37b0n0] parse_args (mpiexec/get_parameters.c:318): error parsing input array
+[mpiexec@x3003c0s37b0n0] HYD_uii_mpx_get_parameters (mpiexec/get_parameters.c:48): unable to parse user arguments
+[mpiexec@x3003c0s37b0n0] main (mpiexec/mpiexec.c:49): error parsing parameters
