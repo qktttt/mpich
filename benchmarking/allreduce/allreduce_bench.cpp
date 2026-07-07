@@ -53,6 +53,15 @@ constexpr const char *kAllreduceDeviceCollectiveCvar = "MPIR_CVAR_ALLREDUCE_DEVI
 constexpr const char *kIallreduceDeviceCollectiveCvar = "MPIR_CVAR_IALLREDUCE_DEVICE_COLLECTIVE";
 constexpr const char *kCollectiveFallbackCvar = "MPIR_CVAR_COLLECTIVE_FALLBACK";
 
+int expected_comm_size_from_env()
+{
+    const char *expected = std::getenv("ALLREDUCE_EXPECTED_RANKS");
+    if (expected == nullptr || expected[0] == '\0') {
+        return 0;
+    }
+    return std::atoi(expected);
+}
+
 }  // namespace
 
 int main(int argc, char **argv)
@@ -78,6 +87,7 @@ int main(int argc, char **argv)
         { "recexch", true, false },
         { "ring", true, false },
         { "k_reduce_scatter_allgather", true, false },
+        { "hierarchical", true, false },
         { "ccl", false, false },
     };
 
@@ -139,6 +149,21 @@ int main(int argc, char **argv)
         }
         fail(context + ": " + std::string(buffer, length), mpi_errno);
     };
+
+    const int expected_comm_size = expected_comm_size_from_env();
+    if (expected_comm_size > 0 && world_size != expected_comm_size) {
+        if (rank == 0) {
+            std::cerr << "ERROR: MPI_COMM_WORLD has " << world_size
+                      << " rank(s), expected " << expected_comm_size
+                      << ". The MPI launcher started processes, but this MPICH "
+                      << "library did not connect them into one MPI job. Set "
+                      << "ALLREDUCE_EXPECTED_RANKS to catch launcher/library mismatches."
+                      << std::endl;
+        }
+        MPI_T_finalize();
+        MPI_Finalize();
+        return EXIT_FAILURE;
+    }
 
     /* Strict integer parsing so malformed CLI values fail early and clearly. */
     auto parse_int = [&](const std::string &name, const std::string &value) -> int {
@@ -395,10 +420,12 @@ int main(int argc, char **argv)
                     return 8;
                 if (item_name == "k_reduce_scatter_allgather")
                     return 9;
-                if (item_name == "ccl")
+                if (item_name == "hierarchical")
                     return 10;
-                if (item_name == "release_gather")
+                if (item_name == "ccl")
                     return 11;
+                if (item_name == "release_gather")
+                    return 12;
             } else if (cvar.name == kDeviceCollectivesCvar) {
                 if (item_name == "all")
                     return 0;
@@ -487,8 +514,11 @@ int main(int argc, char **argv)
                  "'. Use --list-algorithms to see the accepted names.");
         }
 
-        selected_algorithms.push_back(
-            AlgorithmConfig{ name, enum_value(allreduce_algorithm_cvar, name), it->requires_count_ge_pof2 });
+        AlgorithmConfig selected;
+        selected.name = name;
+        selected.cvar_value = enum_value(allreduce_algorithm_cvar, name);
+        selected.requires_count_ge_pof2 = it->requires_count_ge_pof2;
+        selected_algorithms.push_back(selected);
     }
 
     /* Generate 2x message sizes and force the configured max size into the sweep. */
