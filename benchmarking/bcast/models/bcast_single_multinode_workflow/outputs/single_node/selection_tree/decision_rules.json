@@ -1,0 +1,484 @@
+{
+    "metadata": {
+        "source_model": "/home/qktttt/mpich/benchmarking/bcast/models/bcast_single_multinode_workflow/outputs/single_node/bcast_random_forest_model.pkl",
+        "source_model_label": "random_forest",
+        "methodology": "single_multinode_model_distillation",
+        "partition": "single_node",
+        "partition_condition": "nproc <= ppn",
+        "feature_scale": "original",
+        "tree_features": [
+            "nproc",
+            "ppn",
+            "message_size_bytes"
+        ],
+        "target": "optimal_algorithm",
+        "candidate_algorithms": [
+            "binomial",
+            "circ_graph",
+            "nb",
+            "pipelined_tree",
+            "release_gather",
+            "scatter_recursive_doubling_allgather",
+            "scatter_ring_allgather",
+            "tree"
+        ],
+        "ppn_values": [
+            4,
+            8,
+            16,
+            32
+        ],
+        "nproc_values": [
+            4,
+            8,
+            16,
+            32
+        ],
+        "message_size_bytes_values": [
+            2,
+            3,
+            4,
+            6,
+            8,
+            12,
+            16,
+            24,
+            32,
+            48,
+            64,
+            96,
+            128,
+            192,
+            256,
+            384,
+            512,
+            768,
+            1024,
+            1536,
+            2048,
+            3072,
+            4096,
+            6144,
+            8192,
+            12288,
+            16384,
+            24576,
+            32768,
+            49152,
+            65536,
+            98304,
+            131072,
+            196608,
+            262144,
+            393216,
+            524288,
+            786432,
+            1048576,
+            1572864,
+            2097152,
+            3145728,
+            4194304,
+            6291456,
+            8388608,
+            12582912,
+            16777216,
+            25165824,
+            33554432
+        ],
+        "max_depth": 5,
+        "min_samples_leaf": 1,
+        "tree_simplification": "collapsed any subtree whose leaves all select the same algorithm"
+    },
+    "partition": {
+        "condition": "nproc <= ppn",
+        "rows": 490,
+        "tree_features": [
+            "nproc",
+            "ppn",
+            "message_size_bytes"
+        ],
+        "tree": {
+            "type": "decision",
+            "feature": "message_size_bytes",
+            "operator": "<=",
+            "threshold": 1310720.0,
+            "condition": "message_size_bytes <= 1310720",
+            "samples": 490,
+            "class_counts": {
+                "binomial": 0,
+                "circ_graph": 0,
+                "release_gather": 0,
+                "scatter_ring_allgather": 0
+            },
+            "yes": {
+                "type": "decision",
+                "feature": "message_size_bytes",
+                "operator": "<=",
+                "threshold": 917504.0,
+                "condition": "message_size_bytes <= 917504",
+                "samples": 390,
+                "class_counts": {
+                    "binomial": 0,
+                    "circ_graph": 0,
+                    "release_gather": 0,
+                    "scatter_ring_allgather": 0
+                },
+                "yes": {
+                    "type": "leaf",
+                    "algorithm": "release_gather",
+                    "samples": 380,
+                    "class_counts": {
+                        "binomial": 0,
+                        "circ_graph": 0,
+                        "release_gather": 1,
+                        "scatter_ring_allgather": 0
+                    },
+                    "csel_container": {
+                        "requires": "MPIDI_CH4_release_gather",
+                        "algorithm=MPIDI_POSIX_mpi_bcast_release_gather": {}
+                    }
+                },
+                "no": {
+                    "type": "decision",
+                    "feature": "ppn",
+                    "operator": "<=",
+                    "threshold": 12.0,
+                    "condition": "ppn <= 12",
+                    "samples": 10,
+                    "class_counts": {
+                        "binomial": 0,
+                        "circ_graph": 0,
+                        "release_gather": 0,
+                        "scatter_ring_allgather": 0
+                    },
+                    "yes": {
+                        "type": "leaf",
+                        "algorithm": "circ_graph",
+                        "samples": 3,
+                        "class_counts": {
+                            "binomial": 0,
+                            "circ_graph": 1,
+                            "release_gather": 0,
+                            "scatter_ring_allgather": 0
+                        },
+                        "csel_container": {
+                            "algorithm=MPIR_Bcast_intra_circ_graph": {}
+                        }
+                    },
+                    "no": {
+                        "type": "leaf",
+                        "algorithm": "release_gather",
+                        "samples": 7,
+                        "class_counts": {
+                            "binomial": 0,
+                            "circ_graph": 0,
+                            "release_gather": 1,
+                            "scatter_ring_allgather": 0
+                        },
+                        "csel_container": {
+                            "requires": "MPIDI_CH4_release_gather",
+                            "algorithm=MPIDI_POSIX_mpi_bcast_release_gather": {}
+                        }
+                    }
+                }
+            },
+            "no": {
+                "type": "decision",
+                "feature": "nproc",
+                "operator": "<=",
+                "threshold": 12.0,
+                "condition": "nproc <= 12",
+                "samples": 100,
+                "class_counts": {
+                    "binomial": 0,
+                    "circ_graph": 0,
+                    "release_gather": 0,
+                    "scatter_ring_allgather": 0
+                },
+                "yes": {
+                    "type": "decision",
+                    "feature": "ppn",
+                    "operator": "<=",
+                    "threshold": 24.0,
+                    "condition": "ppn <= 24",
+                    "samples": 70,
+                    "class_counts": {
+                        "binomial": 0,
+                        "circ_graph": 0,
+                        "release_gather": 0,
+                        "scatter_ring_allgather": 0
+                    },
+                    "yes": {
+                        "type": "decision",
+                        "feature": "message_size_bytes",
+                        "operator": "<=",
+                        "threshold": 10485760.0,
+                        "condition": "message_size_bytes <= 10485760",
+                        "samples": 50,
+                        "class_counts": {
+                            "binomial": 0,
+                            "circ_graph": 0,
+                            "release_gather": 0,
+                            "scatter_ring_allgather": 0
+                        },
+                        "yes": {
+                            "type": "leaf",
+                            "algorithm": "circ_graph",
+                            "samples": 30,
+                            "class_counts": {
+                                "binomial": 0,
+                                "circ_graph": 1,
+                                "release_gather": 0,
+                                "scatter_ring_allgather": 0
+                            },
+                            "csel_container": {
+                                "algorithm=MPIR_Bcast_intra_circ_graph": {}
+                            }
+                        },
+                        "no": {
+                            "type": "decision",
+                            "feature": "message_size_bytes",
+                            "operator": "<=",
+                            "threshold": 20971520.0,
+                            "condition": "message_size_bytes <= 20971520",
+                            "samples": 20,
+                            "class_counts": {
+                                "binomial": 0,
+                                "circ_graph": 0,
+                                "release_gather": 0,
+                                "scatter_ring_allgather": 0
+                            },
+                            "yes": {
+                                "type": "leaf",
+                                "algorithm": "scatter_ring_allgather",
+                                "samples": 10,
+                                "class_counts": {
+                                    "binomial": 0,
+                                    "circ_graph": 0,
+                                    "release_gather": 0,
+                                    "scatter_ring_allgather": 0
+                                },
+                                "csel_container": {
+                                    "algorithm=MPIR_Bcast_intra_scatter_ring_allgather": {}
+                                }
+                            },
+                            "no": {
+                                "type": "leaf",
+                                "algorithm": "circ_graph",
+                                "samples": 10,
+                                "class_counts": {
+                                    "binomial": 0,
+                                    "circ_graph": 1,
+                                    "release_gather": 0,
+                                    "scatter_ring_allgather": 0
+                                },
+                                "csel_container": {
+                                    "algorithm=MPIR_Bcast_intra_circ_graph": {}
+                                }
+                            }
+                        }
+                    },
+                    "no": {
+                        "type": "decision",
+                        "feature": "message_size_bytes",
+                        "operator": "<=",
+                        "threshold": 10485760.0,
+                        "condition": "message_size_bytes <= 10485760",
+                        "samples": 20,
+                        "class_counts": {
+                            "binomial": 0,
+                            "circ_graph": 0,
+                            "release_gather": 0,
+                            "scatter_ring_allgather": 0
+                        },
+                        "yes": {
+                            "type": "decision",
+                            "feature": "message_size_bytes",
+                            "operator": "<=",
+                            "threshold": 2621440.0,
+                            "condition": "message_size_bytes <= 2621440",
+                            "samples": 12,
+                            "class_counts": {
+                                "binomial": 0,
+                                "circ_graph": 0,
+                                "release_gather": 0,
+                                "scatter_ring_allgather": 0
+                            },
+                            "yes": {
+                                "type": "leaf",
+                                "algorithm": "release_gather",
+                                "samples": 4,
+                                "class_counts": {
+                                    "binomial": 0,
+                                    "circ_graph": 0,
+                                    "release_gather": 1,
+                                    "scatter_ring_allgather": 0
+                                },
+                                "csel_container": {
+                                    "requires": "MPIDI_CH4_release_gather",
+                                    "algorithm=MPIDI_POSIX_mpi_bcast_release_gather": {}
+                                }
+                            },
+                            "no": {
+                                "type": "leaf",
+                                "algorithm": "circ_graph",
+                                "samples": 8,
+                                "class_counts": {
+                                    "binomial": 0,
+                                    "circ_graph": 0,
+                                    "release_gather": 0,
+                                    "scatter_ring_allgather": 0
+                                },
+                                "csel_container": {
+                                    "algorithm=MPIR_Bcast_intra_circ_graph": {}
+                                }
+                            }
+                        },
+                        "no": {
+                            "type": "decision",
+                            "feature": "message_size_bytes",
+                            "operator": "<=",
+                            "threshold": 20971520.0,
+                            "condition": "message_size_bytes <= 20971520",
+                            "samples": 8,
+                            "class_counts": {
+                                "binomial": 0,
+                                "circ_graph": 0,
+                                "release_gather": 0,
+                                "scatter_ring_allgather": 0
+                            },
+                            "yes": {
+                                "type": "leaf",
+                                "algorithm": "scatter_ring_allgather",
+                                "samples": 4,
+                                "class_counts": {
+                                    "binomial": 0,
+                                    "circ_graph": 0,
+                                    "release_gather": 0,
+                                    "scatter_ring_allgather": 1
+                                },
+                                "csel_container": {
+                                    "algorithm=MPIR_Bcast_intra_scatter_ring_allgather": {}
+                                }
+                            },
+                            "no": {
+                                "type": "leaf",
+                                "algorithm": "circ_graph",
+                                "samples": 4,
+                                "class_counts": {
+                                    "binomial": 0,
+                                    "circ_graph": 0,
+                                    "release_gather": 0,
+                                    "scatter_ring_allgather": 0
+                                },
+                                "csel_container": {
+                                    "algorithm=MPIR_Bcast_intra_circ_graph": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "no": {
+                    "type": "decision",
+                    "feature": "message_size_bytes",
+                    "operator": "<=",
+                    "threshold": 10485760.0,
+                    "condition": "message_size_bytes <= 10485760",
+                    "samples": 30,
+                    "class_counts": {
+                        "binomial": 0,
+                        "circ_graph": 0,
+                        "release_gather": 0,
+                        "scatter_ring_allgather": 0
+                    },
+                    "yes": {
+                        "type": "leaf",
+                        "algorithm": "release_gather",
+                        "samples": 18,
+                        "class_counts": {
+                            "binomial": 0,
+                            "circ_graph": 0,
+                            "release_gather": 0,
+                            "scatter_ring_allgather": 0
+                        },
+                        "csel_container": {
+                            "requires": "MPIDI_CH4_release_gather",
+                            "algorithm=MPIDI_POSIX_mpi_bcast_release_gather": {}
+                        },
+                        "simplified_from": "ppn <= 24"
+                    },
+                    "no": {
+                        "type": "decision",
+                        "feature": "ppn",
+                        "operator": "<=",
+                        "threshold": 24.0,
+                        "condition": "ppn <= 24",
+                        "samples": 12,
+                        "class_counts": {
+                            "binomial": 0,
+                            "circ_graph": 0,
+                            "release_gather": 0,
+                            "scatter_ring_allgather": 0
+                        },
+                        "yes": {
+                            "type": "decision",
+                            "feature": "message_size_bytes",
+                            "operator": "<=",
+                            "threshold": 20971520.0,
+                            "condition": "message_size_bytes <= 20971520",
+                            "samples": 4,
+                            "class_counts": {
+                                "binomial": 0,
+                                "circ_graph": 0,
+                                "release_gather": 0,
+                                "scatter_ring_allgather": 0
+                            },
+                            "yes": {
+                                "type": "leaf",
+                                "algorithm": "scatter_ring_allgather",
+                                "samples": 2,
+                                "class_counts": {
+                                    "binomial": 0,
+                                    "circ_graph": 0,
+                                    "release_gather": 0,
+                                    "scatter_ring_allgather": 1
+                                },
+                                "csel_container": {
+                                    "algorithm=MPIR_Bcast_intra_scatter_ring_allgather": {}
+                                }
+                            },
+                            "no": {
+                                "type": "leaf",
+                                "algorithm": "circ_graph",
+                                "samples": 2,
+                                "class_counts": {
+                                    "binomial": 0,
+                                    "circ_graph": 0,
+                                    "release_gather": 0,
+                                    "scatter_ring_allgather": 0
+                                },
+                                "csel_container": {
+                                    "algorithm=MPIR_Bcast_intra_circ_graph": {}
+                                }
+                            }
+                        },
+                        "no": {
+                            "type": "leaf",
+                            "algorithm": "scatter_ring_allgather",
+                            "samples": 8,
+                            "class_counts": {
+                                "binomial": 0,
+                                "circ_graph": 0,
+                                "release_gather": 0,
+                                "scatter_ring_allgather": 1
+                            },
+                            "csel_container": {
+                                "algorithm=MPIR_Bcast_intra_scatter_ring_allgather": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

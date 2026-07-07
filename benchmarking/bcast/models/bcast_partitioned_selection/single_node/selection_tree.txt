@@ -1,0 +1,13 @@
+|--- message_size_bytes <= 2621440.00
+|   |--- class: release_gather
+|--- message_size_bytes >  2621440.00
+|   |--- nproc <= 12.00
+|   |   |--- class: circ_graph
+|   |--- nproc >  12.00
+|   |   |--- message_size_bytes <= 18874368.00
+|   |   |   |--- nproc <= 24.00
+|   |   |   |   |--- class: circ_graph
+|   |   |   |--- nproc >  24.00
+|   |   |   |   |--- class: release_gather
+|   |   |--- message_size_bytes >  18874368.00
+|   |   |   |--- class: scatter_ring_allgather

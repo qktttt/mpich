@@ -1,0 +1,79 @@
+Bcast partitioned selection tree: regular_ppn
+=============================================
+
+Rows: 340
+Features: nproc, ppn, message_size_bytes
+Training accuracy against RF labels: 0.926471
+
+Optimal algorithm counts from random forest:
+  binomial: 130
+  circ_graph: 45
+  nb: 59
+  release_gather: 74
+  scatter_ring_allgather: 32
+
+Classification report:
+                        precision    recall  f1-score   support
+
+              binomial       0.91      0.92      0.92       130
+            circ_graph       0.86      0.93      0.89        45
+                    nb       0.94      0.80      0.86        59
+        release_gather       0.96      1.00      0.98        74
+scatter_ring_allgather       1.00      1.00      1.00        32
+
+              accuracy                           0.93       340
+             macro avg       0.93      0.93      0.93       340
+          weighted avg       0.93      0.93      0.93       340
+
+Confusion matrix rows/columns use this algorithm order:
+  binomial, circ_graph, nb, release_gather, scatter_ring_allgather
+  120, 7, 3, 0, 0
+  0, 42, 0, 3, 0
+  12, 0, 47, 0, 0
+  0, 0, 0, 74, 0
+  0, 0, 0, 0, 32
+
+Selection tree rules:
+|--- nproc <= 48.00
+|   |--- message_size_bytes <= 18874368.00
+|   |   |--- message_size_bytes <= 589824.00
+|   |   |   |--- class: release_gather
+|   |   |--- message_size_bytes >  589824.00
+|   |   |   |--- nproc <= 12.00
+|   |   |   |   |--- message_size_bytes <= 2621440.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- message_size_bytes >  2621440.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |--- nproc >  12.00
+|   |   |   |   |--- message_size_bytes <= 2621440.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- message_size_bytes >  2621440.00
+|   |   |   |   |   |--- class: release_gather
+|   |--- message_size_bytes >  18874368.00
+|   |   |--- nproc <= 12.00
+|   |   |   |--- class: circ_graph
+|   |   |--- nproc >  12.00
+|   |   |   |--- class: scatter_ring_allgather
+|--- nproc >  48.00
+|   |--- message_size_bytes <= 18874368.00
+|   |   |--- message_size_bytes <= 10240.00
+|   |   |   |--- message_size_bytes <= 288.00
+|   |   |   |   |--- nproc <= 96.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- nproc >  96.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- message_size_bytes >  288.00
+|   |   |   |   |--- ppn <= 12.00
+|   |   |   |   |   |--- class: nb
+|   |   |   |   |--- ppn >  12.00
+|   |   |   |   |   |--- class: nb
+|   |   |--- message_size_bytes >  10240.00
+|   |   |   |--- message_size_bytes <= 589824.00
+|   |   |   |   |--- class: binomial
+|   |   |   |--- message_size_bytes >  589824.00
+|   |   |   |   |--- nproc <= 192.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- nproc >  192.00
+|   |   |   |   |   |--- class: circ_graph
+|   |--- message_size_bytes >  18874368.00
+|   |   |--- class: scatter_ring_allgather

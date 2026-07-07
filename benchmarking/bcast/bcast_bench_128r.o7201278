@@ -1,3 +1,0 @@
-Running Bcast benchmark: total_ranks=128 ppn=32 warmup=100 actual=100 max_msg_size=8388608
-Wrote /home/qktttt/mpich/benchmarking/bcast/bcast_bench_ppn32_128r_7201278.csv (81000 rows)
-Wrote: /home/qktttt/mpich/benchmarking/bcast/bcast_bench_ppn32_128r_7201278.csv

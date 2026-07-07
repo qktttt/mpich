@@ -1,0 +1,46 @@
+|--- message_size_bytes <= 10240.00
+|   |--- message_size_bytes <= 224.00
+|   |   |--- ppn <= 6.00
+|   |   |   |--- nproc <= 96.00
+|   |   |   |   |--- nproc <= 12.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- nproc >  12.00
+|   |   |   |   |   |--- class: nb
+|   |   |   |--- nproc >  96.00
+|   |   |   |   |--- class: binomial
+|   |   |--- ppn >  6.00
+|   |   |   |--- class: binomial
+|   |--- message_size_bytes >  224.00
+|   |   |--- ppn <= 24.00
+|   |   |   |--- class: nb
+|   |   |--- ppn >  24.00
+|   |   |   |--- nproc <= 384.00
+|   |   |   |   |--- message_size_bytes <= 1280.00
+|   |   |   |   |   |--- class: nb
+|   |   |   |   |--- message_size_bytes >  1280.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- nproc >  384.00
+|   |   |   |   |--- class: nb
+|--- message_size_bytes >  10240.00
+|   |--- message_size_bytes <= 458752.00
+|   |   |--- ppn <= 12.00
+|   |   |   |--- message_size_bytes <= 57344.00
+|   |   |   |   |--- nproc <= 384.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- nproc >  384.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- message_size_bytes >  57344.00
+|   |   |   |   |--- class: binomial
+|   |   |--- ppn >  12.00
+|   |   |   |--- class: binomial
+|   |--- message_size_bytes >  458752.00
+|   |   |--- message_size_bytes <= 20971520.00
+|   |   |   |--- nproc <= 96.00
+|   |   |   |   |--- class: binomial
+|   |   |   |--- nproc >  96.00
+|   |   |   |   |--- class: circ_graph
+|   |   |--- message_size_bytes >  20971520.00
+|   |   |   |--- nproc <= 24.00
+|   |   |   |   |--- class: binomial
+|   |   |   |--- nproc >  24.00
+|   |   |   |   |--- class: scatter_ring_allgather

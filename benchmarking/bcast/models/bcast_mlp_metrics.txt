@@ -1,0 +1,38 @@
+Bcast median-time MLP regressor (sklearn)
+========================================
+
+Model: StandardScaler + sklearn.neural_network.MLPRegressor
+Features: log2(nproc), one-hot algorithm, log2(message_size_bytes), log2(ppn)
+Target: log2(median_time_sec)
+Target source timing column: max_time_sec
+Metrics are computed after inverse-transforming predictions to seconds.
+Rows: 5831
+Split sizes: train=4082, validation=583, test=1166
+activation: relu
+solver: adam
+learning_rate_init: 0.001
+max_iter: 3000
+batch_size: auto
+tol: 0.0001
+n_iter_no_change: 50
+early_stopping: False
+nproc values: [4, 8, 16, 32, 64, 128, 256, 512, 1024]
+ppn values: [4, 8, 16, 32]
+message sizes: 2 .. 33554432 bytes
+algorithms: binomial, circ_graph, nb, pipelined_tree, release_gather, scatter_recursive_doubling_allgather, scatter_ring_allgather, tree
+
+Validation model selection:
+  hidden_layers=(64,), alpha=0.0001: RMSE=6.24 ms, MAE=1.01 ms, R2=0.9849, MAPE_original=11.43%, log2_RMSE=0.2556
+  hidden_layers=(64,), alpha=0.001: RMSE=6.84 ms, MAE=1.05 ms, R2=0.9818, MAPE_original=10.87%, log2_RMSE=0.2584
+  hidden_layers=(128, 64), alpha=0.0001: RMSE=1.45 ms, MAE=363 us, R2=0.9992, MAPE_original=6.51%, log2_RMSE=0.1628
+  hidden_layers=(128, 64), alpha=0.001: RMSE=4.07 ms, MAE=592 us, R2=0.9936, MAPE_original=7.55%, log2_RMSE=0.1782
+  hidden_layers=(256, 128), alpha=0.0001: RMSE=4.45 ms, MAE=593 us, R2=0.9923, MAPE_original=9.46%, log2_RMSE=0.2033
+  hidden_layers=(256, 128), alpha=0.001: RMSE=5.65 ms, MAE=748 us, R2=0.9876, MAPE_original=7.45%, log2_RMSE=0.1787
+
+Selected hidden_layers: (128, 64), alpha=0.0001 (lowest validation log2_RMSE)
+
+Final model metrics on train+validation:
+  RMSE=1.36 ms, MAE=267 us, R2=0.9987, MAPE_original=6.50%, log2_RMSE=0.1417
+
+Final model metrics on held-out test split:
+  RMSE=2.18 ms, MAE=335 us, R2=0.9963, MAPE_original=6.88%, log2_RMSE=0.1488

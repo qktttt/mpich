@@ -20,6 +20,10 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 MPICH_ROOT = SCRIPT_DIR.parent.parent
 REGULAR_JSON_DIR = MPICH_ROOT / "regular_collective_json_generation_files"
 DEFAULT_MODEL = SCRIPT_DIR / "models" / "bcast_random_forest_model.pkl"
+DEFAULT_SOURCE_MODEL_LABEL = "random_forest"
+DEFAULT_RETRAIN_COMMAND = (
+    "python3 benchmarking/bcast/fit_bcast_random_forest.py --time-column {required}"
+)
 DEFAULT_TEMPLATE = MPICH_ROOT / "src" / "mpi" / "coll" / "coll_selection.json"
 DEFAULT_OUTPUT = SCRIPT_DIR / "models" / "bcast_coll_selection.json"
 DEFAULT_SECTION_OUTPUT = SCRIPT_DIR / "models" / "bcast_intra_auto_generated.json"
@@ -45,6 +49,16 @@ def parse_args():
         description="Generate MPICH Bcast coll_selection JSON from a saved fitted model."
     )
     parser.add_argument("--model", type=Path, default=DEFAULT_MODEL)
+    parser.add_argument("--source-model-label", default=DEFAULT_SOURCE_MODEL_LABEL)
+    parser.add_argument("--retrain-command", default=DEFAULT_RETRAIN_COMMAND)
+    parser.add_argument(
+        "--require-model-time-column",
+        default="max_time_sec",
+        help=(
+            "Require the saved source model metadata to report this training time column. "
+            "Use an empty string to disable the check."
+        ),
+    )
     parser.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE)
     parser.add_argument("-o", "--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument(
@@ -155,6 +169,31 @@ def load_saved_model(path):
     if isinstance(payload, dict) and "model" in payload:
         return payload["model"], payload.get("metadata", {})
     return payload, {}
+
+
+def model_time_column(metadata):
+    value = metadata.get("target_time_column")
+    if value:
+        return str(value)
+    training_args = metadata.get("training_args") or {}
+    value = training_args.get("time_column")
+    if value:
+        return str(value)
+    return None
+
+
+def require_model_time_column(metadata, required, source_model_label, retrain_command):
+    if not required:
+        return
+    actual = model_time_column(metadata)
+    if actual != required:
+        actual_label = actual if actual is not None else "unknown"
+        command = retrain_command.format(required=required)
+        raise ValueError(
+            f"Saved {source_model_label} model was not trained with the required timing column. "
+            f"required={required}, actual={actual_label}. "
+            f"Retrain with: {command}"
+        )
 
 
 def parse_int_list(value, name):
@@ -494,6 +533,13 @@ def main():
     args = parse_args()
     json_module, param_module = load_regular_json_helpers()
     model, metadata = load_saved_model(args.model)
+    require_model_time_column(
+        metadata,
+        args.require_model_time_column,
+        args.source_model_label,
+        args.retrain_command,
+    )
+    source_time_column = model_time_column(metadata)
     model_algorithms = algorithms_from_metadata(metadata)
     triples = resolve_domain(args, metadata)
     feature_space = build_feature_space(triples)
@@ -510,7 +556,8 @@ def main():
     write_output(args.template, args.output, bcast_section)
     write_bcast_section_output(args.section_output, bcast_section)
 
-    print(f"Loaded fitted model: {args.model}")
+    print(f"Loaded fitted {args.source_model_label} model: {args.model}")
+    print(f"Source model time column: {source_time_column}")
     print(f"Feature points: {feature_space.shape[0]}")
     print(f"pof2 candidates: {', '.join(pof2_algs.values())}")
     print(f"non-pof2 candidates: {', '.join(any_algs.values())}")

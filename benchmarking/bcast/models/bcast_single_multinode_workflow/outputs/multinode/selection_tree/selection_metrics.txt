@@ -1,0 +1,165 @@
+Bcast multinode RF-distilled selection tree
+==================================================
+
+Source random forest model: /home/qktttt/mpich/benchmarking/bcast/models/bcast_single_multinode_workflow/outputs/multinode/bcast_random_forest_model.pkl
+Partition condition: nproc > ppn
+Rows: 1274
+Features: nproc, ppn, message_size_bytes
+Training accuracy against RF labels: 0.884615
+
+Optimal algorithm counts from RF:
+  binomial: 597
+  circ_graph: 261
+  nb: 362
+  scatter_recursive_doubling_allgather: 1
+  scatter_ring_allgather: 53
+
+Classification report:
+                                      precision    recall  f1-score   support
+
+                            binomial       0.84      0.94      0.89       597
+                          circ_graph       0.85      0.80      0.83       261
+                                  nb       0.99      0.85      0.92       362
+scatter_recursive_doubling_allgather       0.00      0.00      0.00         1
+              scatter_ring_allgather       1.00      0.87      0.93        53
+
+                            accuracy                           0.88      1274
+                           macro avg       0.74      0.69      0.71      1274
+                        weighted avg       0.89      0.88      0.88      1274
+
+Confusion matrix rows/columns use this algorithm order:
+  binomial, circ_graph, nb, scatter_recursive_doubling_allgather, scatter_ring_allgather
+  564, 32, 1, 0, 0
+  51, 209, 1, 0, 0
+  54, 0, 308, 0, 0
+  1, 0, 0, 0, 0
+  3, 4, 0, 0, 46
+
+Simplified selection tree rules:
+|--- message_size_bytes <= 10240.00
+|   |--- message_size_bytes <= 224.00
+|   |   |--- ppn <= 6.00
+|   |   |   |--- nproc <= 96.00
+|   |   |   |   |--- nproc <= 12.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- nproc >  12.00
+|   |   |   |   |   |--- class: nb
+|   |   |   |--- nproc >  96.00
+|   |   |   |   |--- class: binomial
+|   |   |--- ppn >  6.00
+|   |   |   |--- class: binomial
+|   |--- message_size_bytes >  224.00
+|   |   |--- ppn <= 24.00
+|   |   |   |--- class: nb
+|   |   |--- ppn >  24.00
+|   |   |   |--- nproc <= 384.00
+|   |   |   |   |--- message_size_bytes <= 1280.00
+|   |   |   |   |   |--- class: nb
+|   |   |   |   |--- message_size_bytes >  1280.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- nproc >  384.00
+|   |   |   |   |--- class: nb
+|--- message_size_bytes >  10240.00
+|   |--- message_size_bytes <= 458752.00
+|   |   |--- ppn <= 12.00
+|   |   |   |--- message_size_bytes <= 57344.00
+|   |   |   |   |--- nproc <= 384.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- nproc >  384.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- message_size_bytes >  57344.00
+|   |   |   |   |--- class: binomial
+|   |   |--- ppn >  12.00
+|   |   |   |--- class: binomial
+|   |--- message_size_bytes >  458752.00
+|   |   |--- message_size_bytes <= 20971520.00
+|   |   |   |--- nproc <= 96.00
+|   |   |   |   |--- class: binomial
+|   |   |   |--- nproc >  96.00
+|   |   |   |   |--- class: circ_graph
+|   |   |--- message_size_bytes >  20971520.00
+|   |   |   |--- nproc <= 24.00
+|   |   |   |   |--- class: binomial
+|   |   |   |--- nproc >  24.00
+|   |   |   |   |--- class: scatter_ring_allgather
+
+Raw sklearn selection tree rules:
+|--- message_size_bytes <= 10240.00
+|   |--- message_size_bytes <= 224.00
+|   |   |--- ppn <= 6.00
+|   |   |   |--- nproc <= 96.00
+|   |   |   |   |--- nproc <= 12.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- nproc >  12.00
+|   |   |   |   |   |--- class: nb
+|   |   |   |--- nproc >  96.00
+|   |   |   |   |--- nproc <= 384.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- nproc >  384.00
+|   |   |   |   |   |--- class: binomial
+|   |   |--- ppn >  6.00
+|   |   |   |--- ppn <= 24.00
+|   |   |   |   |--- nproc <= 48.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- nproc >  48.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- ppn >  24.00
+|   |   |   |   |--- class: binomial
+|   |--- message_size_bytes >  224.00
+|   |   |--- ppn <= 24.00
+|   |   |   |--- message_size_bytes <= 7168.00
+|   |   |   |   |--- class: nb
+|   |   |   |--- message_size_bytes >  7168.00
+|   |   |   |   |--- nproc <= 48.00
+|   |   |   |   |   |--- class: nb
+|   |   |   |   |--- nproc >  48.00
+|   |   |   |   |   |--- class: nb
+|   |   |--- ppn >  24.00
+|   |   |   |--- nproc <= 384.00
+|   |   |   |   |--- message_size_bytes <= 1280.00
+|   |   |   |   |   |--- class: nb
+|   |   |   |   |--- message_size_bytes >  1280.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- nproc >  384.00
+|   |   |   |   |--- class: nb
+|--- message_size_bytes >  10240.00
+|   |--- message_size_bytes <= 458752.00
+|   |   |--- ppn <= 12.00
+|   |   |   |--- message_size_bytes <= 57344.00
+|   |   |   |   |--- nproc <= 384.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- nproc >  384.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- message_size_bytes >  57344.00
+|   |   |   |   |--- message_size_bytes <= 229376.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- message_size_bytes >  229376.00
+|   |   |   |   |   |--- class: binomial
+|   |   |--- ppn >  12.00
+|   |   |   |--- message_size_bytes <= 14336.00
+|   |   |   |   |--- ppn <= 24.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- ppn >  24.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- message_size_bytes >  14336.00
+|   |   |   |   |--- message_size_bytes <= 327680.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- message_size_bytes >  327680.00
+|   |   |   |   |   |--- class: binomial
+|   |--- message_size_bytes >  458752.00
+|   |   |--- message_size_bytes <= 20971520.00
+|   |   |   |--- nproc <= 96.00
+|   |   |   |   |--- nproc <= 24.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- nproc >  24.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- nproc >  96.00
+|   |   |   |   |--- ppn <= 24.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- ppn >  24.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |--- message_size_bytes >  20971520.00
+|   |   |   |--- nproc <= 24.00
+|   |   |   |   |--- class: binomial
+|   |   |   |--- nproc >  24.00
+|   |   |   |   |--- class: scatter_ring_allgather

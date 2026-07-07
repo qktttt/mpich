@@ -1,0 +1,8 @@
+Running auto MPI_Bcast benchmark: rule=original total_ranks=128 ppn=32 iterations=100 min_msg_size=32 max_msg_size=33554432
+Using Bcast CSEL rule file: /home/qktttt/mpich/benchmarking/bcast/auto-testing/original_bcast_rules.json
+Wrote: /home/qktttt/mpich/benchmarking/bcast/auto-testing/results/auto_bcast_original_ppn32_128r_7230436.csv
+Finished auto MPI_Bcast benchmark. CSV: /home/qktttt/mpich/benchmarking/bcast/auto-testing/results/auto_bcast_original_ppn32_128r_7230436.csv
+Running auto MPI_Bcast benchmark: rule=generated_single_multinode total_ranks=128 ppn=32 iterations=100 min_msg_size=32 max_msg_size=33554432
+Using Bcast CSEL rule file: /home/qktttt/mpich/benchmarking/bcast/auto-testing/generated_single_multinode_bcast_rules.json
+Wrote: /home/qktttt/mpich/benchmarking/bcast/auto-testing/results/auto_bcast_generated_single_multinode_ppn32_128r_7230436.csv
+Finished auto MPI_Bcast benchmark. CSV: /home/qktttt/mpich/benchmarking/bcast/auto-testing/results/auto_bcast_generated_single_multinode_ppn32_128r_7230436.csv

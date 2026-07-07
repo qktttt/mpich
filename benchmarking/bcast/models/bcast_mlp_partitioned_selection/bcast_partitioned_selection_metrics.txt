@@ -1,0 +1,22 @@
+Bcast manual-partitioned decision tree generation
+=================================================
+
+Source mlp model: /home/qktttt/mpich/benchmarking/bcast/models/bcast_mlp_model.pkl
+Source model time column: max_time_sec
+Features per partition tree: nproc, ppn, message_size_bytes
+max_depth: 5
+min_samples_leaf: 1
+
+Manual partitions:
+  single_node: 60 rows, condition: nproc <= ppn
+    circ_graph: 17
+    release_gather: 24
+    scatter_recursive_doubling_allgather: 5
+    scatter_ring_allgather: 14
+  regular_ppn: 340 rows, condition: nproc > ppn and nproc % ppn == 0
+    binomial: 10
+    circ_graph: 6
+    release_gather: 311
+    scatter_recursive_doubling_allgather: 5
+    scatter_ring_allgather: 8
+  nonregular_ppn: 0 rows, condition: nproc > ppn and nproc % ppn != 0

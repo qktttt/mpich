@@ -1,5 +1,0 @@
-Running Bcast benchmark: nodes=4 total_ranks=128 ppn=32 cpu_bind=list:0:1:2:3:4:5:6:7:8:9:10:11:12:13:14:15:16:17:18:19:20:21:22:23:24:25:26:27:28:29:30:31
-Wrote /home/qktttt/mpich/benchmarking/bcast/bcast_bench_ppn32_128r_7202971.csv (88200 rows)
-Wrote: /home/qktttt/mpich/benchmarking/bcast/bcast_bench_ppn32_128r_7202971.csv
-Running Bcast benchmark: nodes=4 total_ranks=64 ppn=16 cpu_bind=list:0:2:4:6:8:10:12:14:16:18:20:22:24:26:28:30
-=>> PBS: job killed: walltime 1823 exceeded limit 1800

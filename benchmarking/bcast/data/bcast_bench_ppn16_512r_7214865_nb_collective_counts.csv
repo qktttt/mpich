@@ -1,0 +1,4 @@
+requested_collective,requested_algorithm,internal_collective,internal_algorithm,nproc,dump_rank,count,raw_line
+MPI_Bcast,nb,Ibcast,MPIR_Ibcast_intra_sched_binomial,512,0,2500,      2500  MPIR_Ibcast_intra_sched_binomial
+MPI_Bcast,nb,Ibcast,MPIR_Ibcast_intra_sched_scatter_recursive_doubling_allgather,512,0,1100,      1100  MPIR_Ibcast_intra_sched_scatter_recursive_doubling_allgather
+MPI_Bcast,nb,Ibcast,MPIR_Ibcast_intra_sched_scatter_ring_allgather,512,0,1300,      1300  MPIR_Ibcast_intra_sched_scatter_ring_allgather

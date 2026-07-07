@@ -22,13 +22,28 @@ from sklearn.tree import DecisionTreeRegressor, export_graphviz
 
 def parse_args():
     script_dir = Path(__file__).resolve().parent
-    default_summary = script_dir / "plots" / "bcast_median_summary.csv"
-    default_inputs = [default_summary] if default_summary.exists() else sorted(script_dir.glob("bcast_bench_ppn*r_*.csv"))
 
     parser = argparse.ArgumentParser(description="Fit an sklearn regression tree to Bcast median timings.")
-    parser.add_argument("input_csvs", nargs="*", type=Path, default=default_inputs)
+    parser.add_argument(
+        "input_csvs",
+        nargs="*",
+        type=Path,
+        default=None,
+        help=(
+            "Input median summary CSV or raw timing CSV files. Raw split files named "
+            "*_collective_counts.csv are ignored. If omitted, the default summary "
+            "matching --time-column is used when available."
+        ),
+    )
     parser.add_argument("-o", "--output-dir", type=Path, default=script_dir / "models")
-    parser.add_argument("--time-column", default="avg_latency_sec")
+    parser.add_argument(
+        "--time-column",
+        default="max_time_sec",
+        help=(
+            "Timing column to fit. Defaults to max_time_sec so the model targets "
+            "the per-iteration maximum latency across ranks."
+        ),
+    )
     parser.add_argument("--phase", default="actual")
     parser.add_argument("--ppn", type=int, default=None)
     parser.add_argument("--seed", type=int, default=42)
@@ -37,7 +52,62 @@ def parse_args():
     parser.add_argument("--max-depth-candidates", default="2,3,4,5,6,7,8,9,10")
     parser.add_argument("--min-samples-leaf", type=int, default=10)
     parser.add_argument("--min-samples-split", type=int, default=20)
-    return parser.parse_args()
+    args = parser.parse_args()
+    if not args.input_csvs:
+        args.input_csvs = default_input_csvs(script_dir, args.time_column)
+    return args
+
+
+def is_collective_counts_csv(path):
+    return path.suffix == ".csv" and path.name.endswith("_collective_counts.csv")
+
+
+def summary_has_column(path, column):
+    if not path.exists():
+        return False
+    with path.open(newline="") as handle:
+        reader = csv.reader(handle)
+        try:
+            header = next(reader)
+        except StopIteration:
+            return False
+    return column in header
+
+
+def default_input_csvs(script_dir, time_column="max_time_sec"):
+    summary_column = f"median_{time_column}"
+    summary_candidates = []
+    if time_column == "max_time_sec":
+        summary_candidates.extend(
+            [
+                script_dir / "plots_max_latency" / "bcast_median_summary.csv",
+                script_dir / "plots" / "bcast_median_summary.csv",
+            ]
+        )
+    elif time_column == "avg_latency_sec":
+        summary_candidates.extend(
+            [
+                script_dir / "plots" / "bcast_median_summary.csv",
+                script_dir / "plots_max_latency" / "bcast_median_summary.csv",
+            ]
+        )
+    else:
+        summary_candidates.extend(
+            [
+                script_dir / "plots" / "bcast_median_summary.csv",
+                script_dir / "plots_max_latency" / "bcast_median_summary.csv",
+            ]
+        )
+
+    for summary in summary_candidates:
+        if summary_has_column(summary, summary_column):
+            return [summary]
+
+    return sorted(
+        path
+        for path in script_dir.glob("bcast_bench_ppn*r_*.csv")
+        if not is_collective_counts_csv(path)
+    )
 
 
 def ppn_from_row_or_name(row, path, fallback):
@@ -55,8 +125,12 @@ def load_rows(paths, time_column, phase, fallback_ppn):
     rows = []
     grouped = defaultdict(list)
     summary_col = f"median_{time_column}"
+    timing_columns = {"phase", "algorithm", "nproc", "message_size_bytes", time_column}
 
     for path in paths:
+        if is_collective_counts_csv(path):
+            continue
+
         with path.open(newline="") as handle:
             reader = csv.DictReader(handle)
             fields = set(reader.fieldnames or [])
@@ -72,6 +146,11 @@ def load_rows(paths, time_column, phase, fallback_ppn):
                         }
                     )
             else:
+                missing_columns = timing_columns - fields
+                if missing_columns:
+                    missing = ", ".join(sorted(missing_columns))
+                    raise ValueError(f"{path}: missing required timing column(s): {missing}")
+
                 for row in reader:
                     if row["phase"].strip().lower() != phase.lower():
                         continue
@@ -213,6 +292,7 @@ def model_metadata(args, feature_names, algorithms, train_score, test_score, ext
             "one-hot algorithm columns in algorithms order",
         ],
         "target": "log2(median_time_sec)",
+        "target_time_column": str(args.time_column),
         "prediction_inverse": "2 ** prediction",
         "training_args": {name: str(value) for name, value in vars(args).items()},
         "train_validation_score": dict(train_score),

@@ -1,0 +1,38 @@
+Bcast single_node median-time random forest (sklearn)
+==========================================
+
+Model: sklearn.ensemble.RandomForestRegressor
+Partition condition: nproc <= ppn
+Features: log2(nproc), log2(message_size_bytes), log2(ppn), one-hot algorithm
+Target: log2(median_time_sec)
+Target source timing column: max_time_sec
+Metrics are computed after inverse-transforming predictions to seconds.
+Rows: 1568
+Split sizes: train=1098, validation=157, test=313
+n_estimators: 200
+max_features: 1.0 -> 1.0
+min_samples_leaf: 3
+min_samples_split: 6
+nproc values: [4, 8, 16, 32]
+ppn values: [4, 8, 16, 32]
+message sizes: 2 .. 33554432 bytes
+algorithms: binomial, circ_graph, nb, pipelined_tree, release_gather, scatter_recursive_doubling_allgather, scatter_ring_allgather, tree
+
+Validation model selection:
+  max_depth=4: RMSE=985 us, MAE=309 us, R2=0.8625, MAPE_original=43.24%, log2_RMSE=0.7413
+  max_depth=6: RMSE=490 us, MAE=153 us, R2=0.9661, MAPE_original=20.08%, log2_RMSE=0.4009
+  max_depth=8: RMSE=425 us, MAE=126 us, R2=0.9744, MAPE_original=13.30%, log2_RMSE=0.2869
+  max_depth=10: RMSE=413 us, MAE=122 us, R2=0.9758, MAPE_original=10.91%, log2_RMSE=0.2577
+  max_depth=12: RMSE=413 us, MAE=122 us, R2=0.9758, MAPE_original=10.30%, log2_RMSE=0.2555
+  max_depth=14: RMSE=413 us, MAE=122 us, R2=0.9758, MAPE_original=10.21%, log2_RMSE=0.2554
+  max_depth=16: RMSE=413 us, MAE=122 us, R2=0.9758, MAPE_original=10.21%, log2_RMSE=0.2554
+  max_depth=18: RMSE=413 us, MAE=122 us, R2=0.9758, MAPE_original=10.21%, log2_RMSE=0.2554
+  max_depth=20: RMSE=413 us, MAE=122 us, R2=0.9758, MAPE_original=10.21%, log2_RMSE=0.2554
+
+Selected max_depth: 18 (lowest validation log2_RMSE)
+
+Final model metrics on train+validation:
+  RMSE=1.27 ms, MAE=226 us, R2=0.9100, MAPE_original=8.14%, log2_RMSE=0.1863
+
+Final model metrics on held-out test split:
+  RMSE=3.43 ms, MAE=517 us, R2=0.7459, MAPE_original=10.28%, log2_RMSE=0.2565

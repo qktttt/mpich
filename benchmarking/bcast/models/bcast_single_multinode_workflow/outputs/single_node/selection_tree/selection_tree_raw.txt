@@ -1,0 +1,46 @@
+|--- message_size_bytes <= 1310720.00
+|   |--- message_size_bytes <= 917504.00
+|   |   |--- class: release_gather
+|   |--- message_size_bytes >  917504.00
+|   |   |--- ppn <= 12.00
+|   |   |   |--- class: circ_graph
+|   |   |--- ppn >  12.00
+|   |   |   |--- class: release_gather
+|--- message_size_bytes >  1310720.00
+|   |--- nproc <= 12.00
+|   |   |--- ppn <= 24.00
+|   |   |   |--- message_size_bytes <= 10485760.00
+|   |   |   |   |--- class: circ_graph
+|   |   |   |--- message_size_bytes >  10485760.00
+|   |   |   |   |--- message_size_bytes <= 20971520.00
+|   |   |   |   |   |--- class: scatter_ring_allgather
+|   |   |   |   |--- message_size_bytes >  20971520.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |--- ppn >  24.00
+|   |   |   |--- message_size_bytes <= 10485760.00
+|   |   |   |   |--- message_size_bytes <= 2621440.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- message_size_bytes >  2621440.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |--- message_size_bytes >  10485760.00
+|   |   |   |   |--- message_size_bytes <= 20971520.00
+|   |   |   |   |   |--- class: scatter_ring_allgather
+|   |   |   |   |--- message_size_bytes >  20971520.00
+|   |   |   |   |   |--- class: circ_graph
+|   |--- nproc >  12.00
+|   |   |--- message_size_bytes <= 10485760.00
+|   |   |   |--- ppn <= 24.00
+|   |   |   |   |--- message_size_bytes <= 3670016.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- message_size_bytes >  3670016.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |--- ppn >  24.00
+|   |   |   |   |--- class: release_gather
+|   |   |--- message_size_bytes >  10485760.00
+|   |   |   |--- ppn <= 24.00
+|   |   |   |   |--- message_size_bytes <= 20971520.00
+|   |   |   |   |   |--- class: scatter_ring_allgather
+|   |   |   |   |--- message_size_bytes >  20971520.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |--- ppn >  24.00
+|   |   |   |   |--- class: scatter_ring_allgather

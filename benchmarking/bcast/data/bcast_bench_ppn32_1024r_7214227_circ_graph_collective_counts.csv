@@ -1,0 +1,2 @@
+requested_collective,requested_algorithm,internal_collective,internal_algorithm,nproc,dump_rank,count,raw_line
+MPI_Bcast,circ_graph,Bcast,MPIR_Bcast_intra_circ_graph,1024,0,1960,      1960  MPIR_Bcast_intra_circ_graph

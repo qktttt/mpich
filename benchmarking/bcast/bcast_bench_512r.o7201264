@@ -1,2 +1,0 @@
-Running Bcast benchmark: total_ranks=512 ppn=32 warmup=50 actual=50 max_msg_size=8388608
-=>> PBS: job killed: walltime 990 exceeded limit 900

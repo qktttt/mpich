@@ -1,0 +1,2 @@
+requested_collective,requested_algorithm,internal_collective,internal_algorithm,nproc,dump_rank,count,raw_line
+MPI_Bcast,scatter_ring_allgather,Bcast,MPIR_Bcast_intra_scatter_ring_allgather,4096,0,4900,      4900  MPIR_Bcast_intra_scatter_ring_allgather

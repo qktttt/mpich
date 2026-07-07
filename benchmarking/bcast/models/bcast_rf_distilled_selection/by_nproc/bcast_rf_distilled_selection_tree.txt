@@ -1,0 +1,19 @@
+|--- message_size_bytes <= 589824.00
+|   |--- message_size_bytes <= 10240.00
+|   |   |--- class: release_gather
+|   |--- message_size_bytes >  10240.00
+|   |   |--- message_size_bytes <= 73728.00
+|   |   |   |--- ppn <= 24.00
+|   |   |   |   |--- class: binomial
+|   |   |   |--- ppn >  24.00
+|   |   |   |   |--- class: release_gather
+|   |   |--- message_size_bytes >  73728.00
+|   |   |   |--- class: release_gather
+|--- message_size_bytes >  589824.00
+|   |--- ppn <= 24.00
+|   |   |--- class: binomial
+|   |--- ppn >  24.00
+|   |   |--- message_size_bytes <= 2621440.00
+|   |   |   |--- class: release_gather
+|   |   |--- message_size_bytes >  2621440.00
+|   |   |   |--- class: binomial

@@ -1,7 +1,9 @@
 #include <mpi.h>
 
 #include <algorithm>
+#include <cstdio>
 #include <cstdint>
+#include <cstring>
 #include <cstdlib>
 #include <fstream>
 #include <iomanip>
@@ -11,6 +13,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <unistd.h>
 
 namespace {
 
@@ -27,12 +30,6 @@ const int kDefaultMessageSizes[] = {
     33554432,
 };
 
-/* MPI_T CVARs used to force MPICH onto the requested Bcast implementation. */
-constexpr const char *kBcastIntraAlgorithmCvar = "MPIR_CVAR_BCAST_INTRA_ALGORITHM";
-constexpr const char *kBcastDeviceCollectiveCvar = "MPIR_CVAR_BCAST_DEVICE_COLLECTIVE";
-constexpr const char *kDeviceCollectivesCvar = "MPIR_CVAR_DEVICE_COLLECTIVES";
-constexpr const char *kCollectiveFallbackCvar = "MPIR_CVAR_COLLECTIVE_FALLBACK";
-
 /* Command-line configuration and benchmark defaults. */
 struct Config {
     int warmup_rounds = 5;
@@ -40,28 +37,10 @@ struct Config {
     int min_msg_size = 2;
     int max_msg_size = kDefaultMaxMsgSize;
     std::string output_path = "benchmarking/bcast/bcast_bench.csv";
-    std::vector<std::string> algorithms;
-    bool list_algorithms = false;
+    std::string counter_output_path;
+    std::string algorithm_label;
+    bool append_output = false;
     bool show_help = false;
-};
-
-/* User-visible algorithm name accepted by --algorithms and --list-algorithms. */
-struct AlgorithmSpec {
-    const char *name;
-};
-
-/* Algorithm name plus the resolved integer value written to the MPI_T CVAR. */
-struct AlgorithmConfig {
-    std::string name;
-    int cvar_value = 0;
-};
-
-/* Small RAII-like record for MPI_T integer CVAR handles. */
-struct IntCvar {
-    std::string name;
-    MPI_T_enum enum_type = MPI_T_ENUM_NULL;
-    MPI_T_cvar_handle handle = MPI_T_CVAR_HANDLE_NULL;
-    bool opened = false;
 };
 
 /* One CSV row. Rank 0 stores these in memory and writes them after the sweep. */
@@ -70,7 +49,6 @@ struct ResultRow {
     int phase_iteration = 0;
     int global_iteration = 0;
     std::string algorithm;
-    int cvar_value = 0;
     int root = kRoot;
     int nproc = 0;
     int message_size_bytes = 0;
@@ -81,20 +59,289 @@ struct ResultRow {
     bool correct = false;
 };
 
-/* Matches the algorithms exercised by collective_testing/bcast_success_test.cpp. */
-const AlgorithmSpec kSupportedAlgorithms[] = {
-    { "binomial" },
-    { "nb" },
-    { "circ_graph" },
-    { "smp" },
-    { "scatter_recursive_doubling_allgather" },
-    { "scatter_ring_allgather" },
-    { "pipelined_tree" },
-    { "tree" },
-    { "release_gather" },
+struct CounterDumpRow {
+    std::string requested_collective;
+    std::string requested_algorithm;
+    std::string internal_collective;
+    std::string internal_algorithm;
+    int nproc = 0;
+    int dump_rank = 0;
+    long long count = 0;
+    std::string raw_line;
 };
 
-/* Convert MPI and MPI_T return codes into readable diagnostics. */
+bool file_exists(const std::string &path);
+
+std::string csv_field(const std::string &value)
+{
+    if (value.find_first_of(",\"\n\r") == std::string::npos) {
+        return value;
+    }
+
+    std::string escaped = "\"";
+    for (const char ch : value) {
+        if (ch == '"') {
+            escaped += "\"\"";
+        } else {
+            escaped += ch;
+        }
+    }
+    escaped += '"';
+    return escaped;
+}
+
+std::string infer_internal_collective(const std::string &algorithm)
+{
+    const std::string mpir_tsp_prefix = "MPIR_TSP_";
+    if (algorithm.find(mpir_tsp_prefix) == 0) {
+        const std::size_t start = mpir_tsp_prefix.size();
+        const std::size_t end = algorithm.find('_', start);
+        if (end != std::string::npos && end > start) {
+            return algorithm.substr(start, end - start);
+        }
+    }
+
+    const std::string mpir_prefix = "MPIR_";
+    if (algorithm.find(mpir_prefix) == 0) {
+        const std::size_t start = mpir_prefix.size();
+        const char *markers[] = { "_intra_", "_inter_", "_allcomm_", "_sched_" };
+        for (const char *marker : markers) {
+            const std::size_t end = algorithm.find(marker, start);
+            if (end != std::string::npos && end > start) {
+                return algorithm.substr(start, end - start);
+            }
+        }
+        if (algorithm == "MPIR_Coll_nb") {
+            return "Coll";
+        }
+    }
+
+    const std::string posix_prefix = "MPIDI_POSIX_mpi_";
+    if (algorithm.find(posix_prefix) == 0) {
+        const std::size_t start = posix_prefix.size();
+        const std::size_t end = algorithm.find('_', start);
+        if (end != std::string::npos && end > start) {
+            return algorithm.substr(start, end - start);
+        }
+    }
+
+    return "unknown";
+}
+
+bool is_bcast_counter_name(const std::string &name)
+{
+    return name.find("Bcast") != std::string::npos ||
+           name.find("bcast") != std::string::npos ||
+           name.find("Ibcast") != std::string::npos ||
+           name.find("ibcast") != std::string::npos ||
+           name == "MPIR_Coll_nb";
+}
+
+bool parse_counter_dump_line(const std::string &line, long long &count, std::string &name)
+{
+    std::istringstream stream(line);
+    if (!(stream >> count >> name)) {
+        return false;
+    }
+    return count > 0 && !name.empty();
+}
+
+int find_cvar_index(const char *target_name)
+{
+    int num_cvars = 0;
+    if (MPI_T_cvar_get_num(&num_cvars) != MPI_SUCCESS) {
+        return -1;
+    }
+
+    for (int i = 0; i < num_cvars; ++i) {
+        char name[MPI_MAX_OBJECT_NAME] = { 0 };
+        int name_len = MPI_MAX_OBJECT_NAME;
+        int verbosity = 0;
+        MPI_Datatype datatype = MPI_DATATYPE_NULL;
+        MPI_T_enum enumtype = MPI_T_ENUM_NULL;
+        char desc[1] = { 0 };
+        int desc_len = 1;
+        int bind = 0;
+        int scope = 0;
+
+        const int rc = MPI_T_cvar_get_info(i, name, &name_len, &verbosity, &datatype, &enumtype,
+                                           desc, &desc_len, &bind, &scope);
+        if (rc == MPI_SUCCESS && std::strcmp(name, target_name) == 0) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+bool request_counter_dump(MPI_Comm comm, bool mpi_t_initialized)
+{
+    int rank = 0;
+    MPI_Comm_rank(comm, &rank);
+
+    if (!mpi_t_initialized) {
+        if (rank == kRoot) {
+            std::cerr << "Could not initialize MPI_T; MPICH collective algorithm counters "
+                      << "will not be dumped.\n";
+        }
+        return false;
+    }
+
+    const int cvar_index = find_cvar_index("MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS");
+    if (cvar_index < 0) {
+        if (rank == kRoot) {
+            std::cerr << "Could not find MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS; "
+                      << "MPICH collective algorithm counters will not be dumped.\n";
+        }
+        return false;
+    }
+
+    MPI_T_cvar_handle handle = nullptr;
+    int count = 0;
+    const int alloc_rc = MPI_T_cvar_handle_alloc(cvar_index, nullptr, &handle, &count);
+    if (alloc_rc != MPI_SUCCESS) {
+        if (rank == kRoot) {
+            std::cerr << "MPI_T_cvar_handle_alloc failed for "
+                      << "MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS, rc=" << alloc_rc << "\n";
+        }
+        return false;
+    }
+
+    int dump_rank = kRoot;
+    const int write_rc = MPI_T_cvar_write(handle, &dump_rank);
+    if (write_rc != MPI_SUCCESS) {
+        if (rank == kRoot) {
+            std::cerr << "MPI_T_cvar_write failed for MPIR_CVAR_DUMP_COLL_ALGO_COUNTERS, "
+                      << "rc=" << write_rc << "\n";
+        }
+        MPI_T_cvar_handle_free(&handle);
+        return false;
+    }
+
+    MPI_T_cvar_handle_free(&handle);
+    return true;
+}
+
+std::vector<CounterDumpRow> read_bcast_counter_dump(const std::string &capture_path,
+                                                    const Config &config,
+                                                    int nproc)
+{
+    std::vector<CounterDumpRow> rows;
+    std::ifstream capture(capture_path.c_str());
+    if (!capture) {
+        std::cerr << "Could not read captured MPICH collective counter dump: "
+                  << capture_path << "\n";
+        return rows;
+    }
+
+    std::string line;
+    while (std::getline(capture, line)) {
+        long long count = 0;
+        std::string internal_algorithm;
+        if (!parse_counter_dump_line(line, count, internal_algorithm) ||
+            !is_bcast_counter_name(internal_algorithm)) {
+            continue;
+        }
+
+        CounterDumpRow row;
+        row.requested_collective = "MPI_Bcast";
+        row.requested_algorithm = config.algorithm_label;
+        row.internal_collective = infer_internal_collective(internal_algorithm);
+        row.internal_algorithm = internal_algorithm;
+        row.nproc = nproc;
+        row.dump_rank = kRoot;
+        row.count = count;
+        row.raw_line = line;
+        rows.push_back(row);
+    }
+
+    return rows;
+}
+
+bool write_counter_dump_csv(const std::string &path, bool append_output,
+                            const std::vector<CounterDumpRow> &rows)
+{
+    const bool write_header = !append_output || !file_exists(path);
+    std::ofstream counter_csv(path.c_str(),
+                              append_output ? (std::ios::out | std::ios::app)
+                                            : (std::ios::out | std::ios::trunc));
+    if (!counter_csv.is_open()) {
+        std::cerr << "failed to open counter output file: " << path << "\n";
+        return false;
+    }
+
+    if (write_header) {
+        counter_csv << "requested_collective,requested_algorithm,internal_collective,"
+                       "internal_algorithm,nproc,dump_rank,count,raw_line\n";
+    }
+
+    for (const CounterDumpRow &row : rows) {
+        counter_csv << csv_field(row.requested_collective) << ','
+                    << csv_field(row.requested_algorithm) << ','
+                    << csv_field(row.internal_collective) << ','
+                    << csv_field(row.internal_algorithm) << ','
+                    << row.nproc << ','
+                    << row.dump_rank << ','
+                    << row.count << ','
+                    << csv_field(row.raw_line) << '\n';
+    }
+
+    counter_csv.close();
+    if (!counter_csv) {
+        std::cerr << "failed while writing counter output file: " << path << "\n";
+        return false;
+    }
+
+    std::cout << "Wrote " << path << " (" << rows.size() << " rows)\n";
+    return true;
+}
+
+int finalize_with_counter_dump_capture(MPI_Comm comm, bool mpi_t_initialized,
+                                       std::string &capture_path)
+{
+    int rank = 0;
+    MPI_Comm_rank(comm, &rank);
+
+    request_counter_dump(comm, mpi_t_initialized);
+
+    if (rank != kRoot) {
+        return MPI_Finalize();
+    }
+
+    char path_template[] = "/tmp/mpich_bcast_bench_counters_XXXXXX";
+    const int capture_fd = mkstemp(path_template);
+    if (capture_fd < 0) {
+        std::cerr << "Could not create temporary file for MPICH counter dump capture.\n";
+        return MPI_Finalize();
+    }
+    capture_path = path_template;
+
+    std::cout.flush();
+    std::fflush(stdout);
+
+    const int saved_stdout = dup(STDOUT_FILENO);
+    if (saved_stdout < 0 || dup2(capture_fd, STDOUT_FILENO) < 0) {
+        std::cerr << "Could not redirect stdout for MPICH counter dump capture.\n";
+        close(capture_fd);
+        if (saved_stdout >= 0) {
+            close(saved_stdout);
+        }
+        std::remove(capture_path.c_str());
+        capture_path.clear();
+        return MPI_Finalize();
+    }
+    close(capture_fd);
+
+    const int finalize_rc = MPI_Finalize();
+
+    std::fflush(stdout);
+    dup2(saved_stdout, STDOUT_FILENO);
+    close(saved_stdout);
+
+    return finalize_rc;
+}
+
+/* Convert MPI return codes into readable diagnostics. */
 std::string mpi_error_string(int error)
 {
     char buffer[MPI_MAX_ERROR_STRING] = { 0 };
@@ -137,25 +384,46 @@ int expected_comm_size_from_env()
     return std::atoi(expected);
 }
 
+std::string getenv_string(const char *name)
+{
+    const char *value = std::getenv(name);
+    if (value == nullptr || value[0] == '\0') {
+        return std::string();
+    }
+    return value;
+}
+
+bool file_exists(const std::string &path)
+{
+    std::ifstream file(path.c_str());
+    return file.good();
+}
+
+std::string default_counter_output_path(const std::string &output_path)
+{
+    const std::string suffix = "_collective_counts";
+    const std::string::size_type slash = output_path.find_last_of("/\\");
+    const std::string::size_type dot = output_path.find_last_of('.');
+    if (dot != std::string::npos && (slash == std::string::npos || dot > slash)) {
+        return output_path.substr(0, dot) + suffix + output_path.substr(dot);
+    }
+    return output_path + suffix + ".csv";
+}
+
 }  // namespace
 
 int main(int argc, char **argv)
 {
-    /*
-     * MPI_T must be initialized before querying/writing MPICH CVARs. MPI itself
-     * is initialized immediately after so all ranks can parse and fail together.
-     */
-    int provided = 0;
-    int error = MPI_T_init_thread(MPI_THREAD_SINGLE, &provided);
-    if (error != MPI_SUCCESS) {
-        std::cerr << "MPI_T_init_thread failed: " << mpi_error_string(error) << std::endl;
-        return EXIT_FAILURE;
-    }
+    int mpi_t_provided = 0;
+    const bool mpi_t_initialized =
+        MPI_T_init_thread(MPI_THREAD_SINGLE, &mpi_t_provided) == MPI_SUCCESS;
 
-    error = MPI_Init(&argc, &argv);
+    int error = MPI_Init(&argc, &argv);
     if (error != MPI_SUCCESS) {
         std::cerr << "MPI_Init failed: " << mpi_error_string(error) << std::endl;
-        MPI_T_finalize();
+        if (mpi_t_initialized) {
+            MPI_T_finalize();
+        }
         return EXIT_FAILURE;
     }
 
@@ -172,7 +440,7 @@ int main(int argc, char **argv)
         std::exit(error_code);
     };
 
-    /* Route all MPI and MPI_T return-code checks through the same failure path. */
+    /* Route all MPI return-code checks through the same failure path. */
     auto mpi_check = [&](int mpi_errno, const std::string &context) -> void {
         if (mpi_errno != MPI_SUCCESS) {
             fail(context + ": " + mpi_error_string(mpi_errno), mpi_errno);
@@ -189,16 +457,11 @@ int main(int argc, char **argv)
                       << "library did not connect them into one MPI job. Set "
                       << "BCAST_EXPECTED_RANKS to catch launcher/library mismatches.\n";
         }
+        if (mpi_t_initialized) {
+            MPI_T_finalize();
+        }
         MPI_Finalize();
-        MPI_T_finalize();
         return EXIT_FAILURE;
-    }
-
-    /* Build the default algorithm list from the supported algorithm table. */
-    std::vector<std::string> default_algorithms;
-    default_algorithms.reserve(sizeof(kSupportedAlgorithms) / sizeof(kSupportedAlgorithms[0]));
-    for (const AlgorithmSpec &algorithm : kSupportedAlgorithms) {
-        default_algorithms.push_back(algorithm.name);
     }
 
     /* Strict integer parsing so malformed CLI values fail before benchmarking. */
@@ -231,21 +494,19 @@ int main(int argc, char **argv)
            << "  --max-msg-size N       Final message size in bytes (default: "
            << kDefaultMaxMsgSize << ")\n"
            << "  --output PATH          CSV output path (default: benchmarking/bcast/bcast_bench.csv)\n"
-           << "  --algorithms LIST      Comma-separated subset of algorithms to benchmark\n"
-           << "                         Default: ";
-        for (std::size_t i = 0; i < default_algorithms.size(); ++i) {
-            if (i > 0) {
-                os << ",";
-            }
-            os << default_algorithms[i];
-        }
-        os << "\n"
-           << "  --list-algorithms      Print the supported algorithm names and exit\n"
+           << "  --counter-output PATH  MPICH collective algorithm counter CSV path (default: output\n"
+           << "                         path with _collective_counts before the extension)\n"
+           << "  --algorithm-label NAME Label written to the algorithm column. Defaults to\n"
+           << "                         BCAST_ALGORITHM_LABEL, then MPIR_CVAR_BCAST_INTRA_ALGORITHM,\n"
+           << "                         then auto.\n"
+           << "  --append-output        Append rows and write headers only when creating files\n"
            << "  -h, --help             Print this help text and exit\n"
            << "\n"
-           << "Execution order: algorithm -> message size -> warmup/measured iteration.\n"
+           << "Execution order: message size -> warmup/measured iteration.\n"
+           << "Algorithm selection is controlled by the job script/environment before launch.\n"
            << "Each MPI_Bcast is preceded by MPI_Barrier. Rank 0 stores one CSV row per\n"
-           << "collective call and writes all rows at the end of the run.\n";
+           << "collective call and writes all rows at the end of the run. Rank 0 also writes\n"
+           << "MPICH collective algorithm counters dumped by rank 0 during MPI_Finalize.\n";
     };
 
     /* Parse command-line options on every rank so all ranks agree on the run. */
@@ -270,16 +531,12 @@ int main(int argc, char **argv)
                 config.max_msg_size = parse_int(arg, require_value(arg));
             } else if (arg == "--output") {
                 config.output_path = require_value(arg);
-            } else if (arg == "--algorithms") {
-                std::stringstream ss(require_value(arg));
-                std::string item;
-                while (std::getline(ss, item, ',')) {
-                    if (!item.empty()) {
-                        config.algorithms.push_back(item);
-                    }
-                }
-            } else if (arg == "--list-algorithms") {
-                config.list_algorithms = true;
+            } else if (arg == "--counter-output") {
+                config.counter_output_path = require_value(arg);
+            } else if (arg == "--algorithm-label") {
+                config.algorithm_label = require_value(arg);
+            } else if (arg == "--append-output") {
+                config.append_output = true;
             } else if (arg == "-h" || arg == "--help") {
                 config.show_help = true;
             } else {
@@ -287,9 +544,6 @@ int main(int argc, char **argv)
             }
         }
 
-        if (config.algorithms.empty()) {
-            config.algorithms = default_algorithms;
-        }
         if (config.warmup_rounds < 0) {
             throw std::runtime_error("--warmup-rounds must be >= 0");
         }
@@ -318,193 +572,24 @@ int main(int argc, char **argv)
         if (rank == 0) {
             print_usage(std::cout);
         }
-        mpi_check(MPI_T_finalize(), "MPI_T_finalize");
+        if (mpi_t_initialized) {
+            MPI_T_finalize();
+        }
         mpi_check(MPI_Finalize(), "MPI_Finalize");
         return EXIT_SUCCESS;
     }
 
-    if (config.list_algorithms) {
-        if (rank == 0) {
-            for (const AlgorithmSpec &algorithm : kSupportedAlgorithms) {
-                std::cout << algorithm.name << '\n';
-            }
-        }
-        mpi_check(MPI_T_finalize(), "MPI_T_finalize");
-        mpi_check(MPI_Finalize(), "MPI_Finalize");
-        return EXIT_SUCCESS;
+    if (config.counter_output_path.empty()) {
+        config.counter_output_path = default_counter_output_path(config.output_path);
     }
-
-    /* Open an integer MPI_T CVAR. Optional CVARs return an unopened handle. */
-    auto open_int_cvar = [&](const std::string &name, bool required) -> IntCvar {
-        IntCvar cvar;
-        cvar.name = name;
-
-        int index = -1;
-        int rc = MPI_T_cvar_get_index(name.c_str(), &index);
-        if (rc != MPI_SUCCESS) {
-            if (required) {
-                fail("MPI_T_cvar_get_index(" + name + "): " + mpi_error_string(rc), rc);
-            }
-            return cvar;
-        }
-
-        char cvar_name[MPI_MAX_OBJECT_NAME] = { 0 };
-        int name_len = MPI_MAX_OBJECT_NAME;
-        int verbosity = 0;
-        int binding = 0;
-        int scope = 0;
-        int description_length = 0;
-        MPI_Datatype datatype = MPI_DATATYPE_NULL;
-        mpi_check(MPI_T_cvar_get_info(index, cvar_name, &name_len, &verbosity, &datatype,
-                                      &cvar.enum_type, nullptr, &description_length, &binding,
-                                      &scope),
-                  "MPI_T_cvar_get_info(" + name + ")");
-
-        int count = 0;
-        mpi_check(MPI_T_cvar_handle_alloc(index, nullptr, &cvar.handle, &count),
-                  "MPI_T_cvar_handle_alloc(" + name + ")");
-        if (count != 1) {
-            fail("unexpected MPI_T count for " + name + ": " + std::to_string(count));
-        }
-        cvar.opened = true;
-        return cvar;
-    };
-
-    /* Free a CVAR handle only if this build exposed and opened it. */
-    auto close_int_cvar = [&](IntCvar &cvar) -> void {
-        if (cvar.opened) {
-            mpi_check(MPI_T_cvar_handle_free(&cvar.handle),
-                      "MPI_T_cvar_handle_free(" + cvar.name + ")");
-            cvar.opened = false;
-            cvar.handle = MPI_T_CVAR_HANDLE_NULL;
-        }
-    };
-
-    /* Write a value to an opened CVAR; silently ignore unavailable optional CVARs. */
-    auto write_int_cvar = [&](const IntCvar &cvar, int value) -> void {
-        if (cvar.opened) {
-            mpi_check(MPI_T_cvar_write(cvar.handle, &value),
-                      "MPI_T_cvar_write(" + cvar.name + ")");
-        }
-    };
-
-    /*
-     * Resolve a symbolic MPI_T enum item to its integer value.
-     *
-     * Newer MPICH builds expose enum metadata through MPI_T. The fallback table
-     * keeps this benchmark usable with builds that expose only raw integers.
-     */
-    auto enum_value = [&](const IntCvar &cvar, const std::string &item_name) -> int {
-        auto fallback_value = [&]() -> int {
-            if (cvar.name == kBcastIntraAlgorithmCvar) {
-                if (item_name == "auto")
-                    return 0;
-                if (item_name == "binomial")
-                    return 1;
-                if (item_name == "nb")
-                    return 2;
-                if (item_name == "circ_graph")
-                    return 3;
-                if (item_name == "smp")
-                    return 4;
-                if (item_name == "scatter_recursive_doubling_allgather")
-                    return 5;
-                if (item_name == "scatter_ring_allgather")
-                    return 6;
-                if (item_name == "pipelined_tree")
-                    return 7;
-                if (item_name == "tree")
-                    return 8;
-                if (item_name == "release_gather")
-                    return 9;
-            } else if (cvar.name == kDeviceCollectivesCvar) {
-                if (item_name == "all")
-                    return 0;
-                if (item_name == "none")
-                    return 1;
-                if (item_name == "percoll")
-                    return 2;
-            } else if (cvar.name == kCollectiveFallbackCvar) {
-                if (item_name == "error")
-                    return 0;
-                if (item_name == "print")
-                    return 1;
-                if (item_name == "silent")
-                    return 2;
-            }
-
-            fail("enum value '" + item_name + "' not found for " + cvar.name);
-            return -1;
-        };
-
-        if (cvar.enum_type == MPI_T_ENUM_NULL) {
-            return fallback_value();
-        }
-
-        int count = 0;
-        char enum_name[MPI_MAX_OBJECT_NAME] = { 0 };
-        int enum_name_len = MPI_MAX_OBJECT_NAME;
-        mpi_check(MPI_T_enum_get_info(cvar.enum_type, &count, enum_name, &enum_name_len),
-                  "MPI_T_enum_get_info(" + cvar.name + ")");
-
-        for (int i = 0; i < count; ++i) {
-            int value = 0;
-            char value_name[MPI_MAX_OBJECT_NAME] = { 0 };
-            int value_name_len = MPI_MAX_OBJECT_NAME;
-            mpi_check(MPI_T_enum_get_item(cvar.enum_type, i, &value, value_name, &value_name_len),
-                      "MPI_T_enum_get_item(" + cvar.name + ")");
-            if (item_name == value_name) {
-                return value;
-            }
-        }
-
-        return fallback_value();
-    };
-
-    /* Required algorithm selector plus optional CVARs that avoid device overrides. */
-    IntCvar bcast_algorithm_cvar = open_int_cvar(kBcastIntraAlgorithmCvar, true);
-    IntCvar bcast_device_collective_cvar = open_int_cvar(kBcastDeviceCollectiveCvar, false);
-    IntCvar device_collectives_cvar = open_int_cvar(kDeviceCollectivesCvar, false);
-    IntCvar collective_fallback_cvar = open_int_cvar(kCollectiveFallbackCvar, false);
-
-    /*
-     * Force the benchmark through the MPIR Bcast path. Without these writes,
-     * device collectives may bypass MPIR_CVAR_BCAST_INTRA_ALGORITHM.
-     */
-    write_int_cvar(bcast_device_collective_cvar, 0);
-    if (device_collectives_cvar.opened) {
-        write_int_cvar(device_collectives_cvar, enum_value(device_collectives_cvar, "none"));
+    if (config.algorithm_label.empty()) {
+        config.algorithm_label = getenv_string("BCAST_ALGORITHM_LABEL");
     }
-    if (collective_fallback_cvar.opened) {
-        write_int_cvar(collective_fallback_cvar, enum_value(collective_fallback_cvar, "error"));
+    if (config.algorithm_label.empty()) {
+        config.algorithm_label = getenv_string("MPIR_CVAR_BCAST_INTRA_ALGORITHM");
     }
-
-    /* Validate the requested algorithms and resolve their CVAR values once. */
-    std::vector<AlgorithmConfig> selected_algorithms;
-    selected_algorithms.reserve(config.algorithms.size());
-    for (const std::string &name : config.algorithms) {
-        auto duplicate = std::find_if(selected_algorithms.begin(), selected_algorithms.end(),
-                                      [&](const AlgorithmConfig &algorithm) {
-                                          return algorithm.name == name;
-                                      });
-        if (duplicate != selected_algorithms.end()) {
-            continue;
-        }
-
-        auto supported = std::find_if(std::begin(kSupportedAlgorithms),
-                                      std::end(kSupportedAlgorithms),
-                                      [&](const AlgorithmSpec &algorithm) {
-                                          return name == algorithm.name;
-                                      });
-        if (supported == std::end(kSupportedAlgorithms)) {
-            fail("unsupported algorithm '" + name +
-                 "'. Use --list-algorithms to see the accepted names.");
-        }
-
-        AlgorithmConfig algorithm;
-        algorithm.name = name;
-        algorithm.cvar_value = enum_value(bcast_algorithm_cvar, name);
-        selected_algorithms.push_back(algorithm);
+    if (config.algorithm_label.empty()) {
+        config.algorithm_label = "auto";
     }
 
     /* Use a fixed size list: each power of two plus the midpoint to the next level. */
@@ -528,121 +613,113 @@ int main(int argc, char **argv)
     std::vector<ResultRow> results;
     const int total_iterations = config.warmup_rounds + config.measured_rounds;
     if (rank == 0) {
-        results.reserve(selected_algorithms.size() * message_sizes.size() *
-                        static_cast<std::size_t>(total_iterations));
+        results.reserve(message_sizes.size() * static_cast<std::size_t>(total_iterations));
     }
 
     /*
      * Main benchmark loop:
-     *   algorithm -> message size -> warmup/measured iteration
+     *   message size -> warmup/measured iteration
      *
-     * The algorithm CVAR is written once per algorithm, outside the message and
-     * iteration loops, so per-call timing is not polluted by MPI_T writes.
+     * Algorithm selection is intentionally outside this program. Set MPICH CVARs
+     * in the job script before launching this benchmark.
      */
-    for (std::size_t algorithm_index = 0; algorithm_index < selected_algorithms.size();
-         ++algorithm_index) {
-        const AlgorithmConfig &algorithm = selected_algorithms[algorithm_index];
-        write_int_cvar(bcast_algorithm_cvar, algorithm.cvar_value);
-        mpi_check(MPI_Barrier(MPI_COMM_WORLD),
-                  "MPI_Barrier(after selecting " + algorithm.name + ")");
+    for (const int message_size : message_sizes) {
+        for (int iteration = 0; iteration < total_iterations; ++iteration) {
+            const bool is_warmup = iteration < config.warmup_rounds;
+            const int phase_iteration =
+                is_warmup ? iteration : iteration - config.warmup_rounds;
 
-        for (const int message_size : message_sizes) {
-            for (int iteration = 0; iteration < total_iterations; ++iteration) {
-                const bool is_warmup = iteration < config.warmup_rounds;
-                const int phase_iteration =
-                    is_warmup ? iteration : iteration - config.warmup_rounds;
-
-                /* Rebuild the active message range before every broadcast. */
-                std::fill(buffer.begin(), buffer.begin() + message_size, 0);
-                if (rank == kRoot) {
-                    for (int offset = 0; offset < message_size; ++offset) {
-                        buffer[static_cast<std::size_t>(offset)] =
-                            payload_byte(static_cast<int>(algorithm_index), message_size, iteration,
-                                         offset);
-                    }
-                }
-
-                /* The requested pre-call barrier makes each timing sample aligned. */
-                mpi_check(MPI_Barrier(MPI_COMM_WORLD), "MPI_Barrier(before MPI_Bcast)");
-                const double start = MPI_Wtime();
-                error = MPI_Bcast(buffer.data(), message_size, MPI_BYTE, kRoot, MPI_COMM_WORLD);
-                const double stop = MPI_Wtime();
-                mpi_check(error, "MPI_Bcast(" + algorithm.name + ")");
-
-                const double local_elapsed = stop - start;
-                double time_sum = 0.0;
-                double time_min = 0.0;
-                double time_max = 0.0;
-                int local_correct = 1;
-
-                /* Verify every rank received the root payload for this call. */
+            /* Rebuild the active message range before every broadcast. */
+            std::fill(buffer.begin(), buffer.begin() + message_size, 0);
+            if (rank == kRoot) {
                 for (int offset = 0; offset < message_size; ++offset) {
-                    if (buffer[static_cast<std::size_t>(offset)] !=
-                        payload_byte(static_cast<int>(algorithm_index), message_size, iteration,
-                                     offset)) {
-                        local_correct = 0;
-                        break;
-                    }
+                    buffer[static_cast<std::size_t>(offset)] =
+                        payload_byte(0, message_size, iteration, offset);
                 }
-                int global_correct = 0;
+            }
 
-                /*
-                 * Timing reductions:
-                 *   sum / nproc -> requested average latency
-                 *   min/max     -> retained for comparison with average latency
-                 */
-                mpi_check(MPI_Reduce(&local_elapsed, &time_sum, 1, MPI_DOUBLE, MPI_SUM, kRoot,
-                                     MPI_COMM_WORLD),
-                          "MPI_Reduce(sum elapsed)");
-                mpi_check(MPI_Reduce(&local_elapsed, &time_min, 1, MPI_DOUBLE, MPI_MIN, kRoot,
-                                     MPI_COMM_WORLD),
-                          "MPI_Reduce(min elapsed)");
-                mpi_check(MPI_Reduce(&local_elapsed, &time_max, 1, MPI_DOUBLE, MPI_MAX, kRoot,
-                                     MPI_COMM_WORLD),
-                          "MPI_Reduce(max elapsed)");
-                mpi_check(MPI_Reduce(&local_correct, &global_correct, 1, MPI_INT, MPI_MIN, kRoot,
-                                     MPI_COMM_WORLD),
-                          "MPI_Reduce(correct)");
+            /* The requested pre-call barrier makes each timing sample aligned. */
+            mpi_check(MPI_Barrier(MPI_COMM_WORLD), "MPI_Barrier(before MPI_Bcast)");
+            const double start = MPI_Wtime();
+            error = MPI_Bcast(buffer.data(), message_size, MPI_BYTE, kRoot, MPI_COMM_WORLD);
+            const double stop = MPI_Wtime();
+            mpi_check(error, "MPI_Bcast(" + config.algorithm_label + ")");
 
-                if (rank == kRoot) {
-                    /* Store the row now; defer actual file I/O until the sweep finishes. */
-                    ResultRow row;
-                    row.phase = is_warmup ? "warmup" : "actual";
-                    row.phase_iteration = phase_iteration;
-                    row.global_iteration = iteration;
-                    row.algorithm = algorithm.name;
-                    row.cvar_value = algorithm.cvar_value;
-                    row.root = kRoot;
-                    row.nproc = world_size;
-                    row.message_size_bytes = message_size;
-                    row.time_sum_sec = time_sum;
-                    row.avg_latency_sec = time_sum / static_cast<double>(world_size);
-                    row.min_time_sec = time_min;
-                    row.max_time_sec = time_max;
-                    row.correct = global_correct == 1;
-                    results.push_back(row);
+            const double local_elapsed = stop - start;
+            double time_sum = 0.0;
+            double time_min = 0.0;
+            double time_max = 0.0;
+            int local_correct = 1;
+
+            /* Verify every rank received the root payload for this call. */
+            for (int offset = 0; offset < message_size; ++offset) {
+                if (buffer[static_cast<std::size_t>(offset)] !=
+                    payload_byte(0, message_size, iteration, offset)) {
+                    local_correct = 0;
+                    break;
                 }
+            }
+            int global_correct = 0;
+
+            /*
+             * Timing reductions:
+             *   sum / nproc -> requested average latency
+             *   min/max     -> retained for comparison with average latency
+             */
+            mpi_check(MPI_Reduce(&local_elapsed, &time_sum, 1, MPI_DOUBLE, MPI_SUM, kRoot,
+                                 MPI_COMM_WORLD),
+                      "MPI_Reduce(sum elapsed)");
+            mpi_check(MPI_Reduce(&local_elapsed, &time_min, 1, MPI_DOUBLE, MPI_MIN, kRoot,
+                                 MPI_COMM_WORLD),
+                      "MPI_Reduce(min elapsed)");
+            mpi_check(MPI_Reduce(&local_elapsed, &time_max, 1, MPI_DOUBLE, MPI_MAX, kRoot,
+                                 MPI_COMM_WORLD),
+                      "MPI_Reduce(max elapsed)");
+            mpi_check(MPI_Reduce(&local_correct, &global_correct, 1, MPI_INT, MPI_MIN, kRoot,
+                                 MPI_COMM_WORLD),
+                      "MPI_Reduce(correct)");
+
+            if (rank == kRoot) {
+                /* Store the row now; defer actual file I/O until the sweep finishes. */
+                ResultRow row;
+                row.phase = is_warmup ? "warmup" : "actual";
+                row.phase_iteration = phase_iteration;
+                row.global_iteration = iteration;
+                row.algorithm = config.algorithm_label;
+                row.root = kRoot;
+                row.nproc = world_size;
+                row.message_size_bytes = message_size;
+                row.time_sum_sec = time_sum;
+                row.avg_latency_sec = time_sum / static_cast<double>(world_size);
+                row.min_time_sec = time_min;
+                row.max_time_sec = time_max;
+                row.correct = global_correct == 1;
+                results.push_back(row);
             }
         }
     }
 
     /* Rank 0 writes all stored benchmark rows in one CSV pass. */
     if (rank == kRoot) {
-        std::ofstream csv(config.output_path.c_str(), std::ios::out | std::ios::trunc);
+        const bool write_header = !config.append_output || !file_exists(config.output_path);
+        std::ofstream csv(config.output_path.c_str(),
+                          config.append_output ? (std::ios::out | std::ios::app)
+                                               : (std::ios::out | std::ios::trunc));
         if (!csv.is_open()) {
             fail("failed to open output file: " + config.output_path);
         }
 
-        csv << "phase,phase_iteration,global_iteration,algorithm,cvar_value,root,nproc,"
-               "message_size_bytes,time_sum_sec,avg_latency_sec,min_time_sec,max_time_sec,"
-               "correct\n";
+        if (write_header) {
+            csv << "phase,phase_iteration,global_iteration,algorithm,root,nproc,"
+                   "message_size_bytes,time_sum_sec,avg_latency_sec,min_time_sec,max_time_sec,"
+                   "correct\n";
+        }
         csv << std::fixed << std::setprecision(9);
         for (const ResultRow &row : results) {
             csv << row.phase << ','
                 << row.phase_iteration << ','
                 << row.global_iteration << ','
                 << row.algorithm << ','
-                << row.cvar_value << ','
                 << row.root << ','
                 << row.nproc << ','
                 << row.message_size_bytes << ','
@@ -658,15 +735,25 @@ int main(int argc, char **argv)
             fail("failed while writing output file: " + config.output_path);
         }
         std::cout << "Wrote " << config.output_path << " (" << results.size() << " rows)\n";
+
     }
 
-    /* Clean up MPI_T handles before finalizing MPI_T and MPI. */
-    close_int_cvar(collective_fallback_cvar);
-    close_int_cvar(device_collectives_cvar);
-    close_int_cvar(bcast_device_collective_cvar);
-    close_int_cvar(bcast_algorithm_cvar);
+    std::string counter_capture_path;
+    const int finalize_rc =
+        finalize_with_counter_dump_capture(MPI_COMM_WORLD, mpi_t_initialized, counter_capture_path);
 
-    mpi_check(MPI_T_finalize(), "MPI_T_finalize");
-    mpi_check(MPI_Finalize(), "MPI_Finalize");
-    return EXIT_SUCCESS;
+    int exit_code = finalize_rc == MPI_SUCCESS ? EXIT_SUCCESS : finalize_rc;
+    if (rank == kRoot && !counter_capture_path.empty()) {
+        const std::vector<CounterDumpRow> counter_rows =
+            read_bcast_counter_dump(counter_capture_path, config, world_size);
+        if (!write_counter_dump_csv(config.counter_output_path, config.append_output, counter_rows)) {
+            exit_code = EXIT_FAILURE;
+        }
+        std::remove(counter_capture_path.c_str());
+    }
+
+    if (mpi_t_initialized) {
+        MPI_T_finalize();
+    }
+    return exit_code;
 }

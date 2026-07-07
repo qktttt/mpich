@@ -1,0 +1,61 @@
+Bcast random-forest distilled selection tree
+===========================================
+
+Source random forest: /home/qktttt/mpich/benchmarking/bcast/models/bcast_random_forest_model.pkl
+Grid mode: nproc
+Selection tree max_depth: 5
+Selection tree min_samples_leaf: 1
+Selection tree features: nproc, ppn, message_size_bytes
+Grid cells: 250
+ppn values: [2, 4, 8, 16, 32]
+nproc values: [2, 4, 8, 16, 32]
+message-size values: [2, 16, 64, 512, 4096, 16384, 131072, 1048576, 4194304, 33554432]
+candidate algorithms: binomial, circ_graph, nb, pipelined_tree, release_gather, scatter_recursive_doubling_allgather, scatter_ring_allgather, tree
+
+Optimal algorithm counts from random forest:
+  binomial: 90
+  circ_graph: 0
+  nb: 0
+  pipelined_tree: 0
+  release_gather: 160
+  scatter_recursive_doubling_allgather: 0
+  scatter_ring_allgather: 0
+  tree: 0
+
+Training accuracy against RF labels: 1.000000
+
+Classification report:
+                precision    recall  f1-score   support
+
+      binomial       1.00      1.00      1.00        90
+release_gather       1.00      1.00      1.00       160
+
+      accuracy                           1.00       250
+     macro avg       1.00      1.00      1.00       250
+  weighted avg       1.00      1.00      1.00       250
+
+Confusion matrix rows/columns use this algorithm order:
+  binomial, release_gather
+  90, 0
+  0, 160
+
+Selection tree rules:
+|--- message_size_bytes <= 589824.00
+|   |--- message_size_bytes <= 10240.00
+|   |   |--- class: release_gather
+|   |--- message_size_bytes >  10240.00
+|   |   |--- message_size_bytes <= 73728.00
+|   |   |   |--- ppn <= 24.00
+|   |   |   |   |--- class: binomial
+|   |   |   |--- ppn >  24.00
+|   |   |   |   |--- class: release_gather
+|   |   |--- message_size_bytes >  73728.00
+|   |   |   |--- class: release_gather
+|--- message_size_bytes >  589824.00
+|   |--- ppn <= 24.00
+|   |   |--- class: binomial
+|   |--- ppn >  24.00
+|   |   |--- message_size_bytes <= 2621440.00
+|   |   |   |--- class: release_gather
+|   |   |--- message_size_bytes >  2621440.00
+|   |   |   |--- class: binomial

@@ -1,0 +1,67 @@
+|--- message_size_bytes <= 18874368.00
+|   |--- message_size_bytes <= 2621440.00
+|   |   |--- message_size_bytes <= 589824.00
+|   |   |   |--- class: release_gather
+|   |   |--- message_size_bytes >  589824.00
+|   |   |   |--- ppn <= 3.00
+|   |   |   |   |--- nproc <= 384.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- nproc >  384.00
+|   |   |   |   |   |--- class: scatter_recursive_doubling_allgather
+|   |   |   |--- ppn >  3.00
+|   |   |   |   |--- class: release_gather
+|   |--- message_size_bytes >  2621440.00
+|   |   |--- nproc <= 24.00
+|   |   |   |--- ppn <= 3.00
+|   |   |   |   |--- class: release_gather
+|   |   |   |--- ppn >  3.00
+|   |   |   |   |--- ppn <= 6.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- ppn >  6.00
+|   |   |   |   |   |--- class: binomial
+|   |   |--- nproc >  24.00
+|   |   |   |--- ppn <= 3.00
+|   |   |   |   |--- nproc <= 384.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- nproc >  384.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- ppn >  3.00
+|   |   |   |   |--- ppn <= 24.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- ppn >  24.00
+|   |   |   |   |   |--- class: release_gather
+|--- message_size_bytes >  18874368.00
+|   |--- ppn <= 6.00
+|   |   |--- nproc <= 384.00
+|   |   |   |--- nproc <= 48.00
+|   |   |   |   |--- nproc <= 12.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- nproc >  12.00
+|   |   |   |   |   |--- class: scatter_recursive_doubling_allgather
+|   |   |   |--- nproc >  48.00
+|   |   |   |   |--- class: circ_graph
+|   |   |--- nproc >  384.00
+|   |   |   |--- nproc <= 768.00
+|   |   |   |   |--- ppn <= 3.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- ppn >  3.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |--- nproc >  768.00
+|   |   |   |   |--- class: binomial
+|   |--- ppn >  6.00
+|   |   |--- nproc <= 192.00
+|   |   |   |--- ppn <= 12.00
+|   |   |   |   |--- nproc <= 48.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- nproc >  48.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |--- ppn >  12.00
+|   |   |   |   |--- class: scatter_ring_allgather
+|   |   |--- nproc >  192.00
+|   |   |   |--- nproc <= 384.00
+|   |   |   |   |--- ppn <= 24.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- ppn >  24.00
+|   |   |   |   |   |--- class: scatter_ring_allgather
+|   |   |   |--- nproc >  384.00
+|   |   |   |   |--- class: release_gather

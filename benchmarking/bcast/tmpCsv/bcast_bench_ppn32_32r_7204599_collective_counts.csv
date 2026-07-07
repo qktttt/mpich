@@ -1,0 +1,3 @@
+collective,algorithm,nproc,message_size_count,warmup_calls,measured_calls,total_calls
+MPI_Bcast,binomial,32,49,12250,12250,24500
+MPI_Bcast,nb,32,49,12250,12250,24500

@@ -1,0 +1,12 @@
+feature,importance
+log2_message_size_bytes,0.9191743161949114
+algorithm=release_gather,0.03429902277208831
+algorithm=scatter_ring_allgather,0.013491893651080224
+log2_nproc,0.008659943227222673
+log2_ppn,0.008408163412302126
+algorithm=circ_graph,0.006243337418785386
+algorithm=pipelined_tree,0.005051667978619975
+algorithm=scatter_recursive_doubling_allgather,0.003859775159046592
+algorithm=tree,0.000523118819407817
+algorithm=nb,0.0002300302000461178
+algorithm=binomial,5.873116648934225e-05

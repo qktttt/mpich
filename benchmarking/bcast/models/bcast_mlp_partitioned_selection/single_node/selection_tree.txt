@@ -1,0 +1,37 @@
+|--- message_size_bytes <= 589824.00
+|   |--- ppn <= 12.00
+|   |   |--- class: release_gather
+|   |--- ppn >  12.00
+|   |   |--- nproc <= 12.00
+|   |   |   |--- message_size_bytes <= 2304.00
+|   |   |   |   |--- class: circ_graph
+|   |   |   |--- message_size_bytes >  2304.00
+|   |   |   |   |--- ppn <= 24.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- ppn >  24.00
+|   |   |   |   |   |--- class: scatter_recursive_doubling_allgather
+|   |   |--- nproc >  12.00
+|   |   |   |--- nproc <= 24.00
+|   |   |   |   |--- ppn <= 24.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- ppn >  24.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |--- nproc >  24.00
+|   |   |   |   |--- class: release_gather
+|--- message_size_bytes >  589824.00
+|   |--- ppn <= 12.00
+|   |   |--- class: circ_graph
+|   |--- ppn >  12.00
+|   |   |--- nproc <= 24.00
+|   |   |   |--- message_size_bytes <= 2621440.00
+|   |   |   |   |--- ppn <= 24.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- ppn >  24.00
+|   |   |   |   |   |--- class: scatter_ring_allgather
+|   |   |   |--- message_size_bytes >  2621440.00
+|   |   |   |   |--- class: scatter_ring_allgather
+|   |   |--- nproc >  24.00
+|   |   |   |--- message_size_bytes <= 18874368.00
+|   |   |   |   |--- class: release_gather
+|   |   |   |--- message_size_bytes >  18874368.00
+|   |   |   |   |--- class: scatter_ring_allgather

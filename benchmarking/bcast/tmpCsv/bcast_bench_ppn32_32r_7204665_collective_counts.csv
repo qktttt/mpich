@@ -1,0 +1,10 @@
+collective,algorithm,nproc,message_size_count,warmup_calls,measured_calls,total_calls
+MPI_Bcast,binomial,32,49,12250,12250,24500
+MPI_Bcast,nb,32,49,12250,12250,24500
+MPI_Bcast,circ_graph,32,49,12250,12250,24500
+MPI_Bcast,smp,32,49,12250,12250,24500
+MPI_Bcast,scatter_recursive_doubling_allgather,32,49,12250,12250,24500
+MPI_Bcast,scatter_ring_allgather,32,49,12250,12250,24500
+MPI_Bcast,pipelined_tree,32,49,12250,12250,24500
+MPI_Bcast,tree,32,49,12250,12250,24500
+MPI_Bcast,release_gather,32,49,12250,12250,24500

@@ -1,12 +1,17 @@
 # Bcast Benchmark
 
-This benchmark sweeps MPICH intra-communicator `MPI_Bcast` algorithms by changing
-`MPIR_CVAR_BCAST_INTRA_ALGORITHM` through `MPI_T` during a single run.
+This benchmark measures `MPI_Bcast` for the algorithm selected by the launch
+environment. It no longer changes `MPIR_CVAR_BCAST_INTRA_ALGORITHM` internally;
+the PBS job scripts do that by launching the benchmark once per algorithm and
+appending all results to one CSV.
 
-By default it benchmarks the same algorithms used by
+The job-script sweep uses the same algorithms as
 `collective_testing/testing_bcast_2node_64rank.sh`:
 
 `binomial, nb, circ_graph, smp, scatter_recursive_doubling_allgather, scatter_ring_allgather, pipelined_tree, tree, release_gather`
+
+For output filenames, the job scripts shorten `pipelined_tree` to `pipet` so
+those CSVs do not match resume checks for the `tree` algorithm.
 
 Message sizes include each doubling level and the halfway point before the next
 level. With the defaults, the sweep is:
@@ -22,11 +27,14 @@ max rank times so average-vs-slowest-rank latency can be compared later.
 
 Rank 0 stores one row per collective call in memory and writes the CSV at the
 end of the program. Warmup and measured iterations are both written; the
-`phase` column labels each row as `warmup` or `actual`.
+`phase` column labels each row as `warmup` or `actual`. Rank 0 also writes a
+separate collective-count CSV named like the timing output with
+`_collective_counts` before the extension. It records how many `MPI_Bcast`
+calls were made for the configured algorithm label.
 
 The execution order is:
 
-`algorithm -> message size -> iteration`
+`message size -> iteration`
 
 ## Build
 
@@ -47,6 +55,11 @@ mpicxx -std=c++11 -O2 benchmarking/bcast/bcast_bench.cpp \
 
 ```bash
 export BCAST_EXPECTED_RANKS=8
+export MPIR_CVAR_BCAST_DEVICE_COLLECTIVE=0
+export MPIR_CVAR_DEVICE_COLLECTIVES=none
+export MPIR_CVAR_COLLECTIVE_FALLBACK=error
+export MPIR_CVAR_BCAST_INTRA_ALGORITHM=binomial
+export BCAST_ALGORITHM_LABEL=binomial
 mpiexec -n 8 ./benchmarking/bcast/bcast_bench \
   --warmup-rounds 5 \
   --measured-rounds 20 \
@@ -57,11 +70,16 @@ mpiexec -n 8 ./benchmarking/bcast/bcast_bench \
 start processes that do not connect into one `MPI_COMM_WORLD`; the benchmark
 fails early if the communicator size does not match.
 
-To benchmark only a subset of algorithms:
+To append another algorithm run into the same CSVs:
 
 ```bash
+export MPIR_CVAR_BCAST_INTRA_ALGORITHM=tree
+export BCAST_ALGORITHM_LABEL=tree
 mpiexec -n 8 ./benchmarking/bcast/bcast_bench \
-  --algorithms binomial,scatter_ring_allgather,tree
+  --warmup-rounds 5 \
+  --measured-rounds 20 \
+  --output benchmarking/bcast/results.csv \
+  --append-output
 ```
 
 Use `--help` for the full argument list.
@@ -81,8 +99,13 @@ qsub benchmarking/bcast/qsub_bcast_bench_16nodes.sh
 qsub benchmarking/bcast/qsub_bcast_bench_32nodes.sh
 ```
 
-Each wrapper is self-contained. It compiles once and then launches four explicit
-`mpiexec` runs with:
+Each wrapper is self-contained. It compiles once, sources
+`run_bcast_algorithm_sweep.sh`, and then launches every configured algorithm for
+each ppn run. The helper sets `MPIR_CVAR_BCAST_INTRA_ALGORITHM` and
+`BCAST_ALGORITHM_LABEL` before each launch, appending timing rows to the main
+CSV and count rows to the matching `_collective_counts.csv`.
+
+The node-count wrappers run four explicit ppn configurations:
 
 `ppn32 -> list:0:1:2:...:31`
 

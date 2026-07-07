@@ -16,6 +16,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 from fit_bcast_regression_tree import (
     build_xy,
+    default_input_csvs,
     format_score,
     human_seconds,
     data_domain,
@@ -28,13 +29,28 @@ from fit_bcast_regression_tree import (
 
 def parse_args():
     script_dir = Path(__file__).resolve().parent
-    default_summary = script_dir / "plots" / "bcast_median_summary.csv"
-    default_inputs = [default_summary] if default_summary.exists() else sorted(script_dir.glob("bcast_bench_ppn*r_*.csv"))
 
     parser = argparse.ArgumentParser(description="Fit an sklearn random forest to Bcast median timings.")
-    parser.add_argument("input_csvs", nargs="*", type=Path, default=default_inputs)
+    parser.add_argument(
+        "input_csvs",
+        nargs="*",
+        type=Path,
+        default=None,
+        help=(
+            "Input median summary CSV or raw timing CSV files. Raw split files named "
+            "*_collective_counts.csv are ignored. If omitted, the default summary "
+            "matching --time-column is used when available."
+        ),
+    )
     parser.add_argument("-o", "--output-dir", type=Path, default=script_dir / "models")
-    parser.add_argument("--time-column", default="avg_latency_sec")
+    parser.add_argument(
+        "--time-column",
+        default="max_time_sec",
+        help=(
+            "Timing column to fit. Defaults to max_time_sec so the model targets "
+            "the per-iteration maximum latency across ranks."
+        ),
+    )
     parser.add_argument("--phase", default="actual")
     parser.add_argument("--ppn", type=int, default=None)
     parser.add_argument("--seed", type=int, default=42)
@@ -46,7 +62,10 @@ def parse_args():
     parser.add_argument("--min-samples-leaf", type=int, default=3)
     parser.add_argument("--min-samples-split", type=int, default=6)
     parser.add_argument("--n-jobs", type=int, default=1)
-    return parser.parse_args()
+    args = parser.parse_args()
+    if not args.input_csvs:
+        args.input_csvs = default_input_csvs(script_dir, args.time_column)
+    return args
 
 
 def parse_max_features(value):
@@ -69,6 +88,7 @@ def write_metrics(path, rows, algorithms, train_idx, val_idx, test_idx, depth_sc
         handle.write("Model: sklearn.ensemble.RandomForestRegressor\n")
         handle.write("Features: log2(nproc), one-hot algorithm, log2(message_size_bytes), log2(ppn)\n")
         handle.write("Target: log2(median_time_sec)\n")
+        handle.write(f"Target source timing column: {args.time_column}\n")
         handle.write("Metrics are computed after inverse-transforming predictions to seconds.\n")
         handle.write(f"Rows: {len(rows)}\n")
         handle.write(f"Split sizes: train={len(train_idx)}, validation={len(val_idx)}, test={len(test_idx)}\n")
@@ -206,6 +226,7 @@ def main():
         extra={
             "selected_max_depth": best_depth,
             "max_features": max_features,
+            "target_time_column": args.time_column,
             "data_domain": data_domain(rows),
         },
     )

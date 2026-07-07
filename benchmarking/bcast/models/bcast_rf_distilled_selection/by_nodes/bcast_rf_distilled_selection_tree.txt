@@ -1,0 +1,67 @@
+|--- message_size_bytes <= 10240.00
+|   |--- ppn <= 12.00
+|   |   |--- nodes <= 12.00
+|   |   |   |--- class: release_gather
+|   |   |--- nodes >  12.00
+|   |   |   |--- ppn <= 6.00
+|   |   |   |   |--- ppn <= 3.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- ppn >  3.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |--- ppn >  6.00
+|   |   |   |   |--- nodes <= 24.00
+|   |   |   |   |   |--- class: circ_graph
+|   |   |   |   |--- nodes >  24.00
+|   |   |   |   |   |--- class: binomial
+|   |--- ppn >  12.00
+|   |   |--- nodes <= 6.00
+|   |   |   |--- nodes <= 3.00
+|   |   |   |   |--- class: release_gather
+|   |   |   |--- nodes >  3.00
+|   |   |   |   |--- ppn <= 24.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- ppn >  24.00
+|   |   |   |   |   |--- class: binomial
+|   |   |--- nodes >  6.00
+|   |   |   |--- message_size_bytes <= 288.00
+|   |   |   |   |--- nodes <= 12.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- nodes >  12.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- message_size_bytes >  288.00
+|   |   |   |   |--- message_size_bytes <= 2304.00
+|   |   |   |   |   |--- class: nb
+|   |   |   |   |--- message_size_bytes >  2304.00
+|   |   |   |   |   |--- class: nb
+|--- message_size_bytes >  10240.00
+|   |--- message_size_bytes <= 18874368.00
+|   |   |--- message_size_bytes <= 589824.00
+|   |   |   |--- message_size_bytes <= 73728.00
+|   |   |   |   |--- nodes <= 12.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- nodes >  12.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |--- message_size_bytes >  73728.00
+|   |   |   |   |--- nodes <= 6.00
+|   |   |   |   |   |--- class: release_gather
+|   |   |   |   |--- nodes >  6.00
+|   |   |   |   |   |--- class: binomial
+|   |   |--- message_size_bytes >  589824.00
+|   |   |   |--- class: binomial
+|   |--- message_size_bytes >  18874368.00
+|   |   |--- ppn <= 6.00
+|   |   |   |--- nodes <= 12.00
+|   |   |   |   |--- class: binomial
+|   |   |   |--- nodes >  12.00
+|   |   |   |   |--- nodes <= 24.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- nodes >  24.00
+|   |   |   |   |   |--- class: scatter_ring_allgather
+|   |   |--- ppn >  6.00
+|   |   |   |--- nodes <= 6.00
+|   |   |   |   |--- ppn <= 12.00
+|   |   |   |   |   |--- class: binomial
+|   |   |   |   |--- ppn >  12.00
+|   |   |   |   |   |--- class: scatter_ring_allgather
+|   |   |   |--- nodes >  6.00
+|   |   |   |   |--- class: scatter_ring_allgather

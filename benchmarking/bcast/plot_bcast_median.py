@@ -40,8 +40,9 @@ def parse_args() -> argparse.Namespace:
         nargs="*",
         type=Path,
         help=(
-            "Input CSV files. If omitted, uses "
-            "benchmarking/bcast/bcast_bench_ppn*r_*.csv."
+            "Input timing CSV files. If omitted, uses "
+            "benchmarking/bcast/bcast_bench_ppn*r_*.csv, excluding "
+            "*_collective_counts.csv."
         ),
     )
     parser.add_argument(
@@ -112,7 +113,15 @@ def parse_args() -> argparse.Namespace:
 
 
 def default_csv_files() -> List[Path]:
-    return sorted(Path(__file__).resolve().parent.glob("bcast_bench_ppn*r_*.csv"))
+    return sorted(
+        path
+        for path in Path(__file__).resolve().parent.glob("bcast_bench_ppn*r_*.csv")
+        if is_timing_csv(path)
+    )
+
+
+def is_timing_csv(path: Path) -> bool:
+    return path.suffix == ".csv" and not path.name.endswith("_collective_counts.csv")
 
 
 def parse_int(value: str, column: str, path: Path, line_number: int) -> int:
@@ -256,10 +265,15 @@ def read_timings(
         "wrong_phase": 0,
         "incorrect": 0,
         "nonpositive": 0,
+        "skipped_files": 0,
     }
     required_columns = {"phase", "algorithm", "nproc", "message_size_bytes", time_column}
 
     for path in csv_files:
+        if not is_timing_csv(path):
+            stats["skipped_files"] += 1
+            continue
+
         stats["files"] += 1
         with path.open(newline="") as handle:
             reader = csv.DictReader(handle)
@@ -624,6 +638,8 @@ def main() -> int:
         print(f"Skipped {stats['incorrect']} incorrect row(s).")
     if stats["nonpositive"]:
         print(f"Skipped {stats['nonpositive']} non-positive row(s) for log-scale plotting.")
+    if stats["skipped_files"]:
+        print(f"Skipped {stats['skipped_files']} non-timing CSV file(s).")
     print(f"Rendered plots with {renderer}.")
     for path in plot_paths:
         print(f"Wrote plot: {path}")

@@ -1,0 +1,2 @@
+requested_collective,requested_algorithm,internal_collective,internal_algorithm,nproc,dump_rank,count,raw_line
+MPI_Bcast,scatter_recursive_doubling_allgather,Bcast,MPIR_Bcast_intra_scatter_recursive_doubling_allgather,128,0,9800,      9800  MPIR_Bcast_intra_scatter_recursive_doubling_allgather
